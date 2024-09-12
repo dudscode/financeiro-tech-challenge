@@ -1,0 +1,14 @@
+{
+  'jsxSingleQuote': true,
+  'printWidth': 120,
+  'useTabs': false,
+  'tabWidth': 2,
+  'trailingComma': 'none',
+  'semi': false,
+  'singleQuote': true,
+  'bracketSpacing': true,
+  'bracketSameLine': false,
+  'arrowParens': 'avoid',
+  'proseWrap': 'always',
+  'overrides': [{ 'files': '*.json/hbs', '*.hbs', 'options': { 'singleQuote': true, 'parser': 'json' } }]
+}
