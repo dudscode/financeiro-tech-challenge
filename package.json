@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "lint:check": "prettier --check .",
-    "lint:fix": "prettier --write ."
+    "lint:fix": "prettier --write .",
+    "prepare": "husky"
   },
   "dependencies": {
     "next": "14.2.8",
@@ -22,6 +23,8 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.8",
     "prettier": "^3.3.3",
+    "git-commit-msg-linter": "^5.0.8",
+    "husky": "^9.1.5",
     "typescript": "^5"
   }
 }
