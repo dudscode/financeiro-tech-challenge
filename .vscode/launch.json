@@ -1,0 +1,30 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Iniciar projeto",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "outputCapture": "std",
+      "runtimeExecutable": "yarn",
+      "args": ["dev"]
+    },
+    {
+      "name": "Iniciar mock sedrvidor",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "outputCapture": "std",
+      "runtimeExecutable": "yarn",
+      "args": ["json-server"]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Iniciar Server / Client",
+      "configurations": ["Iniciar mock sedrvidor", "Iniciar projeto"],
+      "stopAll": true
+    }
+  ]
+}
