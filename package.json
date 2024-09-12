@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "lint:check": "prettier --check .",
+    "lint:fix": "prettier --write .",
+    "prepare": "husky"
   },
   "dependencies": {
     "next": "14.2.8",
@@ -32,6 +35,9 @@
     "eslint-config-next": "14.2.8",
     "eslint-plugin-storybook": "^0.8.0",
     "storybook": "^8.2.9",
+    "prettier": "^3.3.3",
+    "git-commit-msg-linter": "^5.0.8",
+    "husky": "^9.1.5",
     "typescript": "^5"
   }
 }
