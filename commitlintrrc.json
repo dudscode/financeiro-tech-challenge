@@ -1,0 +1,19 @@
+{
+  "types": {
+    "feat": "Novo recurso",
+    "fix": "Solucionando um problema",
+    "docs": "Mudança em documentação.",
+    "test": "Alterações em testes",
+    "build": "Arquivos de build e dependências",
+    "perf": "Performance",
+    "style": "Formatações de código",
+    "refactor": "Refatorações que não alterem sua funcionalidade",
+    "chore": "Atualizações de tarefas",
+    "ci": "Integração contínua",
+    "raw": "Mudanças relacionadas a arquivos de configurações",
+    "cleanup": "Remover código comentado",
+    "remove": "Exclusão de arquivos",
+    "revert": "Reverte commit anterior."
+  },
+  "max-len": 120
+}
