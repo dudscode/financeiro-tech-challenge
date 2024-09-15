@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -5,8 +6,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #E4EDE3;
+    --foreground: #000000;
   }
 }
 
@@ -19,7 +20,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -38,5 +39,48 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+
+.txt-25 {
+  font-size: 25px;
+}
+.txt-20 {
+  font-size: 20px;
+}
+.txt-16 {
+  font-size: 16px;
+}
+.txt-13 {
+  font-size: 13px;
+}
+.txt-info {
+  color: #8B8B8B;
+}
+.txt-semi-bold {
+  font-weight: 600;
+}
+
+
+.mb-8 {
+  margin-bottom: 8px;
+}
+.mb-24 {
+  margin-bottom: 24px;
+}
+
+
+/* celular */
+
+@media (max-width: 600px) {
+  body {
+    padding: 0 24px;
+  }
+}
+
+/* tablet */
+@media (min-width: 601px) and (max-width: 1024px) {
+  body {
+    padding: 0 60px 80px;
   }
 }
