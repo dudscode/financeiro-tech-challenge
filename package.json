@@ -15,11 +15,13 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "json-server": "^1.0.0-beta.2",
+    "@emotion/cache": "^11.13.1",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^6.0.2",
-    "next": "14.2.8",
+    "@mui/material-nextjs": "^6.1.0",
+    "json-server": "^1.0.0-beta.2",
+    "next": "^14.2.11",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -39,10 +41,10 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.8",
     "eslint-plugin-storybook": "^0.8.0",
-    "storybook": "^8.2.9",
-    "prettier": "^3.3.3",
     "git-commit-msg-linter": "^5.0.8",
     "husky": "^9.1.5",
+    "prettier": "^3.3.3",
+    "storybook": "^8.2.9",
     "typescript": "^5"
   }
 }
