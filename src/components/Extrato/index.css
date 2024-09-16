@@ -1,0 +1,49 @@
+.container_transacao {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.container_transacao-tipo-valor {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container_extrato {
+ width: 282px;
+  padding: 32px 24px;
+  border-radius: 8px;
+  background-color: #F5F5F5;
+  display: flex ;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+.divisor_transacao {
+  width: 70%;
+}
+
+ul li {
+  list-style: none;
+}
+
+@media (max-width: 600px) {
+  .container_extrato {
+    width: 312px;
+  }
+  .container_transacao {
+    gap: 16px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .container_extrato{
+    width: 600px;
+    align-items: center;
+  }
+  .container_transacao {
+    gap: 16px;
+  }
+}
