@@ -10,7 +10,7 @@ export const Container = styled(ContainerMUI)`
     position: relative;
     height: auto;
 
-    @media (min-width: ${theme.breakpoints.values.sm}${theme.breakpoints.unit}) {
+    @media (min-width: ${theme.breakpoints.values.md}${theme.breakpoints.unit}) {
       max-width: 1200px;
       margin: 0 auto;
     }

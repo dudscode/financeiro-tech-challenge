@@ -23,7 +23,7 @@ export const ContentUI = styled(Content)`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media (min-width: ${theme.breakpoints.values.md}px) {
+    @media (min-width: ${theme.breakpoints.values.sm}px) {
       justify-content: flex-end;
     }
   `}
@@ -34,7 +34,7 @@ export const Button = styled('button')``
 export const MenuContainer = styled('div')`
   ${({ theme }) => css`
     position: relative;
-    @media (min-width: ${theme.breakpoints.values.md}px) {
+    @media (min-width: ${theme.breakpoints.values.sm}px) {
       display: none;
     }
   `}

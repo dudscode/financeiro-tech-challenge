@@ -11,7 +11,7 @@ export const User = styled('p')`
     font-weight: 600;
     color: #fff;
     display: none;
-    @media (min-width: ${theme.breakpoints.values.md}px) {
+    @media (min-width: ${theme.breakpoints.values.sm}px) {
       display: inline-block;
     }
   `}
