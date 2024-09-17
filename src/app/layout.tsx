@@ -1,7 +1,7 @@
-import '../../styles/globals.css'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
 import { ThemeProvider } from '@mui/material/styles'
 import theme from '../../styles/theme'
+import CssBaseline from '@mui/material/CssBaseline'
 
 export default function RootLayout({
   children
@@ -15,7 +15,10 @@ export default function RootLayout({
       </head>
       <body>
         <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            {children}
+          </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

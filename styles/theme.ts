@@ -1,4 +1,6 @@
 'use client'
+import '../styles/globals.css'
+import '../styles/font.css'
 import { createTheme } from '@mui/material/styles'
 
 const theme = createTheme({
@@ -27,6 +29,58 @@ const theme = createTheme({
       xl: 1920
     },
     unit: 'px'
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        ':root': {
+          '--background': '#ffffff',
+          '--foreground': '#171717'
+        },
+        '@media (prefers-color-scheme: dark)': {
+          ':root': {
+            '--background': '#e4ede3',
+            '--foreground': '#000000'
+          }
+        },
+        'html, body': {
+          maxWidth: '100vw',
+          overFlowX: 'hidden'
+        },
+        ['*']: {
+          margin: 0,
+          padding: 0,
+          boxSizing: 'border-box'
+        },
+        body: {
+          WebkitFontSmoothing: 'antialiased', // Antialiasing.
+          MozOsxFontSmoothing: 'grayscale', // Antialiasing.
+          color: 'var(--foreground)',
+          backgroundColor: 'var(--background)',
+          fontFamily: 'Inter, sans-serif'
+        },
+        a: {
+          color: 'inherit',
+          textDecoration: 'none'
+        },
+        '@media (prefers-reduced-scheme: dark)': {
+          html: {
+            colorScheme: 'dark'
+          }
+        },
+        'ol, ul': {
+          listStyle: 'none'
+        },
+        button: {
+          backgroundColor: 'transparent',
+          border: 'none',
+          cursor: 'pointer',
+          outline: 'none',
+          padding: 0,
+          boxShadow: 'none'
+        }
+      }
+    }
   }
 })
 
