@@ -11,7 +11,7 @@ const StyledParagraph = styled('p')(({ theme }) => ({
 
 export interface IExtratoProps {
     /**
-     * title card 
+     * title card
      */
     title: string;
     /**
@@ -56,7 +56,6 @@ export const Extrato = ({
                         <p className="txt-16 txt-semi-bold mb-8">{item.valor}</p>
                         <Divider className="divisor_transacao" variant="fullWidth"/>
                     </li>
-                    
                 ))}
             </ul>
 

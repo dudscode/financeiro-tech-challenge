@@ -1,24 +1,24 @@
-import React from 'react';
-import { ThemeProvider, CssBaseline } from '@mui/material';
-import  theme  from '../src/app/utils/theme';
+import React from 'react'
+import { ThemeProvider, CssBaseline } from '@mui/material'
+import theme from '../styles/theme'
 
 const preview = {
   parameters: {
     controls: {
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
+        date: /Date$/i
+      }
+    }
   },
   decorators: [
     (Story: any) => (
       <ThemeProvider theme={theme}>
-        <CssBaseline /> 
+        <CssBaseline />
         <Story />
       </ThemeProvider>
-    ),
-  ],
-};
+    )
+  ]
+}
 
-export default preview;
+export default preview

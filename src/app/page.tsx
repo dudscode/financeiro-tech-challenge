@@ -1,7 +1,6 @@
-"use client";
-import { ThemeProvider } from '@mui/material/styles';
-import theme from './utils/theme';
-import { Extrato, ITransacao } from '../components/Extrato';
+'use client'
+import Base from '@/templates/Base'
+import { Extrato, ITransacao } from '../components/Extrato'
 const transacoes: ITransacao[] = [
   {
     mes: 'Novembro',
@@ -20,12 +19,12 @@ const transacoes: ITransacao[] = [
     tipo: 'Transferência',
     data: '21/11/2022',
     valor: '-R$ 500'
-  },
-];
-export default function Home() {
+  }
+]
+export default async function Home() {
   return (
-    <ThemeProvider theme={theme}>
-      <Extrato title="Extrato" transacao={transacoes} />
-    </ThemeProvider>
+    <Base>
+      <Extrato title='Extrato' transacao={transacoes} />
+    </Base>
   )
 }
