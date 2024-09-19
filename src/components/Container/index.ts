@@ -7,10 +7,16 @@ export const Container = styled(ContainerMUI)`
     padding: 24px;
     display: flex;
     gap: 24px;
+    position: relative;
+    height: auto;
 
-    @media (min-width: ${theme.breakpoints.values.sm}${theme.breakpoints.unit}) {
+    @media (min-width: ${theme.breakpoints.values.md}${theme.breakpoints.unit}) {
       max-width: 1200px;
       margin: 0 auto;
+    }
+
+    &:empty {
+      display: none;
     }
   `}
 `
