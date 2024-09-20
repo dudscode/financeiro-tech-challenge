@@ -1,4 +1,5 @@
-import { styled, css } from '@mui/material/styles'
+import { styled } from '@mui/material/styles'
+import { Typography, Divider } from '@mui/material'
 
 export const Container = styled('div')`
   width: 690px;
@@ -17,19 +18,8 @@ export const Header = styled('div')`
   margin-bottom: 20px;
 `
 
-export const Greeting = styled('h2')`
+export const Text = styled(Typography)`
   font-family: Inter;
-  font-size: 25px;
-  font-weight: 600;
-  line-height: 30.26px;
-  margin: 0;
-`
-
-export const Date = styled('p')`
-  font-family: Inter;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 15.73px;
   margin: 0;
 `
 
@@ -49,15 +39,7 @@ export const BalanceHeader = styled('div')`
   align-items: center;
 `
 
-export const BalanceTitle = styled('h3')`
-  font-family: Inter;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 24.2px;
-  margin: 0;
-`
-
-export const VisibilityIcon = styled('span')<{ isVisible: boolean }>`
+export const VisibilityIconWrapper = styled('span')<{ isVisible: boolean }>`
   font-size: 20px;
   font-weight: 400;
   line-height: 20px;
@@ -69,24 +51,8 @@ export const VisibilityIcon = styled('span')<{ isVisible: boolean }>`
   }
 `
 
-export const BalanceLine = styled('hr')`
+export const BalanceLine = styled(Divider)`
   width: 180px;
   border: 2px solid #ff5031;
   margin: 10px 0;
-`
-
-export const AccountType = styled('p')`
-  font-family: Inter;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 19.36px;
-  margin: 0;
-`
-
-export const BalanceAmount = styled('h1')`
-  font-family: Inter;
-  font-size: 31px;
-  font-weight: 400;
-  line-height: 37.52px;
-  margin: 0;
 `

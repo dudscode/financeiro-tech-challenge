@@ -1,7 +1,8 @@
 'use client'
 import Base from '@/templates/Base'
 import { Extrato, ITransacao } from '../components/Extrato'
-import BalanceCard from '@/components/BalanceCard'
+import { BalanceCard } from '@/components/BalanceCard'
+
 const transacoes: ITransacao[] = [
   {
     mes: 'Novembro',

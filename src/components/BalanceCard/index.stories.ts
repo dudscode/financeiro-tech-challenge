@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import BalanceCard from './index'
+import { BalanceCard, IBalanceCardProps } from './index'
 
-const meta = {
+const meta: Meta<IBalanceCardProps> = {
   title: 'Components/BalanceCard',
   component: BalanceCard,
   parameters: {
@@ -18,10 +18,10 @@ const meta = {
     date: 'Quinta-feira, 08/09/2022',
     balance: 2500.0
   }
-} satisfies Meta<typeof BalanceCard>
+}
 
 export default meta
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<IBalanceCardProps>
 
 export const Default: Story = {
   args: {}
