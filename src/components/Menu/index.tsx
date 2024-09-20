@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { List, Item, Link } from './styles'
+import * as S from './styles'
 
 interface List {
   url: string
@@ -14,14 +14,6 @@ interface MenuProps {
    */
   list: List[]
   /**
-   * cor destaque de seleção
-   */
-  colorHighlight?: string
-  /**
-   * sentido do menu
-   */
-  isHorizontal?: boolean
-  /**
    * classe css
    */
   className?: string
@@ -31,7 +23,7 @@ const getSelected = (item: List, selected: string) => {
   return item.url === selected
 }
 
-export const Menu = ({ list, colorHighlight = '#47A138', isHorizontal = false, className }: MenuProps) => {
+export const Menu = ({ list, className }: MenuProps) => {
   const pathname = usePathname()
 
   if (!list?.length) {
@@ -39,19 +31,18 @@ export const Menu = ({ list, colorHighlight = '#47A138', isHorizontal = false, c
   }
 
   return (
-    <List isHorizontal={isHorizontal} className={className}>
+    <S.List className={className}>
       {list?.map((item, index) => {
         const isSelected = getSelected(item, pathname)
-        const color = isSelected ? colorHighlight : '#000'
-        const weight = isSelected ? '700' : '400'
+        console.log('isSelected: ', isSelected)
         return (
-          <Item key={index} color={color} isHorizontal={isHorizontal} isSelected={isSelected}>
-            <Link color={color} weight={weight} href={item.url} isHorizontal={isHorizontal} isSelected={isSelected}>
+          <S.Item key={index} isSelected={isSelected}>
+            <S.Link href={item.url} isSelected={isSelected}>
               {item?.label}
-            </Link>
-          </Item>
+            </S.Link>
+          </S.Item>
         )
       })}
-    </List>
+    </S.List>
   )
 }

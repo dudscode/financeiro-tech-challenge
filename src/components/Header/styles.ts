@@ -40,13 +40,6 @@ export const MenuContainer = styled('div')`
   `}
 `
 
-export const AccountContainer = styled('div')`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 16px;
-`
-
 export const ModalUI = styled(Modal)`
   position: absolute;
   left: 0;

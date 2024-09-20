@@ -1,4 +1,4 @@
-import { Container } from './styled'
+import * as S from './styled'
 export interface IIconProps {
   /**
    * nome do icone
@@ -20,8 +20,8 @@ export interface IIconProps {
 
 export const Icon = ({ icon, alt, width = '24px', height = '24px' }: IIconProps) => {
   return (
-    <Container width={width} height={height}>
-      <img src={`/assets/svg/${icon}.svg`} alt={alt} width={width} height={height} />
-    </Container>
+    <S.Container width={width} height={height}>
+      <S.Image src={`/assets/svg/${icon}.svg`} alt={alt} width={width} height={height} />
+    </S.Container>
   )
 }
