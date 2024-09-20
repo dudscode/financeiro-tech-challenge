@@ -6,12 +6,12 @@ export const Container = styled('div')`
   ${({ theme }) => css`
     width: 600px;
     height: 402px;
-    background: #004d61;
+    background: ${theme.palette.primary.main};
     border-radius: 8px 8px 8px 8px;
     display: flex;
     flex-direction: column;
     padding: 24px;
-    color: #ffffff;
+    color: ${theme.palette.common.white};
     position: relative;
     gap: 0px;
 
@@ -132,13 +132,13 @@ export const VisibilityIconWrapper = styled('span')<{ isVisible: boolean }>`
   cursor: pointer;
 
   svg {
-    color: ${({ isVisible }) => (isVisible ? '#FFFFFF' : '#FF5031')};
+    color: ${({ isVisible }) => (isVisible ? theme.palette.common.white : theme.palette.error.main)};
   }
 `
 
 export const BalanceLine = styled(Divider)<{ isVisible: boolean }>`
   width: 180px;
-  border: 2px solid ${({ isVisible }) => (isVisible ? '#FFFFFF' : '#FF5031')};
+  border: 2px solid ${({ isVisible }) => (isVisible ? theme.palette.common.white : theme.palette.error.main)};
   margin: 10px 0;
 `
 
