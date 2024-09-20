@@ -19,10 +19,8 @@ const meta: Meta<IBalanceCardProps> = {
     balance: 2500.0
   }
 }
-
 export default meta
 type Story = StoryObj<IBalanceCardProps>
-
 export const Default: Story = {
   args: {}
 }

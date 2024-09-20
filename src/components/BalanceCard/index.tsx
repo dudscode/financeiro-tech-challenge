@@ -1,8 +1,12 @@
+'use client'
 import React, { useState } from 'react'
 import { Typography } from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import * as S from './styles'
+import useIsTablet from '@/hooks/useIsTablet'
+import useIsMobile from '@/hooks/useIsMobile'
+import useCurrencyFormatter from '@/hooks/useCurrencyFormatter'
 
 export interface IBalanceCardProps {
   name: string
@@ -10,42 +14,50 @@ export interface IBalanceCardProps {
   balance: number
 }
 
-export const BalanceCard = ({ name, date, balance }: IBalanceCardProps) => {
+export const BalanceCard: React.FC<IBalanceCardProps> = ({ name, date, balance }) => {
   const [isVisible, setIsVisible] = useState(true)
-
+  const isTablet = useIsTablet()
+  const isMobile = useIsMobile()
+  const { formatarValor } = useCurrencyFormatter()
   const toggleVisibility = () => {
     setIsVisible(!isVisible)
   }
-
   return (
     <S.Container>
       <S.Header>
-        <S.Text variant='h2' style={{ fontSize: '25px', fontWeight: 600, lineHeight: '30.26px' }}>
+        <S.Text variant='h2' className='greeting'>
           Olá, {name}! :)
         </S.Text>
-        <S.Text variant='body2' style={{ fontSize: '13px', fontWeight: 400, lineHeight: '15.73px' }}>
+        <S.Text variant='body2' className='date'>
           {date}
         </S.Text>
       </S.Header>
       <S.BalanceContainer>
         <S.Balance>
           <S.BalanceHeader>
-            <S.Text variant='h3' style={{ fontSize: '20px', fontWeight: 600, lineHeight: '24.2px' }}>
+            <S.Text variant='h3' className='balance-title'>
               Saldo
             </S.Text>
             <S.VisibilityIconWrapper onClick={toggleVisibility} isVisible={isVisible}>
               {isVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}
             </S.VisibilityIconWrapper>
           </S.BalanceHeader>
-          <S.BalanceLine />
-          <S.Text variant='body1' style={{ fontSize: '16px', fontWeight: 400, lineHeight: '19.36px' }}>
+          <S.BalanceLine isVisible={isVisible} />
+          <S.Text variant='body1' className='account-type'>
             Conta Corrente
           </S.Text>
-          <S.Text variant='h1' style={{ fontSize: '31px', fontWeight: 400, lineHeight: '37.52px' }}>
-            R$ {isVisible ? balance.toFixed(2) : '****'}
+          <S.Text variant='h1' className='balance-amount'>
+            {isVisible ? formatarValor(balance) : '****'}
           </S.Text>
         </S.Balance>
       </S.BalanceContainer>
+      {(isTablet || isMobile) && (
+        <>
+          <S.BottomEdge src='/images/bottom-edge.png' alt='Bottom Edge' />
+          <S.TopEdge src='/images/top-edge.png' alt='Top Edge' />
+          <S.PersonWithCoin src='/images/person-with-coin.png' alt='Person with Coin' />
+        </>
+      )}
     </S.Container>
   )
 }
