@@ -5,13 +5,34 @@ import { createTheme } from '@mui/material/styles'
 
 const theme = createTheme({
   palette: {
+    common: { black: '#000', white: '#fff' },
+    background: {
+      paper: 'background-image: linear-gradient(rgba(0, 77, 97, 1), #fff)',
+      default: 'rgba(228, 237, 227, 1)'
+    },
     primary: {
-      main: '#004D61'
+      light: 'rgba(228, 237, 227, 1)',
+      main: 'rgba(0, 77, 97, 1)',
+      dark: 'rgba(0, 77, 97, 1)',
+      contrastText: '#fff'
     },
     secondary: {
-      main: '#47A138'
+      light: 'rgba(248, 248, 248, 1)',
+      main: 'rgba(203, 203, 203, 1)',
+      dark: 'rgba(71, 161, 56, 1)',
+      contrastText: 'rgba(0, 0, 0, 1)'
     },
-    divider: 'rgba(71, 161, 56, 0.5)'
+    error: {
+      light: '#e57373',
+      main: 'rgba(255, 80, 49, 1)',
+      dark: 'rgba(191, 19, 19, 1)',
+      contrastText: '#fff'
+    },
+    text: {
+      primary: 'rgba(0, 0, 0, 0.87)',
+      secondary: 'rgba(71, 161, 56, 1)',
+      disabled: 'rgba(0, 0, 0, 0.38)'
+    }
   },
   typography: {
     h2: {
