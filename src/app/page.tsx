@@ -1,6 +1,11 @@
 'use client'
+
 import Base from '@/templates/Base'
 import { Extrato, ITransacao } from '../components/Extrato'
+import { BalanceCard } from '@/components/BalanceCard'
+import useIsTablet from '@/hooks/useIsTablet'
+import useIsMobile from '@/hooks/useIsMobile'
+
 const transacoes: ITransacao[] = [
   {
     mes: 'Novembro',
@@ -21,10 +26,18 @@ const transacoes: ITransacao[] = [
     valor: '-R$ 500'
   }
 ]
-export default async function Home() {
+
+export default function Home() {
+  const isTablet = useIsTablet()
+  const isMobile = useIsMobile()
   return (
     <Base>
-      <Extrato title='Extrato' transacao={transacoes} />
+      <div
+        style={{ display: 'flex', flexDirection: isTablet || isMobile ? 'column' : 'row', gap: '16px', width: '100%' }}
+      >
+        <BalanceCard name='Joana' date='Quinta-feira, 08/09/2022' balance={2500.00} />
+        <Extrato title='Extrato' transacao={transacoes} />
+      </div>
     </Base>
   )
 }
