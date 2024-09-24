@@ -3,6 +3,7 @@
 import Base from '@/templates/Base'
 import { Extrato, ITransacao } from '../components/Extrato'
 import { BalanceCard } from '@/components/BalanceCard'
+import { TransactionCard } from '@/components/TransactionCard'
 import useIsTablet from '@/hooks/useIsTablet'
 import useIsMobile from '@/hooks/useIsMobile'
 
@@ -33,11 +34,15 @@ export default function Home() {
   return (
     <Base>
       <div
-        style={{ display: 'flex', flexDirection: isTablet || isMobile ? 'column' : 'row', gap: '16px', width: '100%' }}
+        style={{ display: 'flex', flexDirection:  'column', gap: '16px', width: '100%' }}
       >
         <BalanceCard name='Joana' date='Quinta-feira, 08/09/2022' balance={2500.00} />
-        <Extrato title='Extrato' transacao={transacoes} />
+        <TransactionCard onTransactionSubmit={function (type: 'deposit' | 'transfer', amount: number): void {
+          throw new Error('Function not implemented.')
+        } }/>
+
       </div>
+      <Extrato title='Extrato' transacao={transacoes} />
     </Base>
   )
 }
