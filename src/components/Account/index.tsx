@@ -1,15 +1,15 @@
-import { Container, Button, AccountContainer, User } from './styles'
+import * as S from './styles'
 import { Icon } from '@/components/Icons'
 
 export const Account = () => {
   return (
-    <Container>
-      <AccountContainer>
-        <User>Nome do usuario logado</User>
-        <Button>
+    <S.Container>
+      <S.AccountContainer>
+        <S.User>Nome do usuario logado</S.User>
+        <S.Button>
           <Icon icon='account' alt='icone de account' width='40px' height='40px' />
-        </Button>
-      </AccountContainer>
-    </Container>
+        </S.Button>
+      </S.AccountContainer>
+    </S.Container>
   )
 }

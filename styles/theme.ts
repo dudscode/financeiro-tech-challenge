@@ -7,31 +7,31 @@ const theme = createTheme({
   palette: {
     common: { black: '#000', white: '#fff' },
     background: {
-      paper: 'background-image: linear-gradient(rgba(0, 77, 97, 1), #fff)',
-      default: 'rgba(228, 237, 227, 1)'
+      paper: 'background-image: linear-gradient(#004D61, #fff)',
+      default: '#E4EDE3'
     },
     primary: {
-      light: 'rgba(228, 237, 227, 1)',
-      main: 'rgba(0, 77, 97, 1)',
-      dark: 'rgba(0, 77, 97, 1)',
+      light: '#E4EDE3',
+      main: '#004D61',
+      dark: '#004D61',
       contrastText: '#fff'
     },
     secondary: {
-      light: 'rgba(248, 248, 248, 1)',
-      main: 'rgba(203, 203, 203, 1)',
-      dark: 'rgba(71, 161, 56, 1)',
-      contrastText: 'rgba(0, 0, 0, 1)'
+      light: '#F8F8F8',
+      main: '#CBCBCB',
+      dark: '#47A138',
+      contrastText: '#000'
     },
     error: {
       light: '#e57373',
-      main: 'rgba(255, 80, 49, 1)',
-      dark: 'rgba(191, 19, 19, 1)',
+      main: '#FF5031',
+      dark: '#CB0000',
       contrastText: '#fff'
     },
     text: {
-      primary: 'rgba(0, 0, 0, 0.87)',
-      secondary: 'rgba(71, 161, 56, 1)',
-      disabled: 'rgba(0, 0, 0, 0.38)'
+      primary: '#000',
+      secondary: '#47A138',
+      disabled: '#9d9d9d'
     }
   },
   typography: {

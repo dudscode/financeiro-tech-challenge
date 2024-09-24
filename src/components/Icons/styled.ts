@@ -12,15 +12,16 @@ export interface IContainerProps {
 
 export const Container = styled('div')<IContainerProps>`
   ${({ width, height }) => css`
-    position: relative;
-    width: ${width};
-    height: ${height};
+  position: relative;
+  width: ${width};
+  height: ${height};
 
-    & img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: inline-block;
-    }
+  & img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+  }
   `}
-`
+  `
+  export const Image = styled('img')``
