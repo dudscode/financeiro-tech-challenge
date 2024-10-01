@@ -10,7 +10,6 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    colorHighlight: { control: 'color' },
     list: { control: 'object' }
   },
   args: {}
@@ -27,7 +26,6 @@ export const Default: Story = {
       { url: '/investimentos', label: 'Investimentos' },
       { url: '/outros', label: 'Outros serviços' }
     ],
-    colorHighlight: '#47a138'
   }
 }
 export const OtherColor: Story = {
@@ -38,6 +36,5 @@ export const OtherColor: Story = {
       { url: '/investimentos', label: 'Investimentos' },
       { url: '/outros', label: 'Outros serviços' }
     ],
-    colorHighlight: '#FF5031'
   }
 }
