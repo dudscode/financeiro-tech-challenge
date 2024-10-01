@@ -6,18 +6,28 @@ type LinkProps = {
 
 type ItemsProps = {
   isSelected?: boolean
+} & ListProps
+
+type ListProps = {
+  isHorizontal?: boolean
 }
 
-export const List = styled('ul')`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  flex-direction: column;
+export const List = styled('ul')<ListProps>`
+  ${({ isHorizontal }) => css`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    ${isHorizontal &&
+    css`
+      flex-direction: row;
+    `}
+  `}
 `
 
 export const Item = styled('li')<ItemsProps>`
-  ${({ theme, isSelected }) => css`
+  ${({ theme, isSelected, isHorizontal }) => css`
     width: 100%;
     position: relative;
 
@@ -30,6 +40,11 @@ export const Item = styled('li')<ItemsProps>`
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
+      ${isHorizontal &&
+      !isSelected &&
+      css`
+        display: none;
+      `}
     }
     &:last-of-type {
       &:after {

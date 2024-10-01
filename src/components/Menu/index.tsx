@@ -14,6 +14,10 @@ interface MenuProps {
    */
   list: List[]
   /**
+   * se o menu é horizontal
+   */
+  isHorizontal?: boolean
+  /**
    * classe css
    */
   className?: string
@@ -23,7 +27,7 @@ const getSelected = (item: List, selected: string) => {
   return item.url === selected
 }
 
-export const Menu = ({ list, className }: MenuProps) => {
+export const Menu = ({ list, isHorizontal, className }: MenuProps) => {
   const pathname = usePathname()
 
   if (!list?.length) {
@@ -31,12 +35,11 @@ export const Menu = ({ list, className }: MenuProps) => {
   }
 
   return (
-    <S.List className={className}>
+    <S.List className={className} isHorizontal={isHorizontal}>
       {list?.map((item, index) => {
         const isSelected = getSelected(item, pathname)
-        console.log('isSelected: ', isSelected)
         return (
-          <S.Item key={index} isSelected={isSelected}>
+          <S.Item key={index} isSelected={isSelected} isHorizontal={isHorizontal}>
             <S.Link href={item.url} isSelected={isSelected}>
               {item?.label}
             </S.Link>

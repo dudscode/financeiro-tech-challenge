@@ -6,11 +6,10 @@ const meta = {
   title: 'Components/Menu',
   component: Menu,
   parameters: {
-    layout: 'centered'
+    layout: 'fullscreen'
   },
   tags: ['autodocs'],
   argTypes: {
-    colorHighlight: { control: 'color' },
     list: { control: 'object' }
   },
   args: {}
@@ -26,11 +25,10 @@ export const Default: Story = {
       { url: '/tranferencia', label: 'Tranferências' },
       { url: '/investimentos', label: 'Investimentos' },
       { url: '/outros', label: 'Outros serviços' }
-    ],
-    colorHighlight: '#47a138'
+    ]
   }
 }
-export const OtherColor: Story = {
+export const Horizontal: Story = {
   args: {
     list: [
       { url: '/', label: 'Início' },
@@ -38,6 +36,6 @@ export const OtherColor: Story = {
       { url: '/investimentos', label: 'Investimentos' },
       { url: '/outros', label: 'Outros serviços' }
     ],
-    colorHighlight: '#FF5031'
+    isHorizontal: true
   }
 }

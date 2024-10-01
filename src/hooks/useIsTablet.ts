@@ -7,7 +7,7 @@ const useIsTablet = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsTablet(window.innerWidth <= theme.breakpoints.values.md)
+      setIsTablet(window.innerWidth <= theme.breakpoints.values.md && window.innerWidth > theme.breakpoints.values.sm)
     }
 
     handleResize()

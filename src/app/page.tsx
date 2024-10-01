@@ -10,7 +10,7 @@ import { Extrato, ITransacao } from '@/components/Extrato'
 const transacoes: ITransacao[] = [
   {
     mes: 'Novembro',
-    tipo: 'Depósito',
+    tipo: 'Dep�sito',
     data: '21/11/2022',
     valor: 'R$ 100'
   },
@@ -22,7 +22,7 @@ const transacoes: ITransacao[] = [
   },
   {
     mes: 'Novembro',
-    tipo: 'Transferência',
+    tipo: 'Transfer�ncia',
     data: '21/11/2022',
     valor: '-R$ 500'
   }
