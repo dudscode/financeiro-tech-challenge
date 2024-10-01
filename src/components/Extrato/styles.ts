@@ -31,11 +31,12 @@ export const Container = styled('section')`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    flex: 1 2 100%;
     @media (min-width: ${theme.breakpoints.values.sm}${theme.breakpoints.unit}) {
       align-items: center;
     }
     @media (min-width: ${theme.breakpoints.values.lg}${theme.breakpoints.unit}) {
-      width: 280px;
+      max-width: 280px;
     }
   `}
 `

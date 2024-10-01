@@ -11,12 +11,20 @@ export const SideBar = styled('div')`
 `
 
 export const Content = styled('div')`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  flex: 2 1 100%;
+`
+
+export const Main = styled('main')`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 24px;
-    @media (min-width: ${theme.breakpoints.values.lg}${theme.breakpoints.unit}) {
+    @media (min-width: ${theme.breakpoints.values.md + 1}${theme.breakpoints.unit}) {
       flex-direction: row;
     }
   `}

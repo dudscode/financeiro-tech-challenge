@@ -38,20 +38,22 @@ const Base = ({ children }: BaseTemplateProps) => {
   return (
     <>
       <Header />
-      {/* <Container>
-      <Menu list={MENU} />
-    </Container> */}
+      {isTablet && (
+        <Container>
+          <Menu list={MENU} isHorizontal />
+        </Container>
+      )}
       <Container>
-        <S.Content>
+        <S.Main>
           {!(isTablet || isMobile) && (
             <S.SideBar>
               <Menu list={MENU} />
             </S.SideBar>
           )}
-          {children}
-          
+          <S.Content>{children}</S.Content>
+
           <Extrato title='Extrato' transacao={transacoes} />
-        </S.Content>
+        </S.Main>
       </Container>
     </>
   )

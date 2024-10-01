@@ -4,7 +4,7 @@ import theme from '../../../styles/theme'
 
 export const Container = styled('div')`
   ${({ theme }) => css`
-    width: 600px;
+    width: 100%;
     height: 402px;
     background: ${theme.palette.primary.main};
     border-radius: 8px 8px 8px 8px;
