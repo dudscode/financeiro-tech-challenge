@@ -9,3 +9,15 @@ export const SideBar = styled('div')`
     height: calc(100vh - 100px);
   `}
 `
+
+export const Content = styled('div')`
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 24px;
+    @media (min-width: ${theme.breakpoints.values.lg}${theme.breakpoints.unit}) {
+      flex-direction: row;
+    }
+  `}
+`
