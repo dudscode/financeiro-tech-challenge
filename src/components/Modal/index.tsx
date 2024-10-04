@@ -1,5 +1,6 @@
 import { Container, Close, Content } from './styles'
-import { Icon } from '@/components/Icons'
+import I from '@/components/Icons'
+import theme from '../../../styles/theme'
 
 interface ContainerProps {
   bgColor?: string
@@ -18,7 +19,7 @@ export const Modal = ({ children, bgColor, width, height, isOpen = true, callbac
   return (
     <Container className={className} bgColor={bgColor} width={width} height={height}>
       <Close onClick={() => callback && callback(false)}>
-        <Icon icon='close' alt='botão de fechar a modal' width='20px' height='20px' />
+        <I.Close htmlColor={theme.palette.secondary.dark} fontSize='large' />
       </Close>
       <Content>{children}</Content>
     </Container>

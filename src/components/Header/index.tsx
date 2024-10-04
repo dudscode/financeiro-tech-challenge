@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import * as S from './styles'
-import { Icon } from '@/components/Icons'
+import I from '@/components/Icons'
 import { Menu } from '@/components/Menu'
 import { Account } from '@/components/Account'
 import { MENU } from '@/config/menu'
@@ -15,7 +15,7 @@ export const Header = () => {
         <S.ContentUI>
           <S.MenuContainer>
             <S.Button onClick={() => setIsOpen(!isOpen)}>
-              <Icon icon='menu' alt='icone hamburguer de menu' />
+              <I.Menu htmlColor={theme.palette.error.main} fontSize='large' />
             </S.Button>
           </S.MenuContainer>
           <Account />
