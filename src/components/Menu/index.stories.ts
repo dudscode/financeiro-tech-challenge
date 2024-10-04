@@ -6,7 +6,7 @@ const meta = {
   title: 'Components/Menu',
   component: Menu,
   parameters: {
-    layout: 'centered'
+    layout: 'fullscreen'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -25,10 +25,10 @@ export const Default: Story = {
       { url: '/tranferencia', label: 'Tranferências' },
       { url: '/investimentos', label: 'Investimentos' },
       { url: '/outros', label: 'Outros serviços' }
-    ],
+    ]
   }
 }
-export const OtherColor: Story = {
+export const Horizontal: Story = {
   args: {
     list: [
       { url: '/', label: 'Início' },
@@ -36,5 +36,6 @@ export const OtherColor: Story = {
       { url: '/investimentos', label: 'Investimentos' },
       { url: '/outros', label: 'Outros serviços' }
     ],
+    isHorizontal: true
   }
 }
