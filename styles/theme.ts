@@ -22,19 +22,50 @@ const theme = createTheme({
       dark: '#47A138',
       contrastText: '#000'
     },
-    error: {
-      light: '#e57373',
-      main: '#FF5031',
-      dark: '#CB0000',
-      contrastText: '#fff'
-    },
+
     text: {
       primary: '#000',
       secondary: '#47A138',
       disabled: '#9d9d9d'
+    },
+    grey: {
+      50: '#FAFAFA',
+      100: '#F5F5F5',
+      200: '#EEEEEE',
+      300: '#E0E0E0',
+      400: '#BDBDBD',
+      500: '#9E9E9E',
+      600: '#757575',
+      700: '#616161',
+      800: '#424242',
+      900: '#212121'
+    },
+    error: {
+      light: '#e57373',
+      main: '#FF5031',
+      dark: '#BF1313',
+      contrastText: '#fff'
+    },
+    warning: {
+      main: '#FFC107',
+      light: '#FFD54F',
+      dark: '#FFA000',
+      contrastText: '#000'
+    },
+    success: {
+      main: '#47A138',
+      light: '#81C784',
+      dark: '#388E3C',
+      contrastText: '#fff'
     }
   },
   typography: {
+    fontFamily: 'Inter, sans-serif',
+    fontSize: 16,
+    fontWeightBold: 700,
+    fontWeightLight: 300,
+    fontWeightMedium: 500,
+    fontWeightRegular: 400,
     h2: {
       fontSize: '2rem',
       fontWeight: 700
