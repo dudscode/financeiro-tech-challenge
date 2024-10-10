@@ -1,7 +1,8 @@
+import { styled } from '@mui/material/styles'
 import React from 'react'
 import { ThemeProvider, CssBaseline } from '@mui/material'
 import theme from '../styles/theme'
-import '../styles/globals.css'
+import '../styles/storybook.css'
 
 const preview = {
   parameters: {
@@ -14,12 +15,23 @@ const preview = {
   },
   decorators: [
     (Story: any) => (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Story />
-      </ThemeProvider>
+      <Container>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Story />
+          </div>
+        </ThemeProvider>
+      </Container>
     )
   ]
 }
 
 export default preview
+
+const Container = styled('div')`
+  width: 100%;
+  #storybook-root {
+    width: 100%;
+  }
+`

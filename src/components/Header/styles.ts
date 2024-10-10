@@ -5,6 +5,7 @@ import { Modal } from '@/components/Modal'
 export const Container = styled('div')`
   z-index: 5;
   position: relative;
+  width: 100%;
 `
 export const Wrapper = styled('div')`
   ${({ theme }) => css`

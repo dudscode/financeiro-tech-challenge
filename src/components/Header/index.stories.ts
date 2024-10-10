@@ -5,7 +5,7 @@ const meta = {
   title: 'Components/Header',
   component: Header,
   parameters: {
-    layout: 'fullscreen'
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {},

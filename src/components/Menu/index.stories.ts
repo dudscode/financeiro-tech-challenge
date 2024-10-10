@@ -6,7 +6,7 @@ const meta = {
   title: 'Components/Menu',
   component: Menu,
   parameters: {
-    layout: 'fullscreen'
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
