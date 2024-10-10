@@ -1,5 +1,4 @@
 'use client'
-import '../styles/globals.css'
 import '../styles/font.css'
 import { createTheme } from '@mui/material/styles'
 
@@ -66,6 +65,10 @@ const theme = createTheme({
     fontWeightLight: 300,
     fontWeightMedium: 500,
     fontWeightRegular: 400,
+    h1: {
+      fontSize: '6rem',
+      fontWeight: 700
+    },
     h2: {
       fontSize: '2rem',
       fontWeight: 700
