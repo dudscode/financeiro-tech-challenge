@@ -34,6 +34,10 @@ export interface ButtonProps {
    * Optional full width
    */
   isFull?: boolean
+  /**
+   * Optional long button
+   */
+  isLong?: boolean
 }
 
 /**

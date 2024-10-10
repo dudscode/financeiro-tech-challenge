@@ -48,3 +48,10 @@ export const FullButton: Story = {
     isFull: true
   }
 }
+
+export const LongButton: Story = {
+  args: {
+    children: 'Button',
+    isLong: true
+  }
+}
