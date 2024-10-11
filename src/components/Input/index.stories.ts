@@ -26,10 +26,8 @@ export const Error: Story = {
   args: {
     placeholder: 'Digite seu nome completo',
     label: 'Nome',
-    message: {
-      error: 'Nome inválido'
-    },
-    status: 'error'
+    message: 'Nome inválido',
+    error: true
   }
 }
 
@@ -37,19 +35,7 @@ export const Success: Story = {
   args: {
     placeholder: 'Digite seu nome completo',
     label: 'Nome',
-    message: {
-      success: 'Nome ok'
-    },
-    status: 'success'
-  }
-}
-export const Warning: Story = {
-  args: {
-    placeholder: 'Digite seu nome completo',
-    label: 'Nome',
-    message: {
-      warning: 'Nome já existe'
-    },
-    status: 'warning'
+    message: 'Nome ok',
+    error: false
   }
 }
