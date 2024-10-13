@@ -3,7 +3,8 @@ import I from '@/components/Icons'
 import theme from '../../../styles/theme'
 
 interface ContainerProps {
-  bgColor?: string
+  bgColor?: string,
+  closeColor?: string,
   width?: string
   height?: string
   children: React.ReactNode
@@ -12,14 +13,14 @@ interface ContainerProps {
   className?: string
 }
 
-export const Modal = ({ children, bgColor, width, height, isOpen = true, callback, className }: ContainerProps) => {
+export const Modal = ({ children, bgColor, width, height, isOpen = true, callback, className, closeColor = theme.palette.secondary.dark  }: ContainerProps) => {
   if (!isOpen) {
     return null
   }
   return (
     <Container className={className} bgColor={bgColor} width={width} height={height}>
       <Close onClick={() => callback && callback(false)}>
-        <I.Close htmlColor={theme.palette.secondary.dark} fontSize='large' />
+        <I.Close htmlColor={closeColor} fontSize='large' />
       </Close>
       <Content>{children}</Content>
     </Container>
