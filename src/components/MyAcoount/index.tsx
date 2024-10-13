@@ -20,7 +20,6 @@ export const MyAccount: React.FC = () => {
   const isTablet = useIsTablet()
 
   const handleSave = () => {
-    // Implement save logic here
     alert('Informações salvas com sucesso!')
     setIsEditing({ name: false, email: false, password: false })
   }
@@ -112,7 +111,7 @@ export const MyAccount: React.FC = () => {
         </S.FormContainer>
         {(isMobile || isTablet) && <S.ProfileImage src='/images/person-my-account.svg' alt='Profile' />}
       </S.Content>
-      <>  
+      <>
         <S.BottomEdge src='/images/bottom-my-account.png' alt='Bottom Edge' />
         <S.TopEdge src='/images/top-my-account.png' alt='Top Edge' />
       </>

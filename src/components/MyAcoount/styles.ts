@@ -1,12 +1,11 @@
 import { styled, css } from '@mui/material/styles'
 import { Button, TextField } from '@mui/material'
-import theme from '../../../styles/theme'
 
 export const Container = styled('div')`
   ${({ theme }) => css`
     width: 100%;
     height: 527px;
-    background-color: #cbcbcb;
+    background-color: ${theme.palette.secondary.main};
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -29,16 +28,14 @@ export const Container = styled('div')`
 `
 
 export const Header = styled('div')`
-  ${({ theme }) => css`
-    margin-bottom: 20px;
-    text-align: center;
-    z-index: 2;
+  margin-bottom: 20px;
+  text-align: center;
+  z-index: 2;
 
-    @media (max-width: 480px) {
-      margin-bottom: 24px;
-      order: -1;
-    }
-  `}
+  @media (max-width: 480px) {
+    margin-bottom: 24px;
+    order: -1;
+  }
 `
 
 export const Content = styled('div')`
@@ -63,17 +60,15 @@ export const Content = styled('div')`
 `
 
 export const FormContainer = styled('div')`
-  ${({ theme }) => css`
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-    z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  z-index: 2;
 
-    @media (max-width: 480px) {
-      gap: 12px;
-    }
-  `}
+  @media (max-width: 480px) {
+    gap: 12px;
+  }
 `
 
 export const FormField = styled('div')`
@@ -94,13 +89,13 @@ export const FormField = styled('div')`
     .MuiTextField-root {
       background-color: #e6e6e6;
       border-radius: 8px;
-      border: 1px solid #47a138;
+      border: 1px solid ${theme.palette.secondary.dark};
       opacity: 1;
       margin: 0;
       padding: 0;
 
       &.editable {
-        background-color: #ffffff;
+        background-color: ${theme.palette.primary.contrastText};
       }
 
       .MuiInputBase-root {
@@ -158,38 +153,33 @@ export const ProfileImage = styled('img')`
 `
 
 export const BottomEdge = styled('img')`
-  ${({ theme }) => css`
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-    width: 259.91px;
-    height: 256.25px;
-  `}
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  width: 259.91px;
+  height: 256.25px;
+
   @media (max-width: 480px) {
     width: 146px;
     height: 143.94px;
     left: -1;
-    /* transform: rotate(180deg); */
     left: auto;
     right: 0;
   }
 `
 
 export const TopEdge = styled('img')`
-  ${({ theme }) => css`
-    position: absolute;
-    top: 0;
-    right: 0;
-    pointer-events: none;
-    width: 259.91px;
-    height: 256.25px;
-  `}
+  position: absolute;
+  top: 0;
+  right: 0;
+  pointer-events: none;
+  width: 259.91px;
+  height: 256.25px;
 
   @media (max-width: 480px) {
     width: 146px;
     height: 143.94px;
-    /* bottom: 0;  */
     left: 0;
   }
 `
@@ -220,13 +210,13 @@ export const NameEmailInput = styled(TextField)`
     height: 48px;
     gap: 0px;
     border-radius: 8px;
-    border: 1px solid #47a138;
+    border: 1px solid ${theme.palette.secondary.dark};
     opacity: 1;
     margin: 0;
     padding: 0;
 
     &.editable {
-      background-color: #ffffff;
+      background-color: ${theme.palette.primary.contrastText};
     }
 
     .MuiOutlinedInput-notchedOutline {
@@ -247,17 +237,17 @@ export const NameEmailInput = styled(TextField)`
 
 export const PasswordInput = styled(TextField)`
   ${({ theme }) => css`
-    width: 100%;
+    width: 250px;
     height: 48px;
     gap: 0px;
     border-radius: 8px;
-    border: 1px solid #47a138;
+    border: 1px solid ${theme.palette.secondary.dark};
     opacity: 1;
     margin: 0;
     padding: 0;
 
     &.editable {
-      background-color: #ffffff;
+      background-color: ${theme.palette.primary.contrastText};
     }
 
     .MuiOutlinedInput-notchedOutline {
@@ -272,6 +262,10 @@ export const PasswordInput = styled(TextField)`
     .MuiInputAdornment-root {
       display: flex;
       align-items: center.;
+    }
+
+    @media (max-width: 480px) {
+      width: 100%;
     }
   `}
 `
