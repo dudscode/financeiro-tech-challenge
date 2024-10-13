@@ -1,6 +1,11 @@
 'use client'
+import { MyAccount } from '@/components/MyAcoount'
 import Base from '@/templates/Base'
 
-export default async function Home() {
-  return <Base>Outros</Base>
+export default function Home() {
+  return (
+    <Base hideExtrato>
+      <MyAccount />
+    </Base>
+  )
 }
