@@ -25,9 +25,15 @@ export const Label = styled(InputLabel)`
 
 export const Input = styled(OutlinedInput)`
   ${({ theme }) => css`
+    font-size: ${theme.typography.fontSize}px;
+    background-color: ${theme.palette.common.white};
+    input {
+      font-size: ${theme.typography.fontSize}px;
+      padding: 15px 20px;
+    }
     &::placeholder {
       color: ${theme.palette.grey[500]};
-      font-size: ${theme.typography.fontSize};
+      font-size: ${theme.typography.fontSize}px;
       font-family: ${theme.typography.fontFamily};
       font-weight: ${theme.typography.fontWeightRegular};
     }
