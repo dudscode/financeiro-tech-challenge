@@ -1,4 +1,5 @@
 import { styled, css } from '@mui/material/styles'
+import { Modal as ModalComponent } from '@/components/Modal'
 
 export const Container = styled('div')`
   ${({ theme }) => css`
@@ -18,4 +19,10 @@ export const Container = styled('div')`
       padding: 16px 100px;
     }
   `}
+`
+export const Modal = styled(ModalComponent)`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 `

@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { Modal } from '@/components/Modal'
+import React, { useState, useEffect } from 'react'
 import * as S from './styles'
 import theme from '../../../styles/theme'
 import I from '@/components/Icons'
@@ -26,12 +25,18 @@ export const FullModal = ({ children, initialState }: FullModalProps) => {
 
   const zIndex = 10
 
+  useEffect(() => {
+    if (initialState) {
+      setIsOpen(true)
+    }
+  }, [initialState])
+
   const onClose = () => {
     setIsOpen(false)
   }
 
   return (
-    <Modal
+    <S.Modal
       aligne='start'
       height='100vh'
       width={width}
@@ -43,6 +48,6 @@ export const FullModal = ({ children, initialState }: FullModalProps) => {
       hasFullBackground
     >
       <S.Container>{children}</S.Container>
-    </Modal>
+    </S.Modal>
   )
 }
