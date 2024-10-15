@@ -1,4 +1,5 @@
 import * as S from './styles'
+import { FormControl } from '@mui/material'
 
 type MessageProps = {
   error?: string
@@ -20,33 +21,35 @@ type InputProps = {
   /**
    * Feedback do input
    */
-  message?: MessageProps
+  message?: string
   /**
    * Status do input
    */
-  status?: Status
+  error?: boolean
+  /**
+   * Função de callback
+   */
+  callback?: (value: string) => void
 }
 
-const getStatus = (status?: Status, message?: MessageProps) => {
-  switch (status) {
-    case 'error':
-      return message?.error
-    case 'success':
-      return message?.success
-    case 'warning':
-      return message?.warning
-    default:
-      return ''
+export const Input = ({ placeholder, label, message, error = false, callback }: InputProps) => {
+  const status = error ? 'error' : undefined
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    callback && callback(event.target.value)
   }
-}
 
 export const Input = ({ placeholder, label, message, status }: InputProps) => {
   const statusMessage = getStatus(status, message)
   return (
     <S.Container>
       {label && <S.Label htmlFor='input'>{label}</S.Label>}
-      <S.Input placeholder={placeholder} status={status} />
-      {!!statusMessage && <S.Message status={status}>{statusMessage}</S.Message>}
+      <FormControl fullWidth variant='outlined' color={status} focused={!!status}>
+        <S.Input id='input' placeholder={placeholder} onChange={onChange} />
+        <S.Message id='message' error={status === 'error'}>
+          {message}
+        </S.Message>
+      </FormControl>
     </S.Container>
   )
 }

@@ -80,3 +80,9 @@ export const TransactionCard: React.FC<ITransactionCardProps> = ({ onTransaction
     </GreyCard>
   )
 }
+          <S.PersonCard src='/images/person-card.png' alt='Person Card' />
+        </>
+      )}
+    </S.Container>
+  );
+};
