@@ -22,4 +22,5 @@ export const AccountContainer = styled('div')`
   justify-content: flex-start;
   align-items: center;
   gap: 16px;
+  cursor: pointer;
 `
