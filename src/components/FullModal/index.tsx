@@ -3,6 +3,8 @@ import { Modal } from '@/components/Modal'
 import * as S from './styles'
 import theme from '../../../styles/theme'
 import I from '@/components/Icons'
+import useIsTablet from '@/hooks/useIsTablet'
+import useIsMobile from '@/hooks/useIsMobile'
 
 type FullModalProps = {
   children: React.ReactNode
@@ -15,16 +17,24 @@ const Icon = () => {
 }
 
 export const FullModal = ({ children, initialState }: FullModalProps) => {
-  const zIndex = 10
   const [isOpen, setIsOpen] = useState(initialState)
+
+  const isTablet = useIsTablet()
+  const isMobile = useIsMobile()
+
+  const width = isMobile ? '90vw' : isTablet ? '80vw' : '792px'
+
+  const zIndex = 10
+
   const onClose = () => {
     setIsOpen(false)
   }
+
   return (
     <Modal
       aligne='start'
       height='100vh'
-      width='80vw'
+      width={width}
       bgColor={theme.palette.secondary.light}
       iconsClose={Icon}
       callback={onClose}

@@ -20,4 +20,5 @@ export const FormContainer = styled('div')`
   justify-content: flex-start;
   align-items: center;
   gap: 24px;
+  width: 100%;
 `
