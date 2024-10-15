@@ -38,6 +38,10 @@ export interface ButtonProps {
    * Optional long button
    */
   isLong?: boolean
+  /**
+   * Optional disabled button
+   */
+  disabled?: boolean
 }
 
 /**
@@ -50,10 +54,11 @@ export const Button = ({
   size = 'medium',
   startIcon,
   endIcon,
+  disabled = false,
   ...props
 }: ButtonProps) => {
   return (
-    <S.Button type='button' {...{ variant, color, size }} {...props}>
+    <S.Button type='button' disabled={disabled} {...{ variant, color, size }} {...props}>
       {startIcon && <IconButton>{startIcon}</IconButton>}
       {children}
       {endIcon && <IconButton>{endIcon}</IconButton>}

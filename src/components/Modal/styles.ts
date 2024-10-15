@@ -39,7 +39,9 @@ export const Close = styled('button')`
   right: 8px;
 `
 
-export const Content = styled('div')``
+export const Content = styled('div')`
+  width: 100%;
+`
 
 export const Background = styled('div')<BackgroundProps>`
   ${({ theme, zIndex }) => css`
