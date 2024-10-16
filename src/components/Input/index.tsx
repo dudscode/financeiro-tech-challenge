@@ -4,6 +4,14 @@ import { FormControl, InputAdornment, IconButton } from '@mui/material'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
+type MessageProps = {
+  error?: string
+  success?: string
+  warning?: string
+}
+
+export type Status = 'error' | 'success' | 'warning'
+
 type InputProps = {
   /**
    * Texto descritivo do input
@@ -22,7 +30,7 @@ type InputProps = {
    */
   error?: boolean
   /**
-   * FunÃ§Ã£o de callback
+   * Função de callback
    */
   callback?: (value: string) => void
   /**
@@ -82,6 +90,8 @@ export const Input = ({
     callback && callback(event.target.value)
   }
 
+export const Input = ({ placeholder, label, message, status }: InputProps) => {
+  const statusMessage = getStatus(status, message)
   return (
     <S.Container>
       {label && <S.Label htmlFor='input'>{label}</S.Label>}

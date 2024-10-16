@@ -3,37 +3,36 @@ import { Box, Theme, Typography } from '@mui/material'
 import theme from '../../../styles/theme'
 
 interface IParagraph {
-    /**
-     * text size
-     */
-    txt?: string
-    /**
-     * margin bottom
-     */
-    mb?: string
-    /**
-     * font weight
-     */
-    weight?: string
-    /**
-     * text type
-     */
-    type?: string
+  /**
+   * text size
+   */
+  txt?: string
+  /**
+   * margin bottom
+   */
+  mb?: string
+  /**
+   * font weight
+   */
+  weight?: string
+  /**
+   * text type
+   */
+  type?: string
 }
 export const Container = styled('section')`
-    ${({ theme }) => css`
-        width: 100%;
-        padding: 32px 40px 40px;
-        background: ${theme.palette.secondary.main};
-        border-radius: 8px 8px 8px 8px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        @media (min-width: ${theme.breakpoints.values.sm}${theme.breakpoints.unit}) {
-            align-items: flex-start;
-        }
-        
-    `}
+  ${({ theme }) => css`
+    z-index: 10;
+    width: 100%;
+    padding: 32px 40px 40px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media (min-width: ${theme.breakpoints.values.sm}${theme.breakpoints.unit}) {
+      align-items: flex-start;
+    }
+  `}
 `
 export const Title = styled(Typography)`
   margin-bottom: 32px;
@@ -50,7 +49,6 @@ export const ContainerRenda = styled('section')`
         @media (min-width: ${theme.breakpoints.values.sm}${theme.breakpoints.unit}) {
         flex-direction: row;
         }
-       
     `}
 `
 export const renda = styled('div')`
@@ -62,7 +60,6 @@ export const renda = styled('div')`
         display: flex;
         flex-direction: column;
         align-items: center;
-       
     `}
 `
 
@@ -102,8 +99,8 @@ export const legend = styled('p')`
     `}
 `
 export const BoxGrafico = styled(Box)`
-min-height: 300px;
-  width: 100%; 
-display: flex;
-  align-items: center; 
+  min-height: 300px;
+  width: 100%;
+  display: flex;
+  align-items: center;
 `

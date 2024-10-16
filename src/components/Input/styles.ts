@@ -1,7 +1,23 @@
 import { FormHelperText, InputLabel, OutlinedInput } from '@mui/material'
 import { styled, css } from '@mui/material/styles'
+import { Status } from './index'
+import { Theme } from '@mui/material/styles'
+
+const getStatusColor = (theme: Theme, status?: Status) => {
+  switch (status) {
+    case 'error':
+      return theme.palette.error.dark
+    case 'success':
+      return theme.palette.success.main
+    case 'warning':
+      return theme.palette.warning.dark
+    default:
+      return theme.palette.text.primary
+  }
+}
 
 export const Container = styled('div')`
+  position: relative;
   width: 100%;
   gap: 8px;
   display: flex;
