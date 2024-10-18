@@ -10,12 +10,12 @@ export type BaseTemplateProps = {
 }
 
 const BaseHome = ({ children }: BaseTemplateProps) => {
+
   return (
     <>
       <HeaderHome/>
       <Container>
         <S.Content>{children}</S.Content>
-
       </Container>
       <FooterHome/>
     </>

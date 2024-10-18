@@ -30,9 +30,10 @@ const transacoes: ITransacao[] = [
 
 export type BaseTemplateProps = {
   children: React.ReactNode
+  hideExtrato?: boolean
 }
 
-const Base = ({ children }: BaseTemplateProps) => {
+const Base = ({ children, hideExtrato = false }: BaseTemplateProps) => {
   const isTablet = useIsTablet()
   const isMobile = useIsMobile()
   return (
@@ -52,7 +53,7 @@ const Base = ({ children }: BaseTemplateProps) => {
           )}
           <S.Content>{children}</S.Content>
 
-          <Extrato title='Extrato' transacao={transacoes} />
+          {!hideExtrato && <Extrato title='Extrato' transacao={transacoes} />}
         </S.Main>
       </Container>
     </>

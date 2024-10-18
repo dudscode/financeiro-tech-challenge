@@ -11,7 +11,7 @@ export const Button = styled(ButtonUI)<ButtonProps>`
   ${({ theme, isFull, isLong, color }) => css`
     font-size: ${theme.typography.fontSize}px;
     text-transform: initial;
-    font-weight: ${theme.typography.fontWeightMedium};
+    font-weight: ${theme.typography.fontWeightBold};
     font-family: ${theme.typography.fontFamily};
     color: ${theme.palette?.[color]?.contrastText};
     border-radius: 8px;
