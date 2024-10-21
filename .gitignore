@@ -38,4 +38,4 @@ next-env.d.ts
 *storybook.log
 /.vs/financeiro-fiap/
 /.vs/ProjectSettings.json
-/.vs/slnx.sqlite
+/.vs
