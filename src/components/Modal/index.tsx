@@ -3,7 +3,8 @@ import I from '@/components/Icons'
 import theme from '../../../styles/theme'
 
 interface ContainerProps {
-  bgColor?: string
+  bgColor?: string,
+  closeColor?: string,
   width?: string
   height?: string
   children: React.ReactNode
