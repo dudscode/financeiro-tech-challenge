@@ -6,13 +6,81 @@
       "email": "joanadasilvaoliveira@email.com.br",
       "password": "teste",
       "checked": true
+    }
+  ],
+  "extrato": [
+    {
+      "mes": "Novembro",
+      "tipo": "Depósito",
+      "data": "21/11/2022",
+      "valor": 100
     },
     {
-      "id": 2,
-      "name": "Jane Doe",
-      "email": "jane@example.com",
-      "password": "abcdef",
-      "checked": true
+      "mes": "Dezembro",
+      "tipo": "Saque",
+      "data": "15/12/2022",
+      "valor": 50
+    },
+    {
+      "mes": "Novembro",
+      "tipo": "Transferência",
+      "data": "21/11/2022",
+      "valor": 500
     }
-  ]
+  ],
+  "saldo": [
+    {
+      "tipo": "Conta corrente",
+      "valor": 500
+    },
+    {
+      "tipo": "Conta poupança",
+      "valor": 1000
+    }
+  ],
+  "cartoes": [
+    {
+      "alias": "Cartão físico",
+      "nome": "Joana da Silva Oliveira",
+      "tipo": "Platinum",
+      "numero": "1234 5678 1234 5678",
+      "function": "Débito/Crédito",
+      "status": "Ativo"
+    },
+    {
+      "alias": "Cartão digital",
+      "nome": "Joana da Silva Oliveira",
+      "tipo": "Platinum",
+      "numero": "1234 5678 1234 5678",
+      "function": "Crédito",
+      "status": "Inativo"
+    }
+  ],
+  "investimentos": {
+    "total": 30000,
+    "rendaVariavel": 15000,
+    "rendaFixa": 15000,
+    "produtos": [
+      {
+        "id": 1241,
+        "tipo": "Fundos de investimento",
+        "valor": 1000
+      },
+      {
+        "id": 1242,
+        "tipo": "Tesouro Direto",
+        "valor": 5000
+      },
+      {
+        "id": 1243,
+        "tipo": "Previdência Privada",
+        "valor": 10000
+      },
+      {
+        "id": 1244,
+        "tipo": "Bolsa de Valores",
+        "valor": 5000
+      }
+    ]
+  }
 }
