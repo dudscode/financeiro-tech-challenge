@@ -1,15 +1,23 @@
 import { NextResponse } from 'next/server'
+import axios from 'axios'
 
 export async function GET() {
   try {
-    const response = await fetch('https://json-server-vercel-tawny-one.vercel.app/users')
-    if (!response.ok) {
-      throw new Error('Failed to fetch users')
-    }
-    const data = await response.json()
-    return NextResponse.json(data)
+    const response = await axios.get('http://localhost:3001/users')
+    return NextResponse.json(response.data)
   } catch (error) {
-    console.error('Error:', error)
+    console.error('Error fetching user data:', error)
+    return NextResponse.json({ error: (error as Error).message }, { status: 500 })
+  }
+}
+
+export async function PUT(req: Request) {
+  try {
+    const user = await req.json()
+    const response = await axios.put(`http://localhost:3001/users/${user.id}`, user)
+    return NextResponse.json(response.data)
+  } catch (error) {
+    console.error('Error updating user data:', error)
     return NextResponse.json({ error: (error as Error).message }, { status: 500 })
   }
 }

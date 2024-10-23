@@ -1,15 +1,19 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Typography, InputAdornment, IconButton } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
+import axios from 'axios'
 import * as S from './styles'
 import useIsMobile from '@/hooks/useIsMobile'
 import useIsTablet from '@/hooks/useIsTablet'
 
 export const MyAccount: React.FC = () => {
-  const [name, setName] = useState<string>('Joana da Silva Oliveira')
-  const [email, setEmail] = useState<string>('joanadasilvaoliveira@email.com.br')
-  const [password, setPassword] = useState<string>('teste')
+  const [user, setUser] = useState<{ id: number; name: string; email: string; password: string }>({
+    id: 0,
+    name: '',
+    email: '',
+    password: ''
+  })
   const [isEditing, setIsEditing] = useState<{ name: boolean; email: boolean; password: boolean }>({
     name: false,
     email: false,
@@ -19,13 +23,37 @@ export const MyAccount: React.FC = () => {
   const isMobile = useIsMobile()
   const isTablet = useIsTablet()
 
-  const handleSave = () => {
-    alert('Informações salvas com sucesso!')
-    setIsEditing({ name: false, email: false, password: false })
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('/api/users')
+        const userData = response.data[0]
+        setUser(userData)
+      } catch (error) {
+        console.error('Error fetching user data:', error)
+      }
+    }
+
+    fetchUserData()
+  }, [])
+
+  const handleSave = async () => {
+    try {
+      const response = await axios.put('/api/users', user)
+      alert('Informações salvas com sucesso!')
+      setIsEditing({ name: false, email: false, password: false })
+    } catch (error) {
+      console.error('Error saving user data:', error)
+      alert('Erro ao salvar as informações')
+    }
   }
 
   const handleEditClick = (field: 'name' | 'email' | 'password') => {
     setIsEditing(prevState => ({ ...prevState, [field]: !prevState[field] }))
+  }
+
+  const handleChange = (field: 'name' | 'email' | 'password', value: string) => {
+    setUser(prevState => ({ ...prevState, [field]: value }))
   }
 
   return (
@@ -42,8 +70,8 @@ export const MyAccount: React.FC = () => {
             </Typography>
             <S.NameEmailInput
               type='text'
-              value={name}
-              onChange={e => setName(e.target.value)}
+              value={user.name}
+              onChange={e => handleChange('name', e.target.value)}
               placeholder='Nome'
               fullWidth
               className={isEditing.name ? 'editable' : ''}
@@ -65,8 +93,8 @@ export const MyAccount: React.FC = () => {
             </Typography>
             <S.NameEmailInput
               type='email'
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              value={user.email}
+              onChange={e => handleChange('email', e.target.value)}
               placeholder='Email'
               fullWidth
               className={isEditing.email ? 'editable' : ''}
@@ -88,8 +116,8 @@ export const MyAccount: React.FC = () => {
             </Typography>
             <S.PasswordInput
               type='password'
-              value={password}
-              onChange={e => setPassword(e.target.value)}
+              value={user.password}
+              onChange={e => handleChange('password', e.target.value)}
               placeholder='Senha'
               fullWidth
               className={isEditing.password ? 'editable' : ''}
