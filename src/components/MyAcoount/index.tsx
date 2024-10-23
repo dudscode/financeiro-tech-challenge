@@ -39,7 +39,7 @@ export const MyAccount: React.FC = () => {
 
   const handleSave = async () => {
     try {
-      await axios.put('/api/users', user)
+      const response = await axios.put('/api/users', user)
       alert('Informações salvas com sucesso!')
       setIsEditing({ name: false, email: false, password: false })
     } catch (error) {
