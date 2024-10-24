@@ -44,10 +44,10 @@ export const InvestmentsCard = ({
               series={[
                 {
                   data: [
-                    { id: 3, value: 25, label: 'Fundos de investimento', color: 'rgba(37, 103, 249, 1)' },
-                    { id: 2, value: 25, label: 'Tesouro Direto', color: 'rgba(143, 60, 255, 1)' },
-                    { id: 1, value: 25, label: 'Previdência Privada', color: 'rgba(255, 60, 130, 1)' },
-                    { id: 0, value: 25, label: 'Bolsa de Valores', color: 'rgba(241, 130, 61, 1)' }
+                    { id: 3, value: 200, label: 'Fundos de investimento', color: 'rgba(37, 103, 249, 1)' },
+                    { id: 2, value: 4000, label: 'Tesouro Direto', color: 'rgba(143, 60, 255, 1)' },
+                    { id: 1, value: 590, label: 'Previdência Privada', color: 'rgba(255, 60, 130, 1)' },
+                    { id: 0, value: 93, label: 'Bolsa de Valores', color: 'rgba(241, 130, 61, 1)' }
                   ],
                   innerRadius: 70,
                   outerRadius: 100,

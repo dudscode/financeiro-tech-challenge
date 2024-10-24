@@ -9,7 +9,7 @@ export interface ButtonProps {
   /**
    * Optional click handler
    */
-  onClick?: () => void
+  onClick?: (e: any) => void
   /**
    * Optional button typeStyle
    */
@@ -42,6 +42,10 @@ export interface ButtonProps {
    * Optional disabled button
    */
   disabled?: boolean
+  /**
+   * Optional button type
+   */
+  type?: 'button' | 'submit' | 'reset'
 }
 
 /**
@@ -55,10 +59,11 @@ export const Button = ({
   startIcon,
   endIcon,
   disabled = false,
+  type = 'button',
   ...props
 }: ButtonProps) => {
   return (
-    <S.Button type='button' disabled={disabled} {...{ variant, color, size }} {...props}>
+    <S.Button disabled={disabled} {...{ variant, color, size, type }} {...props}>
       {startIcon && <IconButton>{startIcon}</IconButton>}
       {children}
       {endIcon && <IconButton>{endIcon}</IconButton>}

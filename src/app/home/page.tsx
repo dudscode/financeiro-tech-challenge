@@ -1,33 +1,10 @@
 'use client'
-import { useEffect } from 'react'
-import { Typography, Grid, Card, CardContent, CardMedia } from '@mui/material'
+import { Typography, Grid, CardContent, CardMedia } from '@mui/material'
 import * as S from './styles'
 
 import BaseHome from '@/templates/BaseHome'
 
-type User = {
-  id: number
-  name: string
-}
-
 export default function Home() {
-  useEffect(() => {
-    async function getUsers() {
-      try {
-        const res = await fetch('/api/users')
-        if (!res.ok) {
-          throw new Error('Failed to fetch users')
-        }
-        const data: User[] = await res.json()
-        console.log('data: ', data)
-      } catch (error) {
-        console.log('error: ', error)
-      }
-    }
-
-    getUsers()
-  }, [])
-
   const benefits = [
     {
       title: 'Conta e cartão gratuitos',
@@ -69,12 +46,18 @@ export default function Home() {
           {benefits.map((benefit, index) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
               <S.Card>
-                <CardMedia className='CardMedia' component='img' alt={benefit.title} image={benefit.image} sx={{
+                <CardMedia
+                  className='CardMedia'
+                  component='img'
+                  alt={benefit.title}
+                  image={benefit.image}
+                  sx={{
                     width: '73px',
                     height: '56px',
                     display: 'block',
-                    margin: '0 auto',
-                  }} />
+                    margin: '0 auto'
+                  }}
+                />
                 <CardContent>
                   <Typography color='textSecondary' gutterBottom sx={{ fontWeight: 'bold' }}>
                     {benefit.title}
@@ -86,7 +69,6 @@ export default function Home() {
               </S.Card>
             </Grid>
           ))}
-
         </Grid>
       </BaseHome>
     </S.Container>

@@ -24,7 +24,7 @@ type InputProps = {
   /**
    * Função de callback
    */
-  callback?: (value: string) => void
+  onChange?: (value: string) => void
   /**
    * Icone no inicio do input
    */
@@ -37,6 +37,10 @@ type InputProps = {
    * Tipo do input
    */
   type?: 'text' | 'password'
+  /**
+   * Campo obrigatório
+   */
+  required?: boolean
 }
 
 export const Input = ({
@@ -44,10 +48,11 @@ export const Input = ({
   label,
   message,
   error = false,
-  callback,
+  onChange,
   startIcon,
   endIcon,
-  type = 'text'
+  type = 'text',
+  required
 }: InputProps) => {
   const [showPassword, setShowPassword] = useState(false)
   const status = error ? 'error' : undefined
@@ -78,8 +83,8 @@ export const Input = ({
     </InputAdornment>
   )
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    callback && callback(event.target.value)
+  const change = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange && onChange(event.target.value)
   }
 
   return (
@@ -90,7 +95,8 @@ export const Input = ({
           id='input'
           type={showPassword ? 'text' : type}
           placeholder={placeholder}
-          onChange={onChange}
+          onChange={change}
+          required={required}
           {...{ startAdornment, endAdornment: type === 'password' ? passwordAdornment : endAdornment }}
         />
         <S.Message id='message' error={status === 'error'}>

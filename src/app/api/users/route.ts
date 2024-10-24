@@ -1,9 +1,16 @@
-import { NextResponse } from 'next/server'
+import { NextResponse, NextRequest } from 'next/server'
 import axios from 'axios'
 
-export async function GET() {
+type ParamsProps = {
+  email: string
+  password: string
+}
+
+export async function GET(request: NextRequest) {
+  const email = request.nextUrl.searchParams.get('email') || ''
+  const password = request.nextUrl.searchParams.get('password') || ''
   try {
-    const response = await axios.get('http://localhost:3001/users')
+    const response = await axios.get(`http://localhost:3001/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`)
     return NextResponse.json(response.data)
   } catch (error) {
     console.error('Error fetching user data:', error)
