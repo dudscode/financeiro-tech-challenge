@@ -2,7 +2,7 @@ import { styled, css } from '@mui/material/styles'
 import { Typography, TextField, Box, Grid2 as Grid, Button } from '@mui/material'
 
 export const TransactionContainer = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(5),
+  padding: theme.spacing(4),
   zIndex: 10,
   width: '100%'
 }))

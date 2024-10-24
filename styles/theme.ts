@@ -89,20 +89,16 @@ const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         ':root': {
-          '--background': '#ffffff',
-          '--foreground': '#171717',
+          '--background': '#e4ede3',
+          '--background-input': '#ffffff',
+          '--foreground': '#000000',
           '--color-primary': '#004D61',
+          '--color-primary-dark': '#003543',
           '--color-secondary': '#47A138',
           '--color-transaction-text': '#DEE9EA',
           '--border-radius': '8px',
           '--border': '1px solid var(--color-primary)',
           '--text-input-color': '#444444'
-        },
-        '@media (prefers-color-scheme: dark)': {
-          ':root': {
-            '--background': '#e4ede3',
-            '--foreground': '#000000'
-          }
         },
         'html, body': {
           maxWidth: '100vw',
@@ -139,6 +135,9 @@ const theme = createTheme({
           outline: 'none',
           padding: 0,
           boxShadow: 'none'
+        },
+        '.MuiPieArc-root': {
+          stroke: 'var(--color-primary) !important'
         }
       }
     },
@@ -159,22 +158,25 @@ const theme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         root: {
-          backgroundColor: 'var(--background)',
+          backgroundColor: 'var(--background-input)',
           borderRadius: 'var(--border-radius) !important',
           color: 'var(--text-input-color) !important',
           '&:hover': {
-            backgroundColor: 'var(--background)'
+            backgroundColor: 'var(--background-input)'
           }
         },
         input: {
-          backgroundColor: 'var(--background)',
+          backgroundColor: 'var(--background-input)',
           borderRadius: 'var(--border-radius) !important',
           color: 'var(--text-input-color) !important',
           '&-input': {
             borderRadius: 'var(--border-radius) !important'
           },
           '&:hover': {
-            backgroundColor: 'var(--background)'
+            backgroundColor: 'var(--background-input)'
+          },
+          '&[readonly]': {
+            opacity: 0.7
           }
         }
       }
@@ -216,23 +218,24 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: '#f5f5f5',
-          borderRadius: '4px',
-          color: '#333'
+          borderRadius: '8px',
+          color: 'var(--text-input-color)',
+          height: 'auto !important'
         }
       }
     },
     MuiMenu: {
       styleOverrides: {
         paper: {
-          backgroundColor: 'var(--background)',
-          color: '#333'
+          backgroundColor: 'var(--background-input)',
+          color: 'var(--text-input-color)'
         }
       }
     },
     MuiMenuItem: {
       styleOverrides: {
         root: {
-          backgroundColor: 'var(--background)',
+          backgroundColor: 'var(--background-input)',
           textAlign: 'center',
           display: 'flow-root',
           '&.Mui-selected': {
@@ -244,8 +247,39 @@ const theme = createTheme({
             }
           },
           '&:hover': {
-            backgroundColor: '#E4EDE3'
+            backgroundColor: 'var(--background)'
           }
+        }
+      }
+    },
+    MuiPopper: {
+      styleOverrides: {
+        root: {
+          // backgroundColor: 'var(--background-input)',
+          color: 'var(--text-input-color)',
+          MuiChartsTooltip: {
+            paper: {
+              backgroundColor: 'var(--background-input) !important',
+              color: 'var(--text-input-color)'
+            }
+          }
+        }
+      }
+    },
+    MuiChartsTooltip: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: 'var(--background-input)',
+          borderRadius: 'var(--border-radius) !important'
+        },
+        labelCell: {
+          color: 'var(--color-primary) !important'
+        },
+        cell: {
+          color: 'var(--color-primary)'
+        },
+        valueCell: {
+          color: 'var(--text-input-color)'
         }
       }
     }
