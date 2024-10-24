@@ -4,8 +4,9 @@ import { usePathname } from 'next/navigation'
 import * as S from './styles'
 
 interface List {
-  url: string
+  url?: string
   label: string
+  click?: () => void
 }
 
 interface MenuProps {
@@ -38,11 +39,19 @@ export const Menu = ({ list, isHorizontal, className }: MenuProps) => {
     <S.List className={className} isHorizontal={isHorizontal}>
       {list?.map((item, index) => {
         const isSelected = getSelected(item, pathname)
+        const hasClick = item?.click
         return (
           <S.Item key={index} isSelected={isSelected} isHorizontal={isHorizontal}>
-            <S.Link href={item.url} isSelected={isSelected}>
-              {item?.label}
-            </S.Link>
+            {!hasClick && (
+              <S.Link href={item.url} isSelected={isSelected}>
+                {item?.label}
+              </S.Link>
+            )}
+            {hasClick && (
+              <S.Link onClick={item.click} isSelected={isSelected}>
+                {item?.label}
+              </S.Link>
+            )}
           </S.Item>
         )
       })}

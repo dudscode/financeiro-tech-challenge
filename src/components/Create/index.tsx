@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import * as S from './styles'
 import { Input } from '@/components/Input'
 import { Checkbox } from '@/components/Checkbox'
@@ -7,11 +7,12 @@ import { FullModal } from '../FullModal'
 
 type CreateProps = {
   isOpen: boolean
+  callback?: (value: boolean) => void
 }
 
-export const Create = ({ isOpen }: CreateProps) => {
+export const Create = ({ isOpen, callback }: CreateProps) => {
   return (
-    <FullModal initialState={isOpen}>
+    <FullModal initialState={false} state={isOpen} callback={callback}>
       <S.Image src='images/login.png' />
       <S.Text>Preencha os campos abaixo para criar sua conta corrente!</S.Text>
       <S.FormContainer>

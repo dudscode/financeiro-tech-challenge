@@ -7,15 +7,16 @@ import useIsMobile from '@/hooks/useIsMobile'
 
 type FullModalProps = {
   children: React.ReactNode
-  callback?: () => void
+  callback?: (value: boolean) => void
   initialState?: boolean
+  state: boolean
 }
 
 const Icon = () => {
   return <I.Close htmlColor={theme.palette.common.black} fontSize='small' />
 }
 
-export const FullModal = ({ children, initialState }: FullModalProps) => {
+export const FullModal = ({ children, state, initialState = false, callback }: FullModalProps) => {
   const [isOpen, setIsOpen] = useState(initialState)
 
   const isTablet = useIsTablet()
@@ -26,13 +27,12 @@ export const FullModal = ({ children, initialState }: FullModalProps) => {
   const zIndex = 10
 
   useEffect(() => {
-    if (initialState) {
-      setIsOpen(true)
-    }
-  }, [initialState])
+    setIsOpen(state)
+  }, [state])
 
   const onClose = () => {
     setIsOpen(false)
+    callback && callback(false)
   }
 
   return (
