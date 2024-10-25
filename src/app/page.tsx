@@ -38,7 +38,7 @@ export default function Home() {
             </S.Title>
           </Grid>
           <Grid item xs={12} md={6}>
-            <img src='images/banner-home.png' />
+            <S.BannerImage/>
           </Grid>
         </Grid>
         <S.Typography>Vantagens do nosso banco:</S.Typography>
