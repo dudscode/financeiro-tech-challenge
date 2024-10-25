@@ -3,8 +3,13 @@ import { Typography, Grid, CardContent, CardMedia } from '@mui/material'
 import * as S from './styles'
 
 import BaseHome from '@/templates/BaseHome'
+import useIsMobile from '@/hooks/useIsMobile'
+
+import { MyContext } from '@/templates/BaseHome'
 
 export default function Home() {
+  const isMobile = useIsMobile()
+
   const benefits = [
     {
       title: 'Conta e cartão gratuitos',
@@ -31,45 +36,73 @@ export default function Home() {
   return (
     <S.Container>
       <BaseHome>
-        <Grid container spacing={4} alignItems='center'>
-          <Grid item xs={12} md={6}>
-            <S.Title>
-              Experimente mais liberdade no controle da sua vida financeira. Crie sua conta com a gente!
-            </S.Title>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <S.BannerImage/>
-          </Grid>
-        </Grid>
-        <S.Typography>Vantagens do nosso banco:</S.Typography>
-        <Grid container spacing={4}>
-          {benefits.map((benefit, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
-              <S.Card>
-                <CardMedia
-                  className='CardMedia'
-                  component='img'
-                  alt={benefit.title}
-                  image={benefit.image}
-                  sx={{
-                    width: '73px',
-                    height: '56px',
-                    display: 'block',
-                    margin: '0 auto'
-                  }}
-                />
-                <CardContent>
-                  <Typography color='textSecondary' gutterBottom sx={{ fontWeight: 'bold' }}>
-                    {benefit.title}
-                  </Typography>
-                  <Typography variant='body2' color='textDisabled'>
-                    {benefit.description}
-                  </Typography>
-                </CardContent>
-              </S.Card>
-            </Grid>
-          ))}
-        </Grid>
+        <MyContext.Consumer>
+          {({ login, create }) => {
+            return (
+              <>
+                <Grid container spacing={4} alignItems='center'>
+                  <Grid item xs={12} md={6}>
+                    <S.Title>
+                      Experimente mais liberdade no controle da sua vida financeira. Crie sua conta com a gente!
+                    </S.Title>
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <S.BannerImage />
+                  </Grid>
+                </Grid>
+                {isMobile && (
+                  <S.Buttons>
+                    <S.ButtonUI
+                      variant='contained'
+                      color='success'
+                      size='small'
+                      onClick={() => create.setOpenCreate(true, 'login')}
+                    >
+                      Abrir minha conta
+                    </S.ButtonUI>
+                    <S.ButtonUI
+                      variant='outlined'
+                      color='warning'
+                      size='large'
+                      onClick={() => login.setOpenLogin(true, 'login')}
+                    >
+                      Já tenho conta
+                    </S.ButtonUI>
+                  </S.Buttons>
+                )}
+                <S.Typography>Vantagens do nosso banco:</S.Typography>
+                <Grid container spacing={4}>
+                  {benefits.map((benefit, index) => (
+                    <Grid item xs={12} sm={6} md={3} key={index}>
+                      <S.Card>
+                        <CardMedia
+                          className='CardMedia'
+                          component='img'
+                          alt={benefit.title}
+                          image={benefit.image}
+                          sx={{
+                            width: '73px',
+                            height: '56px',
+                            display: 'block',
+                            margin: '0 auto'
+                          }}
+                        />
+                        <CardContent>
+                          <Typography color='textSecondary' gutterBottom sx={{ fontWeight: 'bold' }}>
+                            {benefit.title}
+                          </Typography>
+                          <Typography variant='body2' color='textDisabled'>
+                            {benefit.description}
+                          </Typography>
+                        </CardContent>
+                      </S.Card>
+                    </Grid>
+                  ))}
+                </Grid>
+              </>
+            )
+          }}
+        </MyContext.Consumer>
       </BaseHome>
     </S.Container>
   )

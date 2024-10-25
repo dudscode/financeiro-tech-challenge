@@ -56,8 +56,8 @@ export const WithoutMenuContainer = styled('div')`
 `
 
 export const Logo = styled('img')`
-    max-width: 145.688px;
-    max-height: 32px;
+  max-width: 145.688px;
+  max-height: 32px;
 `
 export const LinkContainer = styled('div')`
   display: flex;
@@ -71,7 +71,6 @@ export const Link = styled('a')`
   :hover {
     color: ${theme.palette.secondary.light};
   }
-
 `
 export const TextButton = styled('p')`
   color: ${theme.palette.text.secondary};
