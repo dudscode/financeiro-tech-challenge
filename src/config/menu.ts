@@ -6,6 +6,6 @@ export const MENU = [
 ]
 
 export const MENU_HOME = [
-  { url: '/home', label: 'Sobre' },
+  { url: '/dashboard', label: 'Sobre' },
   { url: '/', label: 'Serviços' }
 ]
