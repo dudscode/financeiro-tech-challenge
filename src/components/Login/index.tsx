@@ -30,8 +30,7 @@ export const Login = ({ isOpen, callback }: LoginProps) => {
       }
       setPassword('')
       setEmail('')
-      !!callback && callback(false)
-      window.location.href = '/'
+      window.location.href = '/dashboard'
     }
   }
 
