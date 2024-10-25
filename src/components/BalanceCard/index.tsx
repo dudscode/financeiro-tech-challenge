@@ -11,7 +11,7 @@ import useCurrencyFormatter from '@/hooks/useCurrencyFormatter'
 export interface IBalanceCardProps {
   name: string
   date: string
-  balance: number
+  balance: number | string
 }
 
 export const BalanceCard: React.FC<IBalanceCardProps> = ({ name, date, balance }) => {
@@ -47,7 +47,7 @@ export const BalanceCard: React.FC<IBalanceCardProps> = ({ name, date, balance }
             Conta Corrente
           </S.Text>
           <S.Text variant='h1' className='balance-amount'>
-            {isVisible ? formatarValor(balance) : '****'}
+            {isVisible && typeof balance !== 'string' ? formatarValor(balance) : '****'}
           </S.Text>
         </S.Balance>
       </S.BalanceContainer>
