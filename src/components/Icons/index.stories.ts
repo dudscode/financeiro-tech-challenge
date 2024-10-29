@@ -1,30 +1,37 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { Icon } from '.'
+import type { Meta, StoryObj } from '@storybook/react';
+import Icons from './index';
 
-const meta = {
+const meta: Meta<typeof Icons.Close> = {
   title: 'Components/Icons',
-  component: Icon,
+  component: Icons.Close,
+  subcomponents: {
+    Menu: Icons.Menu as React.ComponentType<unknown>,
+    Account: Icons.Account as React.ComponentType<unknown>,
+  },
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
   tags: ['autodocs'],
-  argTypes: {},
-  args: {}
-} satisfies Meta<typeof Icon>
+};
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Account: Story = {
+export const CloseIcon: Story = {
   args: {
-    icon: 'account',
-    alt: 'account'
-  }
-}
+    
+  },
+};
 
-export const Menu: Story = {
+export const MenuIcon: Story = {
   args: {
-    icon: 'menu',
-    alt: 'menu'
-  }
-}
+    
+  },
+
+};
+
+export const AccountIcon: Story = {
+  args: {
+    
+  },
+};
