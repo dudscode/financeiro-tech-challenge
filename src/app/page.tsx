@@ -1,88 +1,109 @@
 'use client'
+import { Typography, Grid, CardContent, CardMedia } from '@mui/material'
+import * as S from './styles'
 
-import Base from '@/templates/Base'
-import { BalanceCard } from '@/components/BalanceCard'
-import { TransactionCard } from '@/components/TransactionCard'
-import { useSaldo } from '@/hooks/useSaldo'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import BaseHome from '@/templates/BaseHome'
+import useIsMobile from '@/hooks/useIsMobile'
 
+import { MyContext } from '@/templates/BaseHome'
 
 export default function Home() {
-  const [saldo, setSaldo] = useState({
-    tipo: '',
-    valor: ''
-  });
+  const isMobile = useIsMobile()
 
-
-
-  const [userName, setUserName] = useState('***');
-
-  useEffect(() => {
-    const fetchSaldoData = async () => {
-      try {
-        const response = await axios.get('/api/saldo')
-        const saldoData = response.data[0]
-        setSaldo(saldoData)
-      } catch (error) {
-        console.error('Error fetching saldo data:', error)
-      }
+  const benefits = [
+    {
+      title: 'Conta e cartão gratuitos',
+      description: 'Isso mesmo, nossa conta é digital, sem custo fixo e mais que isso: sem tarifa de manutenção.',
+      image: 'images/icone-presente.png'
+    },
+    {
+      title: 'Saques sem custo',
+      description: 'Você pode sacar gratuitamente 4x por mês de qualquer Banco 24h.',
+      image: 'images/icone-saque.png'
+    },
+    {
+      title: 'Programa de pontos',
+      description: 'Você pode acumular pontos com suas compras no crédito sem pagar mensalidade!',
+      image: 'images/icone-pontos.png'
+    },
+    {
+      title: 'Seguro Dispositivos',
+      description: 'Seus dispositivos móveis (computador e laptop) protegidos por uma mensalidade simbólica.',
+      image: 'images/icone-dispositivos.png'
     }
-    fetchSaldoData();
-
-
-
-    if (typeof window !== 'undefined') {
-      const auth = sessionStorage.getItem('auth');
-      if (auth) {
-        const name = JSON.parse(auth).userName;
-        setUserName(name.split(' ')[0]);
-      }
-    };
-
-  }, []);
-  const refreshSaldo = async (updatedSaldo: {}) => {
-    try {
-      const response = await axios.put('/api/saldo', updatedSaldo)
-      console.log('Sucess update saldo data:', response)
-    } catch (error) {
-      console.error('Error update saldo data:', error)
-    }
-  }
-
-  const sendTransaction = async (transaction: any) => {
-    try {
-      const response = await axios.post('/api/extrato', transaction)
-      console.log(response.data)
-      const updatedSaldo = { tipo: saldo.tipo, valor: saldo.valor + transaction.valor }
-      setSaldo(updatedSaldo);
-      await refreshSaldo(updatedSaldo);
-      alert('Transação efetuada com sucesso!')
-    } catch (error) {
-      console.error('Error saving user data:', error)
-      alert('Erro ao efetuar transação. Tente novamente.')
-    }
-  }
-
-  const formatMonth = () => {
-    var data = new Date().toLocaleString('pt-BR', { month: 'long' })
-    return data[0].toUpperCase() + data.substring(1)
-  }
-
+  ]
 
   return (
-    <Base>
-      <BalanceCard name={userName} date='Quinta-feira, 08/09/2022' balance={saldo.valor} />
-      <TransactionCard
-        onTransactionSubmit={function (type: 'deposit' | 'transfer', amount: number): void {
-          sendTransaction({
-            mes: formatMonth(),
-            tipo: type === 'deposit' ? 'Depósito' : 'Transferência',
-            data: new Date().toLocaleDateString(),
-            valor: type === 'transfer' ? -amount : amount
-          })
-        }}
-      />
-    </Base>
+    <S.Container>
+      <BaseHome>
+        <MyContext.Consumer>
+          {({ login, create }) => {
+            return (
+              <>
+                <Grid container spacing={4} alignItems='center'>
+                  <Grid item xs={12} md={6}>
+                    <S.Title>
+                      Experimente mais liberdade no controle da sua vida financeira. Crie sua conta com a gente!
+                    </S.Title>
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <S.BannerImage />
+                  </Grid>
+                </Grid>
+                {isMobile && (
+                  <S.Buttons>
+                    <S.ButtonUI
+                      variant='contained'
+                      color='success'
+                      size='small'
+                      onClick={() => create.setOpenCreate(true, 'login')}
+                    >
+                      Abrir minha conta
+                    </S.ButtonUI>
+                    <S.ButtonUI
+                      variant='outlined'
+                      color='warning'
+                      size='large'
+                      onClick={() => login.setOpenLogin(true, 'login')}
+                    >
+                      Já tenho conta
+                    </S.ButtonUI>
+                  </S.Buttons>
+                )}
+                <S.Typography>Vantagens do nosso banco:</S.Typography>
+                <Grid container spacing={4}>
+                  {benefits.map((benefit, index) => (
+                    <Grid item xs={12} sm={6} md={3} key={index}>
+                      <S.Card>
+                        <CardMedia
+                          className='CardMedia'
+                          component='img'
+                          alt={benefit.title}
+                          image={benefit.image}
+                          sx={{
+                            width: '73px',
+                            height: '56px',
+                            display: 'block',
+                            margin: '0 auto'
+                          }}
+                        />
+                        <CardContent>
+                          <Typography color='textSecondary' gutterBottom sx={{ fontWeight: 'bold' }}>
+                            {benefit.title}
+                          </Typography>
+                          <Typography variant='body2' color='textDisabled'>
+                            {benefit.description}
+                          </Typography>
+                        </CardContent>
+                      </S.Card>
+                    </Grid>
+                  ))}
+                </Grid>
+              </>
+            )
+          }}
+        </MyContext.Consumer>
+      </BaseHome>
+    </S.Container>
   )
 }
