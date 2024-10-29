@@ -10,8 +10,7 @@ const meta: Meta<typeof Extrato> = {
   },
   tags: ['autodocs'], // For autodocs entry
   argTypes: {
-    title: { control: 'text' },
-    transacao: { control: 'object' }
+    title: { control: 'text' }
   }
 }
 
@@ -22,11 +21,6 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     title: 'Extrato de Transações',
-    transacao: [
-      { mes: 'Janeiro', data: '01/01/2024', tipo: 'Crédito', valor: 'R$ 200,00' },
-      { mes: 'Fevereiro', data: '15/02/2024', tipo: 'Débito', valor: 'R$ 150,00' },
-      { mes: 'Março', data: '10/03/2024', tipo: 'Crédito', valor: 'R$ 300,00' }
-    ]
   }
 }
 
@@ -34,13 +28,11 @@ export const Default: Story = {
 export const Empty: Story = {
   args: {
     title: 'Extrato Vazio',
-    transacao: []
   }
 }
 
 export const SingleTransaction: Story = {
   args: {
-    title: 'Extrato com Uma Transação',
-    transacao: [{ mes: 'Abril', data: '05/04/2024', tipo: 'Crédito', valor: 'R$ 100,00' }]
+    title: 'Extrato com Uma Transação'
   }
 }
