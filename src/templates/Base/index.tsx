@@ -7,26 +7,7 @@ import * as S from './styles'
 import useIsTablet from '@/hooks/useIsTablet'
 import useIsMobile from '@/hooks/useIsMobile'
 
-const transacoes: ITransacao[] = [
-  {
-    mes: 'Novembro',
-    tipo: 'Depósito',
-    data: '21/11/2022',
-    valor: 'R$ 100'
-  },
-  {
-    mes: 'Dezembro',
-    tipo: 'Saque',
-    data: '15/12/2022',
-    valor: 'R$ 50'
-  },
-  {
-    mes: 'Novembro',
-    tipo: 'Transferência',
-    data: '21/11/2022',
-    valor: '-R$ 500'
-  }
-]
+
 
 export type BaseTemplateProps = {
   children: React.ReactNode
@@ -53,7 +34,7 @@ const Base = ({ children, hideExtrato = false }: BaseTemplateProps) => {
           )}
           <S.Content>{children}</S.Content>
 
-          {!hideExtrato && <Extrato title='Extrato' transacao={transacoes} />}
+          {!hideExtrato && <Extrato title='Extrato' />}
         </S.Main>
       </Container>
     </>
