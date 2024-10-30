@@ -1,20 +1,20 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { Account } from '.'
+import type { Meta, StoryObj } from '@storybook/react';
+import { Account } from './index';
 
-const meta = {
+const meta: Meta<typeof Account> = {
   title: 'Components/Account',
   component: Account,
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
   tags: ['autodocs'],
-  argTypes: {},
-  args: {}
-} satisfies Meta<typeof Account>
+};
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {}
-}
+  args: {
+    // Adicione os argumentos necessários para o componente Account, se houver
+  },
+};

@@ -1,15 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import * as S from './styles'
+import axios from 'axios'
 
 export interface IExtratoProps {
   /**
    * title card
    */
   title: string
-  /**
-   * lista transações
-   */
-  transacao: ITransacao[]
 }
 export interface ITransacao {
   /**
@@ -27,15 +24,39 @@ export interface ITransacao {
   /**
    * valor da transação
    */
-  valor: string
+  valor: number
 }
 
-export const Extrato = ({ title = 'Extrato', transacao = [] }: IExtratoProps) => {
+
+export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
+  const [extrato, setExtrato] = useState<ITransacao[]>([]);
+
+  useEffect(() => {
+
+
+    const fetchExtratoData = async () => {
+      try {
+        const response = await axios.get('/api/extrato')
+        setExtrato(response.data)
+      } catch (error) {
+        console.error('Error fetching extrato data:', error)
+      }
+    }
+    fetchExtratoData();
+  }, []);
+
+  const formatCurrency = (value: number): string => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(value);
+  };
   return (
     <S.Container>
       <S.Title variant='h2'>{title}</S.Title>
-      <S.List>
-        {transacao.map((item, index) => (
+      {extrato.length > 0 ? (
+        <S.List >
+        {extrato.map((item, index) => (
           <S.Item key={index}>
             <S.TextHighlight> {item.mes} </S.TextHighlight>
             <S.TextContaine>
@@ -45,12 +66,16 @@ export const Extrato = ({ title = 'Extrato', transacao = [] }: IExtratoProps) =>
               </S.Paragraph>
             </S.TextContaine>
             <S.Paragraph txt='16px' md='8' weight='600'>
-              {item.valor}
+              {formatCurrency(item.valor)}
             </S.Paragraph>
             <S.Divider variant='fullWidth' />
           </S.Item>
         ))}
       </S.List>
+      ) : (
+        <S.Paragraph txt='16px'>Não existe nenhum extrato</S.Paragraph>
+      )}
+      
     </S.Container>
   )
 }

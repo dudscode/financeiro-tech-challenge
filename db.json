@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Joana da Silva Oliveira",
       "email": "joanadasilvaoliveira@email.com.br",
       "password": "teste",
@@ -13,27 +13,74 @@
       "mes": "Novembro",
       "tipo": "Depósito",
       "data": "21/11/2022",
-      "valor": 100
+      "valor": 100,
+      "id": "e4da"
     },
     {
       "mes": "Dezembro",
       "tipo": "Saque",
       "data": "15/12/2022",
-      "valor": 50
+      "valor": 50,
+      "id": "58fb"
     },
     {
       "mes": "Novembro",
       "tipo": "Transferência",
       "data": "21/11/2022",
+      "valor": 500,
+      "id": "01c8"
+    },
+    {
+      "id": "af82",
+      "mes": "Outubro",
+      "tipo": "Depósito",
+      "data": "28/10/2024",
       "valor": 500
+    },
+    {
+      "id": "c88d",
+      "mes": "Outubro",
+      "tipo": "Depósito",
+      "data": "28/10/2024",
+      "valor": 500
+    },
+    {
+      "id": "e8d7",
+      "mes": "Outubro",
+      "tipo": "Transferência",
+      "data": "28/10/2024",
+      "valor": -500
+    },
+    {
+      "id": "98d0",
+      "mes": "Outubro",
+      "tipo": "Transferência",
+      "data": "28/10/2024",
+      "valor": -20
+    },
+    {
+      "id": "d326",
+      "mes": "Outubro",
+      "tipo": "Depósito",
+      "data": "29/10/2024",
+      "valor": 12.31
+    },
+    {
+      "id": "1566",
+      "mes": "Outubro",
+      "tipo": "Transferência",
+      "data": "29/10/2024",
+      "valor": -1.21
     }
   ],
   "saldo": [
     {
       "tipo": "Conta corrente",
-      "valor": 500
+      "valor": 491.1,
+      "id": "1"
     },
     {
+      "id": "2",
       "tipo": "Conta poupança",
       "valor": 1000
     }
@@ -45,7 +92,8 @@
       "tipo": "Platinum",
       "numero": "1234 5678 1234 5678",
       "function": "Débito/Crédito",
-      "status": "Ativo"
+      "status": "Ativo",
+      "id": "0554"
     },
     {
       "alias": "Cartão digital",
@@ -53,7 +101,8 @@
       "tipo": "Platinum",
       "numero": "1234 5678 1234 5678",
       "function": "Crédito",
-      "status": "Inativo"
+      "status": "Inativo",
+      "id": "f311"
     }
   ],
   "investimentos": {

@@ -32,6 +32,9 @@ export const Container = styled('section')`
     flex-direction: column;
     align-items: flex-start;
     flex: 1 2 100%;
+    overflow-y: auto; 
+    max-height: 80vh;
+    min-width: 310px;
     @media (min-width: ${theme.breakpoints.values.sm}${theme.breakpoints.unit}) {
       align-items: center;
     }

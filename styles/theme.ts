@@ -262,27 +262,25 @@ const theme = createTheme({
               backgroundColor: 'var(--background-input) !important',
               color: 'var(--text-input-color)'
             }
+          },
+          styleOverrides: {
+            paper: {
+              backgroundColor: 'var(--background-input)',
+              borderRadius: 'var(--border-radius) !important'
+            },
+            labelCell: {
+              color: 'var(--color-primary) !important'
+            },
+            cell: {
+              color: 'var(--color-primary)'
+            },
+            valueCell: {
+              color: 'var(--text-input-color)'
+            }
           }
         }
       }
     },
-    MuiChartsTooltip: {
-      styleOverrides: {
-        paper: {
-          backgroundColor: 'var(--background-input)',
-          borderRadius: 'var(--border-radius) !important'
-        },
-        labelCell: {
-          color: 'var(--color-primary) !important'
-        },
-        cell: {
-          color: 'var(--color-primary)'
-        },
-        valueCell: {
-          color: 'var(--text-input-color)'
-        }
-      }
-    }
   }
 })
 
