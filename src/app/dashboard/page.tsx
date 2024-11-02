@@ -6,11 +6,6 @@ import { TransactionCard } from '@/components/TransactionCard'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-interface Saldo {
-  tipo: string
-  valor: number
-}
-
 interface Transaction {
   mes: string
   tipo: string
@@ -19,35 +14,9 @@ interface Transaction {
 }
 
 export default function Home() {
-  const [saldo, setSaldo] = useState<Saldo>({ tipo: '', valor: 0 })
-  const [userName, setUserName] = useState('***')
+  const [saldo, setSaldo] = useState({ tipo: '', valor: 0 })
 
-  useEffect(() => {
-    const fetchSaldoData = async () => {
-      try {
-        const response = await axios.get('/api/saldo')
-        const saldoData = response.data[0]
-        setSaldo(saldoData)
-      } catch (error) {
-        console.error('Error fetching saldo data:', error)
-      }
-    }
-
-    const fetchUserName = () => {
-      if (typeof window !== 'undefined') {
-        const auth = sessionStorage.getItem('auth')
-        if (auth) {
-          const name = JSON.parse(auth).userName
-          setUserName(name.split(' ')[0])
-        }
-      }
-    }
-
-    fetchSaldoData()
-    fetchUserName()
-  }, [])
-
-  const refreshSaldo = async (updatedSaldo: Saldo) => {
+  const refreshSaldo = async (updatedSaldo: { tipo: string; valor: number }) => {
     try {
       await axios.put('/api/saldo', updatedSaldo)
     } catch (error) {
@@ -75,7 +44,7 @@ export default function Home() {
 
   return (
     <Base>
-      <BalanceCard name={userName} date='Quinta-feira, 08/09/2022' balance={saldo.valor} />
+      <BalanceCard />
       <TransactionCard
         onTransactionSubmit={(type: 'deposit' | 'transfer', amount: number) => {
           sendTransaction({
