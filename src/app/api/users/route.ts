@@ -6,11 +6,15 @@ type ParamsProps = {
   password: string
 }
 
+const API_URL = 'https://json-server-vercel-tawny-one.vercel.app'
+
 export async function GET(request: NextRequest) {
   const email = request.nextUrl.searchParams.get('email') || ''
   const password = request.nextUrl.searchParams.get('password') || ''
   try {
-    const response = await axios.get(`http://localhost:3001/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`)
+    const response = await axios.get(
+      `${API_URL}/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+    )
     return NextResponse.json(response.data)
   } catch (error) {
     console.error('Error fetching user data:', error)
@@ -21,7 +25,7 @@ export async function GET(request: NextRequest) {
 export async function PUT(req: Request) {
   try {
     const user = await req.json()
-    const response = await axios.put(`http://localhost:3001/users/${user.id}`, user)
+    const response = await axios.put(`${API_URL}/users/${user.id}`, user)
     return NextResponse.json(response.data)
   } catch (error) {
     console.error('Error updating user data:', error)

@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server'
 import axios from 'axios'
 
+const API_URL = 'https://json-server-vercel-tawny-one.vercel.app'
+
 export async function GET() {
   try {
-    const response = await axios.get(`http://localhost:3001/extrato`)
+    const response = await axios.get(`${API_URL}/extrato`)
     return NextResponse.json(response.data)
   } catch (error) {
     console.error('Error fetching extrato data:', error)
@@ -14,10 +16,10 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const extrato = await req.json()
-    const response = await axios.post(`http://localhost:3001/extrato/`, extrato)
+    const response = await axios.post(`${API_URL}/extrato/`, extrato)
     return NextResponse.json(response.data)
   } catch (error) {
-    console.error('Error create extrato data:', error)
+    console.error('Error creating extrato data:', error)
     return NextResponse.json({ error: (error as Error).message }, { status: 500 })
   }
 }
@@ -25,10 +27,10 @@ export async function POST(req: Request) {
 export async function PATCH(req: Request) {
   try {
     const extrato = await req.json()
-    const response = await axios.patch(`http://localhost:3001/extrato/${extrato.item.id}`, extrato.item)
+    const response = await axios.patch(`${API_URL}/extrato/${extrato.item.id}`, extrato.item)
     return NextResponse.json(response.data)
   } catch (error) {
-    console.error('Error create extrato data:', error)
+    console.error('Error updating extrato data:', error)
     return NextResponse.json({ error: (error as Error).message }, { status: 500 })
   }
 }
