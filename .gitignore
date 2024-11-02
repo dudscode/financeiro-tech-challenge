@@ -40,3 +40,5 @@ next-env.d.ts
 /.vs/ProjectSettings.json
 /.vs
 storybook-static/
+
+db.json

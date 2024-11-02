@@ -5,7 +5,7 @@ export interface ButtonProps {
   /**
    * Button contents
    */
-  children: string
+  children: string | React.ReactNode
   /**
    * Optional click handler
    */
@@ -46,6 +46,14 @@ export interface ButtonProps {
    * Optional button type
    */
   type?: 'button' | 'submit' | 'reset'
+  /**
+   * Optional border radius
+   */
+  radius?: boolean
+  /**
+   * Optional button width
+   */
+  width?: string
 }
 
 /**
@@ -60,10 +68,12 @@ export const Button = ({
   endIcon,
   disabled = false,
   type = 'button',
+  radius = false,
+  width = 'auto',
   ...props
 }: ButtonProps) => {
   return (
-    <S.Button disabled={disabled} {...{ variant, color, size, type }} {...props}>
+    <S.Button disabled={disabled} {...{ variant, color, size, type, width, radius }} {...props}>
       {startIcon && <IconButton>{startIcon}</IconButton>}
       {children}
       {endIcon && <IconButton>{endIcon}</IconButton>}
