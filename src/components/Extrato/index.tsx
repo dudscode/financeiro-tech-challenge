@@ -5,6 +5,7 @@ import { Button } from '@/components/Button'
 import I from '@/components/Icons'
 import { SelectTypeTransaction } from '@/components/SelectTypeTransaction'
 import { DialogModal } from '@/components/Dialog'
+import CircularProgress from '@mui/material/CircularProgress'
 
 export interface IExtratoProps {
   title: string
@@ -66,6 +67,7 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
   const [openModal, setOpenModal] = useState(false)
   const [openDialog, setOpenDialog] = useState(false)
   const [dialogMode, setDialogMode] = useState<'edit' | 'delete'>('edit')
+  const [loading, setLoading] = useState(true)
   const hasExtrato = !!extrato.length
 
   const edit = (item: ITransacao) => {
@@ -119,6 +121,8 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
         setExtrato(response.data)
       } catch (error) {
         console.error('Error fetching extrato data:', error)
+      } finally {
+        setLoading(false)
       }
     }
     fetchExtratoData()
@@ -151,7 +155,9 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
         <S.TitleContainer>
           <S.Title variant='h2'>{title}</S.Title>
         </S.TitleContainer>
-        {extrato.length > 0 ? (
+        {loading ? (
+          <CircularProgress />
+        ) : extrato.length > 0 ? (
           <S.List>
             {extrato.map((item, index) => (
               <S.Item key={index}>

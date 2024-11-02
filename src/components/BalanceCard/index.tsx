@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { Typography } from '@mui/material'
+import { CircularProgress } from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import * as S from './styles'
@@ -69,7 +69,7 @@ export const BalanceCard: React.FC<BalanceCardProps> = ({ saldo, loading, refres
       </S.Header>
       <S.BalanceContainer>
         {loading ? (
-          <S.Text variant='body1'>Carregando...</S.Text>
+          <CircularProgress sx={{ color: 'white' }} />
         ) : (
           <S.Balance>
             <S.BalanceHeader>
