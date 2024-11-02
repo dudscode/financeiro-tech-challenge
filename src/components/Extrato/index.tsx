@@ -5,6 +5,7 @@ import { FullModal } from '@/components/FullModal'
 import { Button } from '@/components/Button'
 import I from '@/components/Icons'
 import { SelectTypeTransaction } from '@/components/SelectTypeTransaction'
+import { DialogModal } from '@/components/Dialog'
 
 export interface IExtratoProps {
   /**
@@ -62,6 +63,7 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
   const [extrato, setExtrato] = useState<ITransacao[]>([])
   const [item, setItem] = useState<ITransacao>({} as ITransacao)
   const [openModal, setOpenModal] = useState(false)
+  const [openDialog, setOpenDialog] = useState(false)
   const hasExtrato = !!extrato.length
 
   const edit = (item: ITransacao) => {
@@ -69,15 +71,34 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
     setOpenModal(true)
   }
 
-  const deleted = (item: ITransacao) => {
-    setItem(item)
-    setOpenModal(true)
+  const deleted = (value: string | undefined) => {
+    if (value === 'Ok') {
+      fetchDeleteData()
+      setOpenDialog(false)
+      return
+    }
+    setOpenDialog(false)
   }
 
   const fetchEditData = async () => {
     try {
       await axios.patch('/api/extrato', {
         item
+      })
+      const response = await axios.get('/api/extrato')
+      setExtrato(response.data)
+    } catch (error) {
+      console.error('Error fetching extrato data:', error)
+    } finally {
+      setOpenModal(false)
+    }
+  }
+  const fetchDeleteData = async () => {
+    try {
+      await axios.delete('/api/extrato', {
+        data: {
+          id: item.id
+        }
       })
       const response = await axios.get('/api/extrato')
       setExtrato(response.data)
@@ -102,6 +123,9 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
 
   return (
     <>
+      <DialogModal open={openDialog} id='' onClose={value => deleted(value)} value='Ok'>
+        Deseja realmente apagar o registro {item.id}?
+      </DialogModal>
       <S.Container>
         <S.TitleContainer>
           <S.Title variant='h2'>{title}</S.Title>
@@ -110,15 +134,25 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
           <S.List>
             {extrato.map((item, index) => (
               <S.Item key={index}>
-                <div>
-                  <Button radius width='25px' onClick={() => edit(item)} disabled={!hasExtrato}>
-                    <I.Edit fontSize='small' />
-                  </Button>
-                  <Button radius width='25px' onClick={() => edit(item)} disabled={!hasExtrato}>
-                    <I.Delete fontSize='small' sx={{ fontSize: '17px' }} />
-                  </Button>
-                </div>
-                <S.TextHighlight> {item.mes} </S.TextHighlight>
+                <S.TextContaine>
+                  <S.TextHighlight>{item.mes}</S.TextHighlight>
+                  <S.ButtonContainer>
+                    <Button radius width='30px' onClick={() => edit(item)} disabled={!hasExtrato}>
+                      <I.Edit fontSize='small' />
+                    </Button>
+                    <Button
+                      radius
+                      width='30px'
+                      onClick={() => {
+                        setItem(item)
+                        setOpenDialog(true)
+                      }}
+                      disabled={!hasExtrato}
+                    >
+                      <I.Delete fontSize='small' sx={{ fontSize: '17px' }} />
+                    </Button>
+                  </S.ButtonContainer>
+                </S.TextContaine>
                 <S.TextContaine>
                   <S.Paragraph txt='16px'>{item.tipo}</S.Paragraph>
                   <S.Paragraph txt='13px' type='info'>

@@ -6,7 +6,7 @@ const theme = createTheme({
   palette: {
     common: { black: '#000', white: '#fff' },
     background: {
-      paper: 'background-image: linear-gradient(#004D61, #fff)',
+      paper: '#E4EDE3',
       default: '#E4EDE3'
     },
     primary: {
@@ -280,7 +280,7 @@ const theme = createTheme({
           }
         }
       }
-    },
+    }
   }
 })
 

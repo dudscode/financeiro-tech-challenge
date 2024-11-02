@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as S from './styles'
 import { FormControl, InputAdornment, IconButton } from '@mui/material'
 import Visibility from '@mui/icons-material/Visibility'
@@ -41,6 +41,10 @@ type InputProps = {
    * Campo obrigatório
    */
   required?: boolean
+  /**
+   * Valor do input
+   */
+  value?: string
 }
 
 export const Input = ({
@@ -52,9 +56,11 @@ export const Input = ({
   startIcon,
   endIcon,
   type = 'text',
-  required
+  required,
+  value = ''
 }: InputProps) => {
   const [showPassword, setShowPassword] = useState(false)
+  const [inputValue, setInputValue] = useState(value)
   const status = error ? 'error' : undefined
   const IconStart = startIcon
   const IconEnd = endIcon
@@ -84,8 +90,12 @@ export const Input = ({
   )
 
   const change = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange && onChange(event.target.value)
+    setInputValue(event.target.value)
   }
+
+  useEffect(() => {
+    onChange && onChange(inputValue)
+  }, [inputValue])
 
   return (
     <S.Container>
@@ -97,6 +107,7 @@ export const Input = ({
           placeholder={placeholder}
           onChange={change}
           required={required}
+          value={inputValue}
           {...{ startAdornment, endAdornment: type === 'password' ? passwordAdornment : endAdornment }}
         />
         <S.Message id='message' error={status === 'error'}>

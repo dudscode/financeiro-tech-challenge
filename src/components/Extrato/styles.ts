@@ -108,3 +108,10 @@ export const TitleContainer = styled('div')`
     gap: 8px;
   }
 `
+
+export const ButtonContainer = styled('div')`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+`
