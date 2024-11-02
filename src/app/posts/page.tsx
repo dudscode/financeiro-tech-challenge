@@ -12,7 +12,7 @@ const Posts = () => {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch('http://localhost:3001/posts', { method: 'GET' })
+      const response = await fetch('https://json-server-vercel-tawny-one.vercel.app/posts', { method: 'GET' })
       if (!response.ok) {
         throw new Error('Network response was not ok')
       }

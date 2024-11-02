@@ -23,7 +23,7 @@ const setSessionStorage = (data: User[]) => {
 export const initialUserAuth = async (email: string, password: string) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/api/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+      `https://json-server-vercel-tawny-one.vercel.app/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
     )
     if (!response?.data?.length) {
       throw new Error('Usuário não encontrado')
