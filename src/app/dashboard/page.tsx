@@ -5,6 +5,8 @@ import { BalanceCard } from '@/components/BalanceCard'
 import { TransactionCard } from '@/components/TransactionCard'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 interface Transaction {
   mes: string
@@ -27,6 +29,7 @@ export default function Home() {
         setSaldo({ tipo: 'Conta Corrente', valor: totalSaldo })
       } catch (error) {
         console.error('Error fetching saldo data:', error)
+        toast.error('Erro ao buscar dados do saldo.')
       } finally {
         setLoading(false)
       }
@@ -39,8 +42,10 @@ export default function Home() {
     try {
       await axios.put('/api/saldo', updatedSaldo)
       setSaldo(updatedSaldo)
+      toast.success('Saldo atualizado com sucesso!')
     } catch (error) {
       console.error('Error updating saldo data:', error)
+      toast.error('Erro ao atualizar dados do saldo.')
     }
   }
 
@@ -50,10 +55,10 @@ export default function Home() {
       const updatedSaldo = { tipo: saldo.tipo, valor: saldo.valor + transaction.valor }
       setSaldo(updatedSaldo)
       await refreshSaldo(updatedSaldo)
-      alert('Transação efetuada com sucesso!')
+      toast.success('Transação efetuada com sucesso!')
     } catch (error) {
       console.error('Error saving user data:', error)
-      alert('Erro ao efetuar transação. Tente novamente.')
+      toast.error('Erro ao efetuar transação. Tente novamente.')
     }
   }
 

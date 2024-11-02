@@ -6,6 +6,8 @@ import axios from 'axios'
 import * as S from './styles'
 import useIsMobile from '@/hooks/useIsMobile'
 import useIsTablet from '@/hooks/useIsTablet'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export const MyAccount: React.FC = () => {
   const [user, setUser] = useState<{ id: number; name: string; email: string; password: string }>({
@@ -31,6 +33,7 @@ export const MyAccount: React.FC = () => {
         setUser(userData)
       } catch (error) {
         console.error('Error fetching user data:', error)
+        toast.error('Erro ao buscar dados do usuário.')
       }
     }
 
@@ -40,11 +43,11 @@ export const MyAccount: React.FC = () => {
   const handleSave = async () => {
     try {
       const response = await axios.put('/api/users', user)
-      alert('Informações salvas com sucesso!')
+      toast.success('Informações salvas com sucesso!')
       setIsEditing({ name: false, email: false, password: false })
     } catch (error) {
       console.error('Error saving user data:', error)
-      alert('Erro ao salvar as informações')
+      toast.error('Erro ao salvar as informações')
     }
   }
 

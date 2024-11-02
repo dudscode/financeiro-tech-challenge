@@ -3,6 +3,9 @@ import React, { useState } from 'react'
 import { MenuItem, Select, Grid2 as Grid, FormControl } from '@mui/material'
 import * as S from './styles'
 import GreyCard from '../CardGrey'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 export interface ITransactionCardProps {
   onTransactionSubmit: (type: 'deposit' | 'transfer', amount: number) => void
 }
@@ -36,7 +39,7 @@ export const TransactionCard: React.FC<ITransactionCardProps> = ({ onTransaction
     if (transactionType && numericAmount > 0) {
       onTransactionSubmit(transactionType, numericAmount)
     } else {
-      alert('Por favor, selecione o tipo de transação e insira um valor válido.')
+      toast.error('Por favor, selecione o tipo de transação e insira um valor válido.')
     }
   }
 
