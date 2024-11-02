@@ -21,7 +21,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     list: [
-      { url: '/', label: 'Início' },
+      { url: '/dashboard', label: 'Início' },
       { url: '/tranferencia', label: 'Tranferências' },
       { url: '/investimentos', label: 'Investimentos' },
       { url: '/outros', label: 'Outros serviços' }
@@ -31,7 +31,7 @@ export const Default: Story = {
 export const Horizontal: Story = {
   args: {
     list: [
-      { url: '/', label: 'Início' },
+      { url: '/dashboard', label: 'Início' },
       { url: '/tranferencia', label: 'Tranferências' },
       { url: '/investimentos', label: 'Investimentos' },
       { url: '/outros', label: 'Outros serviços' }
