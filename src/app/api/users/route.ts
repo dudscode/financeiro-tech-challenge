@@ -6,7 +6,7 @@ type ParamsProps = {
   password: string
 }
 
-const API_URL = 'https://json-server-vercel-tawny-one.vercel.app'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://json-server-vercel-tawny-one.vercel.app'
 
 export async function GET(request: NextRequest) {
   const email = request.nextUrl.searchParams.get('email') || ''

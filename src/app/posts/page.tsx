@@ -7,12 +7,14 @@ type Post = {
   body: string
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://json-server-vercel-tawny-one.vercel.app'
+
 const Posts = () => {
   const [posts, setPosts] = useState<Post[]>([])
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch('https://json-server-vercel-tawny-one.vercel.app/posts', { method: 'GET' })
+      const response = await fetch(`${API_URL}/posts`, { method: 'GET' })
       if (!response.ok) {
         throw new Error('Network response was not ok')
       }

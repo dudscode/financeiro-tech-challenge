@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import axios from 'axios'
 
-const API_URL = 'https://json-server-vercel-tawny-one.vercel.app'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://json-server-vercel-tawny-one.vercel.app'
 
 export async function GET() {
   try {

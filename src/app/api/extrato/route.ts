@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import axios from 'axios'
 
-const API_URL = 'https://json-server-vercel-tawny-one.vercel.app'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://json-server-vercel-tawny-one.vercel.app'
 
 export async function GET() {
   try {
@@ -38,10 +38,10 @@ export async function PATCH(req: Request) {
 export async function DELETE(req: Request) {
   try {
     const extrato = await req.json()
-    const response = await axios.delete(`http://localhost:3001/extrato/${extrato.id}`)
+    const response = await axios.delete(`${API_URL}/extrato/${extrato.id}`)
     return NextResponse.json(response.data)
   } catch (error) {
-    console.error('Error create extrato data:', error)
+    console.error('Error deleting extrato data:', error)
     return NextResponse.json({ error: (error as Error).message }, { status: 500 })
   }
 }
