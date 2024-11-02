@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import * as S from './styles'
 import axios from 'axios'
-import { FullModal } from '@/components/FullModal'
 import { Button } from '@/components/Button'
 import I from '@/components/Icons'
 import { SelectTypeTransaction } from '@/components/SelectTypeTransaction'
 import { DialogModal } from '@/components/Dialog'
 
 export interface IExtratoProps {
-  /**
-   * title card
-   */
   title: string
 }
 
@@ -20,25 +16,10 @@ export interface IType {
 }
 
 export interface ITransacao {
-  /**
-   * mês da transação
-   */
   mes: string
-  /**
-   * data da transação
-   */
   data: string
-  /**
-   * tipo da transação
-   */
   tipo: 'Depósito' | 'Transferência' | undefined
-  /**
-   * valor da transação
-   */
   valor: number
-  /**
-   * id da transação
-   */
   id: string
 }
 
@@ -47,6 +28,14 @@ const formatCurrency = (value: number): string => {
     style: 'currency',
     currency: 'BRL'
   }).format(value)
+}
+
+const formatCurrencyWithoutNegative = (value: number): string => {
+  const absoluteValue = Math.abs(value)
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(absoluteValue)
 }
 
 const getTransactionType = (type: string) => {
@@ -59,15 +48,29 @@ const getTransactionType = (type: string) => {
   return undefined
 }
 
+const getTransactionTypeValue = (
+  type: 'Depósito' | 'Transferência' | undefined
+): 'deposit' | 'transfer' | undefined => {
+  if (type === 'Depósito') {
+    return 'deposit'
+  }
+  if (type === 'Transferência') {
+    return 'transfer'
+  }
+  return undefined
+}
+
 export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
   const [extrato, setExtrato] = useState<ITransacao[]>([])
   const [item, setItem] = useState<ITransacao>({} as ITransacao)
   const [openModal, setOpenModal] = useState(false)
   const [openDialog, setOpenDialog] = useState(false)
+  const [dialogMode, setDialogMode] = useState<'edit' | 'delete'>('edit')
   const hasExtrato = !!extrato.length
 
   const edit = (item: ITransacao) => {
     setItem(item)
+    setDialogMode('edit')
     setOpenModal(true)
   }
 
@@ -123,8 +126,26 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
 
   return (
     <>
-      <DialogModal open={openDialog} id='' onClose={value => deleted(value)} value='Ok'>
+      <DialogModal open={openDialog} id='' onClose={value => deleted(value)} value='Ok' mode='delete'>
         Deseja realmente apagar o registro {item.id}?
+      </DialogModal>
+      <DialogModal
+        open={openModal}
+        id=''
+        onClose={fetchEditData}
+        value='Ok'
+        mode='edit'
+        title={`Deseja editar tipo de operação do item ${item.id} feito no dia ${item.data} com valor de ${formatCurrencyWithoutNegative(item.valor)}?`}
+      >
+        <S.List>
+          <S.Item>
+            <SelectTypeTransaction
+              callback={(value: string) => setItem({ ...item, tipo: getTransactionType(value) })}
+              size='100%'
+              initialValue={getTransactionTypeValue(item.tipo)}
+            />
+          </S.Item>
+        </S.List>
       </DialogModal>
       <S.Container>
         <S.TitleContainer>
@@ -134,31 +155,32 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
           <S.List>
             {extrato.map((item, index) => (
               <S.Item key={index}>
-                <S.TextContaine>
+                <S.TextContainer>
                   <S.TextHighlight>{item.mes}</S.TextHighlight>
                   <S.ButtonContainer>
-                    <Button radius width='30px' onClick={() => edit(item)} disabled={!hasExtrato}>
-                      <I.Edit fontSize='small' />
+                    <Button radius width='22px' onClick={() => edit(item)} disabled={!hasExtrato}>
+                      <I.Edit fontSize='small' sx={{ fontSize: '14px' }} />
                     </Button>
                     <Button
                       radius
-                      width='30px'
+                      width='22px'
                       onClick={() => {
                         setItem(item)
+                        setDialogMode('delete')
                         setOpenDialog(true)
                       }}
                       disabled={!hasExtrato}
                     >
-                      <I.Delete fontSize='small' sx={{ fontSize: '17px' }} />
+                      <I.Delete fontSize='small' sx={{ fontSize: '14px' }} />
                     </Button>
                   </S.ButtonContainer>
-                </S.TextContaine>
-                <S.TextContaine>
+                </S.TextContainer>
+                <S.TextContainer>
                   <S.Paragraph txt='16px'>{item.tipo}</S.Paragraph>
                   <S.Paragraph txt='13px' type='info'>
                     {item.data}
                   </S.Paragraph>
-                </S.TextContaine>
+                </S.TextContainer>
                 <S.Paragraph>{formatCurrency(item.valor)}</S.Paragraph>
                 <S.Divider variant='fullWidth' />
               </S.Item>
@@ -168,26 +190,6 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
           <S.Paragraph txt='16px'>Não existe nenhum extrato</S.Paragraph>
         )}
       </S.Container>
-      <FullModal state={openModal} callback={() => setOpenModal(false)}>
-        <S.List>
-          <S.TitleContainer>
-            <S.Title variant='h2'>Extrato</S.Title>
-            <Button onClick={fetchEditData}>Salvar</Button>
-          </S.TitleContainer>
-          <S.Item>
-            <S.TextHighlight> {item.mes} </S.TextHighlight>
-            <S.TextContaine>
-              <SelectTypeTransaction
-                callback={(value: string) => setItem({ ...item, tipo: getTransactionType(value) })}
-              />
-              <S.Paragraph txt='13px' type='info'>
-                {item.data}
-              </S.Paragraph>
-            </S.TextContaine>
-            <S.Paragraph>{formatCurrency(item.valor)}</S.Paragraph>
-          </S.Item>
-        </S.List>
-      </FullModal>
     </>
   )
 }

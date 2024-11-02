@@ -63,7 +63,7 @@ export const TextHighlight = styled('p')`
   `}
 `
 
-export const TextContaine = styled('div')`
+export const TextContainer = styled('div')`
   margin-bottom: 8px;
   display: flex;
   justify-content: space-between;
@@ -85,6 +85,11 @@ export const Paragraph = styled('p')<IParagraph>`
     font-weight: ${weight};
     margin-bottom: ${md};
   `}
+`
+
+export const TextModal = styled('p')`
+  font-size: 18px;
+  margin-bottom: 8px;
 `
 
 export const Divider = styled(Hr)`
