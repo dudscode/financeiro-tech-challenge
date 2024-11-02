@@ -32,7 +32,7 @@ export const Container = styled('section')`
     flex-direction: column;
     align-items: flex-start;
     flex: 1 2 100%;
-    overflow-y: auto; 
+    overflow-y: auto;
     max-height: 80vh;
     min-width: 310px;
     @media (min-width: ${theme.breakpoints.values.sm}${theme.breakpoints.unit}) {
@@ -45,7 +45,7 @@ export const Container = styled('section')`
 `
 
 export const List = styled('ul')`
-  width: 240px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -53,9 +53,7 @@ export const List = styled('ul')`
 
 export const Item = styled('li')``
 
-export const Title = styled(Typography)`
-  margin-bottom: 24px;
-`
+export const Title = styled(Typography)``
 
 export const TextHighlight = styled('p')`
   ${({ theme }) => css`
@@ -95,4 +93,18 @@ export const Divider = styled(Hr)`
     margin-top: 8px;
     border-color: ${theme.palette.secondary.dark};
   `}
+`
+
+export const TitleContainer = styled('div')`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 24px;
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
 `
