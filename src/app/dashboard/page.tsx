@@ -15,10 +15,30 @@ interface Transaction {
 
 export default function Home() {
   const [saldo, setSaldo] = useState({ tipo: '', valor: 0 })
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchSaldoData = async () => {
+      setLoading(true)
+      try {
+        const response = await axios.get('/api/saldo')
+        const saldoData = response.data
+        const totalSaldo = saldoData.reduce((acc: number, item: { valor: number }) => acc + item.valor, 0)
+        setSaldo({ tipo: 'Conta Corrente', valor: totalSaldo })
+      } catch (error) {
+        console.error('Error fetching saldo data:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchSaldoData()
+  }, [])
 
   const refreshSaldo = async (updatedSaldo: { tipo: string; valor: number }) => {
     try {
       await axios.put('/api/saldo', updatedSaldo)
+      setSaldo(updatedSaldo)
     } catch (error) {
       console.error('Error updating saldo data:', error)
     }
@@ -44,7 +64,7 @@ export default function Home() {
 
   return (
     <Base>
-      <BalanceCard />
+      <BalanceCard saldo={saldo} loading={loading} refreshSaldo={refreshSaldo} />
       <TransactionCard
         onTransactionSubmit={(type: 'deposit' | 'transfer', amount: number) => {
           sendTransaction({

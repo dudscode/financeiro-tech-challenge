@@ -3,39 +3,31 @@ import React, { useState, useEffect } from 'react'
 import { Typography } from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import axios from 'axios'
 import * as S from './styles'
 import useIsTablet from '@/hooks/useIsTablet'
 import useIsMobile from '@/hooks/useIsMobile'
 import useCurrencyFormatter from '@/hooks/useCurrencyFormatter'
-
-export interface IBalanceCardProps {}
 
 interface Saldo {
   tipo: string
   valor: number
 }
 
-export const BalanceCard: React.FC<IBalanceCardProps> = () => {
+interface BalanceCardProps {
+  saldo: Saldo
+  loading: boolean
+  refreshSaldo: (updatedSaldo: Saldo) => void
+}
+
+export const BalanceCard: React.FC<BalanceCardProps> = ({ saldo, loading, refreshSaldo }) => {
   const [isVisible, setIsVisible] = useState(true)
   const [currentDate, setCurrentDate] = useState('')
-  const [saldo, setSaldo] = useState<Saldo>({ tipo: '', valor: 0 })
   const [userName, setUserName] = useState('***')
   const isTablet = useIsTablet()
   const isMobile = useIsMobile()
   const { formatarValor } = useCurrencyFormatter()
 
   useEffect(() => {
-    const fetchSaldoData = async () => {
-      try {
-        const response = await axios.get('/api/saldo')
-        const saldoData = response.data[0]
-        setSaldo(saldoData)
-      } catch (error) {
-        console.error('Error fetching saldo data:', error)
-      }
-    }
-
     const fetchUserName = () => {
       if (typeof window !== 'undefined') {
         const auth = sessionStorage.getItem('auth')
@@ -57,7 +49,6 @@ export const BalanceCard: React.FC<IBalanceCardProps> = () => {
       return date.charAt(0).toUpperCase() + date.slice(1)
     }
 
-    fetchSaldoData()
     fetchUserName()
     setCurrentDate(formatCurrentDate())
   }, [])
@@ -77,23 +68,27 @@ export const BalanceCard: React.FC<IBalanceCardProps> = () => {
         </S.Text>
       </S.Header>
       <S.BalanceContainer>
-        <S.Balance>
-          <S.BalanceHeader>
-            <S.Text variant='h3' className='balance-title'>
-              Saldo
+        {loading ? (
+          <S.Text variant='body1'>Carregando...</S.Text>
+        ) : (
+          <S.Balance>
+            <S.BalanceHeader>
+              <S.Text variant='h3' className='balance-title'>
+                Saldo
+              </S.Text>
+              <S.VisibilityIconWrapper onClick={toggleVisibility} isVisible={isVisible}>
+                {isVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}
+              </S.VisibilityIconWrapper>
+            </S.BalanceHeader>
+            <S.BalanceLine isVisible={isVisible} />
+            <S.Text variant='body1' className='account-type'>
+              Conta Corrente
             </S.Text>
-            <S.VisibilityIconWrapper onClick={toggleVisibility} isVisible={isVisible}>
-              {isVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}
-            </S.VisibilityIconWrapper>
-          </S.BalanceHeader>
-          <S.BalanceLine isVisible={isVisible} />
-          <S.Text variant='body1' className='account-type'>
-            Conta Corrente
-          </S.Text>
-          <S.Text variant='h1' className='balance-amount'>
-            {isVisible && typeof saldo.valor !== 'string' ? formatarValor(saldo.valor) : '****'}
-          </S.Text>
-        </S.Balance>
+            <S.Text variant='h1' className='balance-amount'>
+              {isVisible && typeof saldo.valor !== 'string' ? formatarValor(saldo.valor) : '****'}
+            </S.Text>
+          </S.Balance>
+        )}
       </S.BalanceContainer>
       {(isTablet || isMobile) && (
         <>
