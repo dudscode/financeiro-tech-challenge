@@ -69,6 +69,7 @@ export default function Home() {
 
   return (
     <Base>
+      <ToastContainer />
       <BalanceCard saldo={saldo} loading={loading} refreshSaldo={refreshSaldo} />
       <TransactionCard
         onTransactionSubmit={(type: 'deposit' | 'transfer', amount: number) => {

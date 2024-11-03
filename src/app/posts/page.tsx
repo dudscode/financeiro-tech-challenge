@@ -7,7 +7,8 @@ type Post = {
   body: string
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://json-server-vercel-tawny-one.vercel.app'
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || 'https://json-server-vercel-tawny-one.vercel.app' || 'http://localhost:3001'
 
 const Posts = () => {
   const [posts, setPosts] = useState<Post[]>([])
