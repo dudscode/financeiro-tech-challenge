@@ -11,7 +11,7 @@ export const Container = styled(ContainerMUI)`
     height: auto;
 
     @media (min-width: ${theme.breakpoints.values.md}${theme.breakpoints.unit}) {
-      max-width: 1200px;
+      max-width: var(--max-width);
       margin: 0 auto;
     }
 

@@ -39,7 +39,7 @@ const BaseHome = ({ children }: BaseTemplateProps) => {
     <MyContext.Provider value={{ login: { openLogin, setOpenLogin }, create: { openCreate, setOpenCreate } }}>
       <HeaderHome callback={openModal} />
       <ToastContainer />
-      <Container>
+      <Container sx={{ padding: '24px 0' }}>
         <S.Content>{children}</S.Content>
       </Container>
       <FooterHome />
