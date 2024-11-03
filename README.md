@@ -1,42 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with
-[`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Financeiro-Fiap
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-14.2.11-blue) ![React](https://img.shields.io/badge/React-18-blue)
+![MUI](https://img.shields.io/badge/MUI-6.0.2-0073e6) ![Storybook](https://img.shields.io/badge/Storybook-8.2.9-ff4785)
+![Storybook](https://img.shields.io/badge/Node-18.18-417e38)
 
-First, run the development server:
+## Descrição
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+O aplicativo **Financeiro-FIAP** foi desenvolvido para um desafio da FIAP utilizando Next.js e React. A proposta foi
+construir uma aplicação baseada no seguinte
+[design do Figma](https://www.figma.com/design/ns5TC3X5Xr8V7I3LYKg9KA/Projeto-Financeiro?node-id=503-4264&node-type=canvas)
+e implementar um style guide consistente. Optamos pela biblioteca de componentes Material-UI (MUI) para oferecer uma
+interface moderna e responsiva, garantindo que a experiência do usuário seja intuitiva e visualmente atraente. Além
+disso, o projeto inclui um servidor JSON local para simular uma API REST e um ambiente de desenvolvimento de componentes
+com Storybook.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Requisitos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [**Node.js**](https://nodejs.org/en) (versão 18.18)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically
-optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Como executar o projeto
 
-## Learn More
+1. **`npm i`**: Instale as dependências
+2. **`npm run json-server`**: Inicie o servidor JSON
+3. **`npm run dev`**: Inicie a aplicação em modo de desenvolvimento - <http://localhost:3000>
+4. **`npm run storybook`**: inicie o storybook para ver a documentação dos componentes (opcional) -
+   <http://localhost:6006>
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts Principais
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **`npm i`**: Instala as dependencias
+- **`npm run dev`**: Inicia o ambiente de desenvolvimento com Next.js.
+- **`npm run build`**: Cria uma build de produção da aplicação Next.js.
+- **`npm run start`**: Inicia a aplicação em modo de produção.
+- **`json-server`**: Inicia um servidor JSON usando o arquivo `db.json`, disponível em `http://localhost:3001`.
+- **`storybook`**: Inicia o Storybook em modo de desenvolvimento na porta `http://localhost:6006`.
+- **`build-storybook`**: Cria uma build do Storybook para deploy.
+- **`lint:fix`**: Corrige a formatação de código com Prettier.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions
-are welcome!
+Instale as dependencias com o comando npm i Executa o json-server com o comando npm run json-server execute a aplicacao
+principal npm run dev para ver a documentacao do componentes com o storybook utilize o comando npm run storybook
 
-## Deploy on Vercel
+## Tecnologias Utilizadas
 
-The easiest way to deploy your Next.js app is to use the
-[Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
-from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for
-more details.
+- [**Next.js**](https://nextjs.org/) (v14.2.11): Framework React para renderização server-side.
+- [**React**](https://react.dev/)(v18): Biblioteca de JavaScript para construção de interfaces de usuário.
+- [**Material-UI**](https://mui.com/) (v6.0.2): Biblioteca de componentes estilizados para interfaces modernas.
+- [**Axios**](https://axios-http.com/ptbr/docs/intro): Cliente HTTP para integração com APIs.
+- [**JSON Server**](https://github.com/typicode/json-server): Ferramenta para simular uma API REST.
+- [**Storybook**](https://storybook.js.org/): Ferramenta de desenvolvimento de componentes isolados.
+- [**Husky**](https://github.com/typicode/husky#readme): Ferramenta para hooks Git, assegurando qualidade no processo de
+  commit.
+- [**Prettier**](https://prettier.io/) e [**ESLint**](https://eslint.org/): Ferramentas de formatação e linting de
+  código.
