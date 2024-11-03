@@ -98,7 +98,8 @@ const theme = createTheme({
           '--color-transaction-text': '#DEE9EA',
           '--border-radius': '8px',
           '--border': '1px solid var(--color-primary)',
-          '--text-input-color': '#444444'
+          '--text-input-color': '#444444',
+          '--max-width': '1320px'
         },
         'html, body': {
           maxWidth: '100vw',

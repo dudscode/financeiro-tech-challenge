@@ -1,10 +1,9 @@
 import { styled, css } from '@mui/material/styles'
 import { Button } from '@/components/Button'
-
+import { Typography } from '@mui/material'
 export const Container = styled('div')`
   bottom: 0;
   background: linear-gradient(180deg, #004d61 0%, #ffffff 100%);
-
   @media (max-width: 600px) {
     width: 100%;
   }
@@ -17,7 +16,6 @@ export const Title = styled('div')`
     margin: 0 auto;
     font-size: 28px;
     font-weight: 600px;
-    width: 434px;
     max-width: 100%;
 
     @media (max-width: 1024px) {
@@ -31,15 +29,15 @@ export const Title = styled('div')`
   `}
 `
 
-export const Typography = styled('div')`
+export const CenteredHeading = styled('div')`
   ${({ theme }) => css`
     color: ${theme.palette.text.primary};
     font-weight: ${theme.typography.fontWeightBold};
     margin: 0 auto;
     margin-top: 35px;
+    margin-bottom: 1em;
     font-size: 28px;
     font-weight: 600px;
-    width: 434px;
 
     @media (max-width: 600px) {
       display: flex;
@@ -53,48 +51,41 @@ export const Typography = styled('div')`
   `}
 `
 
-export const Card = styled('div')`
-  margin-top: 35px;
-  padding-bottom: 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 282px;
+export const Card = styled('div')(({ theme }) => ({
+  marginBottom: '2em',
+  [theme.breakpoints.up('md')]: {}
+}))
 
-  @media (max-width: 1024px) {
-    margin-left: 20%;
-  }
-  @media (max-width: 600px) {
-    margin: 0 auto;
-    width: 100%;
-    justify-content: center;
-  }
-`
+export const CardTitle = styled(Typography)(({ theme }) => ({
+  textAlign: 'center',
+  fontSize: '24px !important',
+  marginBottom: '0.8em',
+  fontWeight: 'bold',
+  marginTop: '0.8em',
+  color: theme.palette.text.secondary,
+  [theme.breakpoints.down('sm')]: {}
+}))
 
-export const BannerImage = styled('div')`
-  background-image: url('/images/banner-home.png');
-  background-size: contain;
-  background-position: top;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 300px;
-  margin-top: 35px;
-
-  @media (max-width: 600px) {
-    height: 200px;
+export const BannerImage = styled('img')(({ theme }) => ({
+  width: '100%',
+  padding: '20px 5%',
+  [theme.breakpoints.up('md')]: {
+    paddingRight: '3%'
   }
-`
+}))
 
 export const Buttons = styled('div')`
   margin: 0 auto;
-  display: flex;
   gap: 20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0px 12px;
 `
 
 export const ButtonUI = styled(Button)`
   ${({ theme, variant }) => css`
+    flex: 1 0 50%;
     ${variant !== 'outlined' &&
     css`
       background-color: ${theme.palette.common.black};

@@ -7,10 +7,12 @@ type ButtonProps = {
   color: 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning'
   radius?: boolean
   width?: string
+  variant?: 'text' | 'outlined' | 'contained'
+  isHeader?: boolean
 }
 
 export const Button = styled(ButtonUI)<ButtonProps>`
-  ${({ theme, isFull, isLong, color, radius, width }) => css`
+  ${({ theme, isFull, isLong, color, radius, width, variant, isHeader }) => css`
     font-size: ${theme.typography.fontSize}px;
     text-transform: initial;
     font-weight: ${theme.typography.fontWeightBold};
@@ -31,6 +33,18 @@ export const Button = styled(ButtonUI)<ButtonProps>`
     ${isFull &&
     css`
       width: 100%;
+    `}
+    ${variant === 'outlined' &&
+    css`
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 8px;
+      flex: 1 0 auto;
+    `}
+    ${isHeader &&
+    css`
+      border: 2px solid ${theme.palette.text.secondary};
+      color: ${theme.palette.text.secondary};
     `}
   `}
 `

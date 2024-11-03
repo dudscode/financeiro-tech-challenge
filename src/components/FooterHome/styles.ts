@@ -17,21 +17,21 @@ export const Wrapper = styled('div')`
 
 export const Footer = styled('div')`
   display: flex;
-  width: 80%;
+  width: 100%;
   justify-content: space-between;
   flex-wrap: wrap;
   flex-direction: column;
   gap: 32px;
   padding: 32px;
+  max-width: var(--max-width);
   @media (min-width: ${theme.breakpoints.values.sm}${theme.breakpoints.unit}) {
-    padding: 0px;
+    padding: 20px;
     flex-direction: row;
     gap: 10px;
-    width: 90%;
   }
   @media (min-width: ${theme.breakpoints.values.lg}${theme.breakpoints.unit}) {
     flex-direction: row;
-    padding: 32px;
+    padding: 32px 0;
   }
 `
 export const FooterContainerItem = styled('div')`

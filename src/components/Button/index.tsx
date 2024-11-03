@@ -54,6 +54,10 @@ export interface ButtonProps {
    * Optional button width
    */
   width?: string
+  /**
+   * Optional button header customization
+   */
+  isHeader?: boolean
 }
 
 /**
@@ -70,10 +74,11 @@ export const Button = ({
   type = 'button',
   radius = false,
   width = 'auto',
+  isHeader = false,
   ...props
 }: ButtonProps) => {
   return (
-    <S.Button disabled={disabled} {...{ variant, color, size, type, width, radius }} {...props}>
+    <S.Button disabled={disabled} {...{ variant, color, size, type, width, radius, isHeader }} {...props}>
       {startIcon && <IconButton>{startIcon}</IconButton>}
       {children}
       {endIcon && <IconButton>{endIcon}</IconButton>}

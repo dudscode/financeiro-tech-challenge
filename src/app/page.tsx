@@ -1,5 +1,5 @@
 'use client'
-import { Typography, Grid, CardContent, CardMedia } from '@mui/material'
+import { Typography, CardContent, CardMedia, Grid2 as Grid, Card } from '@mui/material'
 import * as S from './styles'
 
 import BaseHome from '@/templates/BaseHome'
@@ -40,14 +40,14 @@ export default function Home() {
           {({ login, create }) => {
             return (
               <>
-                <Grid container spacing={4} alignItems='center'>
-                  <Grid item xs={12} md={6}>
+                <Grid container spacing={2} alignItems='center'>
+                  <Grid size={{ xs: 10, md: 5 }} offset={{ xs: 1, md: 0 }}>
                     <S.Title>
                       Experimente mais liberdade no controle da sua vida financeira. Crie sua conta com a gente!
                     </S.Title>
                   </Grid>
-                  <Grid item xs={12} md={6}>
-                    <S.BannerImage />
+                  <Grid size={{ xs: 12, md: 6 }} offset={{ md: 1 }}>
+                    <S.BannerImage src='./images/banner-home.png' alt='Banner Bytebank' />
                   </Grid>
                 </Grid>
                 {isMobile && (
@@ -58,7 +58,7 @@ export default function Home() {
                       size='small'
                       onClick={() => create.setOpenCreate(true, 'login')}
                     >
-                      Abrir minha conta
+                      Abrir conta
                     </S.ButtonUI>
                     <S.ButtonUI
                       variant='outlined'
@@ -70,10 +70,14 @@ export default function Home() {
                     </S.ButtonUI>
                   </S.Buttons>
                 )}
-                <S.Typography>Vantagens do nosso banco:</S.Typography>
-                <Grid container spacing={4}>
+                <S.CenteredHeading>Vantagens do nosso banco:</S.CenteredHeading>
+                <Grid container spacing={5} sx={{ marginBottom: '2em' }}>
                   {benefits.map((benefit, index) => (
-                    <Grid item xs={12} sm={6} md={3} key={index}>
+                    <Grid
+                      size={{ xs: 10, sm: 4, md: 3 }}
+                      offset={{ xs: 1, sm: index % 2 === 0 ? 1 : 2, md: 0 }}
+                      key={benefit.title}
+                    >
                       <S.Card>
                         <CardMedia
                           className='CardMedia'
@@ -87,14 +91,10 @@ export default function Home() {
                             margin: '0 auto'
                           }}
                         />
-                        <CardContent>
-                          <Typography color='textSecondary' gutterBottom sx={{ fontWeight: 'bold' }}>
-                            {benefit.title}
-                          </Typography>
-                          <Typography variant='body2' color='textDisabled'>
-                            {benefit.description}
-                          </Typography>
-                        </CardContent>
+                        <S.CardTitle color='textSecondary'>{benefit.title}</S.CardTitle>
+                        <Typography variant='body2' color='#767676' sx={{ textAlign: 'center' }}>
+                          {benefit.description}
+                        </Typography>
                       </S.Card>
                     </Grid>
                   ))}

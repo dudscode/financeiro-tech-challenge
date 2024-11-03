@@ -51,14 +51,20 @@ export const ModalUI = styled(Modal)`
 
 export const WithoutMenuContainer = styled('div')`
   display: flex;
-  width: 90%;
+  width: 100%;
+  max-width: var(--max-width);
   justify-content: space-between;
 `
 
-export const Logo = styled('img')`
-  max-width: 145.688px;
-  max-height: 32px;
-`
+export const Logo = styled('img')(({ theme }) => ({
+  maxWidth: '145.688px',
+  maxHeight: '32px',
+  marginRight: '30px',
+  [theme.breakpoints.up('md')]: {
+    marginRight: '72px'
+  }
+}))
+
 export const LinkContainer = styled('div')`
   display: flex;
   align-items: center;
