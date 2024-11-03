@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Button from '@mui/material/Button'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
@@ -11,12 +11,14 @@ export interface ConfirmationDialogRawProps {
   open: boolean
   onClose: (value?: string) => void
   children: React.ReactNode
+  mode: 'edit' | 'delete'
+  title?: string
 }
 
 export const DialogModal = (props: ConfirmationDialogRawProps) => {
-  const { onClose, value: valueProp, open, ...other } = props
-  const [value, setValue] = React.useState(valueProp)
-  const radioGroupRef = React.useRef<HTMLElement>(null)
+  const { onClose, value: valueProp, open, mode, title, ...other } = props
+  const [value, setValue] = useState(valueProp)
+  const radioGroupRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     if (!open) {
@@ -46,13 +48,13 @@ export const DialogModal = (props: ConfirmationDialogRawProps) => {
       open={open}
       {...other}
     >
-      <DialogTitle>Apagar</DialogTitle>
+      <DialogTitle>{title || (mode === 'edit' ? 'Editar Extrato' : 'Excluir item')}</DialogTitle>
       <DialogContent dividers>{props.children}</DialogContent>
       <DialogActions>
         <Button autoFocus onClick={handleCancel}>
-          Cancel
+          Cancelar
         </Button>
-        <Button onClick={handleOk}>Ok</Button>
+        <Button onClick={handleOk}>{mode === 'edit' ? 'Salvar' : 'Ok'}</Button>
       </DialogActions>
     </Dialog>
   )
