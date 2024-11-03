@@ -1,6 +1,5 @@
-'use client'
 import React, { useState, useEffect } from 'react'
-import { Typography, InputAdornment, IconButton } from '@mui/material'
+import { Typography, InputAdornment, IconButton, CircularProgress } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import axios from 'axios'
 import * as S from './styles'
@@ -9,13 +8,11 @@ import useIsTablet from '@/hooks/useIsTablet'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001' || 'https://json-server-vercel-tawny-one.vercel.app'
+
 export const MyAccount: React.FC = () => {
-  const [user, setUser] = useState<{ id: number; name: string; email: string; password: string }>({
-    id: 0,
-    name: '',
-    email: '',
-    password: ''
-  })
+  const [user, setUser] = useState<{ id: number; name: string; email: string; password: string } | null>(null)
   const [isEditing, setIsEditing] = useState<{ name: boolean; email: boolean; password: boolean }>({
     name: false,
     email: false,
@@ -28,7 +25,7 @@ export const MyAccount: React.FC = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get('/api/users')
+        const response = await axios.get(`${API_URL}/users`)
         const userData = response.data[0]
         setUser(userData)
       } catch (error) {
@@ -42,9 +39,11 @@ export const MyAccount: React.FC = () => {
 
   const handleSave = async () => {
     try {
-      const response = await axios.put('/api/users', user)
-      toast.success('Informações salvas com sucesso!')
-      setIsEditing({ name: false, email: false, password: false })
+      if (user) {
+        const response = await axios.put(`${API_URL}/users/${user.id}`, user)
+        toast.success('Informações salvas com sucesso!')
+        setIsEditing({ name: false, email: false, password: false })
+      }
     } catch (error) {
       console.error('Error saving user data:', error)
       toast.error('Erro ao salvar as informações')
@@ -56,11 +55,20 @@ export const MyAccount: React.FC = () => {
   }
 
   const handleChange = (field: 'name' | 'email' | 'password', value: string) => {
-    setUser(prevState => ({ ...prevState, [field]: value }))
+    setUser(prevState => (prevState ? { ...prevState, [field]: value } : null))
+  }
+
+  if (!user) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <CircularProgress />
+      </div>
+    )
   }
 
   return (
     <S.Container>
+      <ToastContainer />
       <S.Header>
         <Typography variant='h2'>Minha Conta</Typography>
       </S.Header>
