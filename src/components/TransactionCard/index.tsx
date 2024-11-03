@@ -45,6 +45,7 @@ export const TransactionCard: React.FC<ITransactionCardProps> = ({ onTransaction
 
   return (
     <GreyCard cardType='alternative'>
+      <ToastContainer />    
       <S.TransactionContainer>
         <S.TransactionCardHeader variant='h2'>Nova Transação</S.TransactionCardHeader>
 
