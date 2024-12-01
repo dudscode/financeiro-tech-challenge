@@ -5,7 +5,7 @@ import * as S from './styles'
 import GreyCard from '../CardGrey'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
+import { formatCurrency } from '@/components/TransactionCard/utils'
 export interface ITransactionCardProps {
   onTransactionSubmit: (type: 'deposit' | 'transfer', amount: number) => void
 }
@@ -13,17 +13,6 @@ export interface ITransactionCardProps {
 export const TransactionCard: React.FC<ITransactionCardProps> = ({ onTransactionSubmit }) => {
   const [transactionType, setTransactionType] = useState<'deposit' | 'transfer' | ''>('')
   const [amount, setAmount] = useState<string>('')
-
-  const formatCurrency = (value: string) => {
-    const cleanValue = value.replace(/\D/g, '').replace(/^0+/, '')
-
-    const integerPart = cleanValue.slice(0, -2)
-    const decimalPart = cleanValue.slice(-2)
-
-    const formattedInteger = integerPart ? parseInt(integerPart, 10).toLocaleString('pt-BR') : '0'
-
-    return `${formattedInteger},${decimalPart.padStart(2, '0')}`
-  }
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.replace(/\D/g, '')
@@ -45,7 +34,7 @@ export const TransactionCard: React.FC<ITransactionCardProps> = ({ onTransaction
 
   return (
     <GreyCard cardType='alternative'>
-      <ToastContainer />    
+      <ToastContainer />
       <S.TransactionContainer>
         <S.TransactionCardHeader variant='h2'>Nova Transação</S.TransactionCardHeader>
 
