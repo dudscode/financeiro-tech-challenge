@@ -5,7 +5,6 @@ import { HeaderHome } from '@/components/HeaderHome'
 import { FooterHome } from '@/components/FooterHome'
 import { Login } from '@/components/Login'
 import { Create } from '@/components/Create'
-import { ToastContainer } from 'react-toastify'
 
 import { createContext } from 'react'
 
@@ -38,7 +37,6 @@ const BaseHome = ({ children }: BaseTemplateProps) => {
   return (
     <MyContext.Provider value={{ login: { openLogin, setOpenLogin }, create: { openCreate, setOpenCreate } }}>
       <HeaderHome callback={openModal} />
-      <ToastContainer />
       <Container sx={{ padding: '24px 0' }}>
         <S.Content>{children}</S.Content>
       </Container>

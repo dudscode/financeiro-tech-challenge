@@ -4,7 +4,7 @@ import Base from '@/templates/Base'
 import { BalanceCard } from '@/components/BalanceCard'
 import { TransactionCard } from '@/components/TransactionCard'
 import { useEffect, useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useSaldo } from '@/hooks/useSaldo'
 import { useTransaction } from '@/hooks/useTransaction'
@@ -20,6 +20,7 @@ export default function Home() {
 
   const onTransaction = async (type: 'deposit' | 'transfer', amount: number): Promise<void> => {
     try {
+      console.log('akiiii')
       setLoading(true)
       await sendTransaction(type, amount)
       await getSaldoCC()
@@ -32,7 +33,6 @@ export default function Home() {
 
   return (
     <Base>
-      <ToastContainer />
       <BalanceCard saldo={saldo || { tipo: '', valor: 0 }} loading={loading} refreshSaldo={refreshSaldo} />
       <TransactionCard
         onTransactionSubmit={(type, amount) => {

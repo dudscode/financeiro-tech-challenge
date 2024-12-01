@@ -2,7 +2,7 @@ import React from 'react'
 import { Typography, CircularProgress } from '@mui/material'
 import useIsMobile from '@/hooks/useIsMobile'
 import useIsTablet from '@/hooks/useIsTablet'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useUser } from '@/hooks/useUser'
 import * as S from '@/components/MyAcoount/styles'
@@ -24,7 +24,6 @@ export const MyAccount: React.FC = () => {
 
   return (
     <S.Container>
-      <ToastContainer />
       <S.Header>
         <Typography variant='h2'>Minha Conta</Typography>
       </S.Header>

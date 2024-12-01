@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { MenuItem, Select, Grid2 as Grid, FormControl } from '@mui/material'
 import * as S from './styles'
 import GreyCard from '../CardGrey'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { formatCurrency } from '@/components/TransactionCard/utils'
 export interface ITransactionCardProps {
@@ -34,7 +34,6 @@ export const TransactionCard: React.FC<ITransactionCardProps> = ({ onTransaction
 
   return (
     <GreyCard cardType='alternative'>
-      <ToastContainer />
       <S.TransactionContainer>
         <S.TransactionCardHeader variant='h2'>Nova Transação</S.TransactionCardHeader>
 
