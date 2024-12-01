@@ -1,31 +1,84 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || 'https://json-server-vercel-tawny-one.vercel.app' || 'http://localhost:3001'
+interface Saldo {
+  tipo: string
+  valor: number
+}
+type Type = 'cc' | 'cp' | 'total'
 
-export const useSaldo = () => {
-  const [saldo, setSaldo] = useState({ contaCorrente: { valor: 0 }, contaPoupanca: { valor: 0 } })
+const refreshSaldo = async (updatedSaldo: Saldo) => {
+  try {
+    return await axios.put('/api/saldo', updatedSaldo)
+  } catch (error) {
+    console.error('Error updating saldo data:', error)
+  }
+}
+
+export const getSaldoCP = async () => {
+  try {
+    const response = await axios.get(`/api/saldo`, { params: { tipo: 'Conta poupança' } })
+    const saldoCC = response.data[0]
+    return saldoCC
+  } catch (error) {
+    console.error('Error fetching saldo data:', error)
+    return { tipo: 'Conta Corrente', valor: 0 }
+  }
+}
+export const getSaldoCC = async () => {
+  try {
+    const response = await axios.get(`/api/saldo`, { params: { tipo: 'Conta corrente' } })
+    const saldoCC = response.data[0]
+    return saldoCC
+  } catch (error) {
+    console.error('Error fetching saldo data:', error)
+    return { tipo: 'Conta Corrente', valor: 0 }
+  }
+}
+
+export const getSaldoTotal = async () => {
+  try {
+    const response = await axios.get(`/api/saldo`)
+    const saldoCC = response.data
+    return saldoCC.reduce((acc: number, item: { valor: number }) => acc + item.valor, 0)
+  } catch (error) {
+    console.error('Error fetching saldo data:', error)
+    return 0
+  }
+}
+
+const types = {
+  cc: getSaldoCC,
+  cp: getSaldoCP,
+  total: getSaldoTotal
+}
+
+export const useSaldo = (type: Type = 'cc') => {
+  const [saldo, setSaldo] = useState<Saldo | null>(null)
 
   useEffect(() => {
     const fetchSaldo = async () => {
-      const saldoResult = await getSaldo()
+      const saldoResult = await types[type]()
       setSaldo(saldoResult)
-      console.log(saldoResult)
     }
 
-    fetchSaldo()
+    try {
+      fetchSaldo()
+    } catch (error) {
+      console.error('Error fetching saldo data:', error)
+    }
   }, [])
 
-  return saldo
-}
+  const getSaldo = async (fnSaldo: () => Promise<Saldo>) => {
+    const saldoResult: Saldo = await fnSaldo()
+    setSaldo(saldoResult)
+  }
 
-const getSaldo = async () => {
-  try {
-    const response = await axios.get(`${API_URL}/saldo`)
-    return { contaCorrente: response.data[0], contaPoupanca: response.data[1] }
-  } catch (error) {
-    console.error('Error fetching saldo data:', error)
-    return { contaCorrente: { valor: 0 }, contaPoupanca: { valor: 0 } }
+  return {
+    saldo,
+    refreshSaldo,
+    getSaldoTotal: () => getSaldo(getSaldoTotal),
+    getSaldoCC: () => getSaldo(getSaldoCC),
+    getSaldoCP: () => getSaldo(getSaldoCP)
   }
 }
