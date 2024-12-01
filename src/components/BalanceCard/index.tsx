@@ -7,6 +7,13 @@ import * as S from './styles'
 import useIsTablet from '@/hooks/useIsTablet'
 import useIsMobile from '@/hooks/useIsMobile'
 import useCurrencyFormatter from '@/hooks/useCurrencyFormatter'
+import { useAuth } from '@/hooks/useAuth'
+
+interface Auth {
+  userName?: string
+  access: boolean
+  email?: string
+}
 
 interface Saldo {
   tipo: string
@@ -19,7 +26,20 @@ interface BalanceCardProps {
   refreshSaldo: (updatedSaldo: Saldo) => void
 }
 
+const formatCurrentDate = () => {
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: 'long',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  }
+  const date = new Date().toLocaleDateString('pt-BR', options)
+  return date.charAt(0).toUpperCase() + date.slice(1)
+}
+
 export const BalanceCard: React.FC<BalanceCardProps> = ({ saldo, loading, refreshSaldo }) => {
+  const { getSession } = useAuth()
+  const auth = getSession()
   const [isVisible, setIsVisible] = useState(true)
   const [currentDate, setCurrentDate] = useState('')
   const [userName, setUserName] = useState('***')
@@ -27,29 +47,15 @@ export const BalanceCard: React.FC<BalanceCardProps> = ({ saldo, loading, refres
   const isMobile = useIsMobile()
   const { formatarValor } = useCurrencyFormatter()
 
+  const mountUserName = (auth: Auth) => {
+    if (auth.access) {
+      const name: string = auth?.userName || ''
+      setUserName(name.split(' ')[0])
+    }
+  }
+
   useEffect(() => {
-    const fetchUserName = () => {
-      if (typeof window !== 'undefined') {
-        const auth = sessionStorage.getItem('auth')
-        if (auth) {
-          const name = JSON.parse(auth).userName
-          setUserName(name.split(' ')[0])
-        }
-      }
-    }
-
-    const formatCurrentDate = () => {
-      const options: Intl.DateTimeFormatOptions = {
-        weekday: 'long',
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-      }
-      const date = new Date().toLocaleDateString('pt-BR', options)
-      return date.charAt(0).toUpperCase() + date.slice(1)
-    }
-
-    fetchUserName()
+    mountUserName(auth)
     setCurrentDate(formatCurrentDate())
   }, [])
 

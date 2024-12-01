@@ -1,4 +1,3 @@
-
 import { initialUserAuth } from '@/services/auth'
 
 export const useAuth = () => {
@@ -9,6 +8,12 @@ export const useAuth = () => {
     logout: () => {
       sessionStorage.removeItem('auth')
       return { access: false }
+    },
+    getSession: () => {
+      if (typeof window !== 'undefined') {
+        const auth = sessionStorage.getItem('auth')
+        return auth ? JSON.parse(auth) : { access: false }
+      }
     }
   }
 }
