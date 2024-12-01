@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server'
 import axios from 'axios'
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL  || 'https://json-server-vercel-tawny-one.vercel.app' || 'http://localhost:3001'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'
 interface ExtratoItem {
   id: string
   mes: string
@@ -32,7 +31,8 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const extrato: ExtratoItem = await req.json()
-    const response = await axios.post(`${API_URL}/extrato/`, extrato)
+    const response = await axios.post(`${API_URL}/extrato`, extrato)
+
     return NextResponse.json(response.data)
   } catch (error) {
     console.error('Error creating extrato data:', error)
