@@ -1,5 +1,5 @@
 'use client'
-import { Typography, CardContent, CardMedia, Grid2 as Grid, Card } from '@mui/material'
+import { Typography, CardMedia, Grid2 as Grid } from '@mui/material'
 import * as S from './styles'
 
 import BaseHome from '@/templates/BaseHome'
