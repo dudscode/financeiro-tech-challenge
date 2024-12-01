@@ -1,11 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server'
 import axios from 'axios'
 
-type ParamsProps = {
-  email: string
-  password: string
-}
-
 const API_URL = 'http://localhost:3001'
 
 export async function GET(request: NextRequest) {
@@ -18,6 +13,17 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(response.data)
   } catch (error) {
     console.error('Error fetching user data:', error)
+    return NextResponse.json({ error: (error as Error).message }, { status: 500 })
+  }
+}
+
+export async function PUT(req: Request) {
+  try {
+    const user = await req.json()
+    const response = await axios.put(`${API_URL}/users/${user.id}`, user)
+    return NextResponse.json(response.data)
+  } catch (error) {
+    console.error('Error updating user data:', error)
     return NextResponse.json({ error: (error as Error).message }, { status: 500 })
   }
 }

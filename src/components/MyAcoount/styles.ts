@@ -184,6 +184,13 @@ export const TopEdge = styled('img')`
   }
 `
 
+export const LoadingContainer = styled('div')`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`
+
 export const StyledButton = styled(Button)`
   ${({ theme }) => css`
     width: 250px;
@@ -204,9 +211,13 @@ export const StyledButton = styled(Button)`
   `}
 `
 
-export const NameEmailInput = styled(TextField)`
-  ${({ theme }) => css`
-    width: 100%;
+type InputProps = {
+  width?: string
+}
+
+export const Input = styled(TextField)<InputProps>`
+  ${({ theme, width }) => css`
+    width: ${width || '100%'};
     height: 48px;
     gap: 0px;
     border-radius: 8px;
@@ -232,38 +243,6 @@ export const NameEmailInput = styled(TextField)`
       display: flex;
       align-items: center;
     }
-  `}
-`
-
-export const PasswordInput = styled(TextField)`
-  ${({ theme }) => css`
-    width: 250px;
-    height: 48px;
-    gap: 0px;
-    border-radius: 8px;
-    border: 1px solid ${theme.palette.secondary.dark};
-    opacity: 1;
-    margin: 0;
-    padding: 0;
-
-    &.editable {
-      background-color: ${theme.palette.primary.contrastText};
-    }
-
-    .MuiOutlinedInput-notchedOutline {
-      border: none;
-    }
-
-    .MuiInputBase-root {
-      display: flex;
-      align-items: center.;
-    }
-
-    .MuiInputAdornment-root {
-      display: flex;
-      align-items: center.;
-    }
-
     @media (max-width: 480px) {
       width: 100%;
     }
