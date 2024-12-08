@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import transactions from '@/redux/features/slices/transactions'
+import saldo from '@/redux/features/slices/saldo'
 
 const reducer = {
-  transactions: transactions
+  transactions: transactions,
+  saldo
 }
 
 const store = configureStore({

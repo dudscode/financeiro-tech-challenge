@@ -1,26 +1,17 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit'
 
-interface ITrasaction {
-  mes: string
-  tipo: string
-  data: string
-  valor: number
-}
-
 interface ISaldo {
   id: string
   tipo: string
   valor: number
 }
 
-interface IExtratoState {
-  extrato: ITrasaction[]
+interface ISaldoState {
   saldo: ISaldo[]
   saldoTotal: number
 }
 
-const initialState: IExtratoState = {
-  extrato: [],
+const initialState: ISaldoState = {
   saldo: [],
   saldoTotal: 0
 }
@@ -29,38 +20,44 @@ const saldoSlice = createSlice({
   name: 'transactions',
   initialState,
   reducers: {
-    resetExtrato: (state, action: { payload: ITrasaction[] }) => {
-      return {
-        ...state,
-        extrato: [...action.payload]
+    updateSaldoCC: (state, action: { payload: ISaldo }) => {
+      const index = state.saldo.findIndex(item => item.tipo === 'Conta corrente')
+      if (index !== -1) {
+        return {
+          ...state,
+          saldo: [
+            state.saldo[index],
+            {
+              ...state.saldo[index],
+              valor: action.payload.valor
+            }
+          ]
+        }
       }
     },
-    addTransaction: (state, action: { payload: ITrasaction }) => {
-      return {
-        ...state,
-        extrato: [...state.extrato, action.payload]
-      }
-    },
-    saldoTotal: (state, action: { payload: number }) => {
-      return {
-        ...state,
-        saldoTotal: action.payload
-      }
-    },
-    addSaldo: (state, action: { payload: ISaldo }) => {
-      return {
-        ...state,
-        saldo: [action.payload]
+    updateSaldoCP: (state, action: { payload: ISaldo }) => {
+      const index = state.saldo.findIndex(item => item.tipo === 'Conta poupança')
+      if (index !== -1) {
+        return {
+          ...state,
+          saldo: [
+            state.saldo[index],
+            {
+              ...state.saldo[index],
+              valor: action.payload.valor
+            }
+          ]
+        }
       }
     }
   }
 })
 
-const selectTotalSaldo = createSelector(
-  state => state.transactions.transactions,
-  transactions => transactions
+export const totalSaldo = createSelector(
+  (state: ISaldoState) => state.saldo,
+  (saldo: ISaldo[]) => saldo.reduce((acc, item) => acc + item.valor, 0)
 )
 
-export const {} = saldoSlice.actions
+export const { updateSaldoCC, updateSaldoCP } = saldoSlice.actions
 
 export default saldoSlice.reducer

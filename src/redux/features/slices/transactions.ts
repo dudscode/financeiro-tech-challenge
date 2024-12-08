@@ -29,38 +29,20 @@ const transactionsSlice = createSlice({
   name: 'transactions',
   initialState,
   reducers: {
-    resetExtrato: (state, action: { payload: ITrasaction[] }) => {
-      return {
-        ...state,
-        extrato: [...action.payload]
-      }
-    },
     addTransaction: (state, action: { payload: ITrasaction }) => {
       return {
         ...state,
         extrato: [...state.extrato, action.payload]
       }
-    },
-    saldoTotal: (state, action: { payload: number }) => {
-      return {
-        ...state,
-        saldoTotal: action.payload
-      }
-    },
-    addSaldo: (state, action: { payload: ISaldo }) => {
-      return {
-        ...state,
-        saldo: [action.payload]
-      }
     }
   }
 })
 
-const selectTotalSaldo = createSelector(
+const totalTransactions = createSelector(
   state => state.transactions.transactions,
-  transactions => transactions
+  transactions => transactions.reduce((acc: number, item: ITrasaction) => acc + item.valor, 0)
 )
 
-export const { addTransaction, addSaldo, saldoTotal } = transactionsSlice.actions
+export const { addTransaction } = transactionsSlice.actions
 
 export default transactionsSlice.reducer
