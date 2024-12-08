@@ -71,12 +71,19 @@
       "tipo": "Transferência",
       "data": "29/10/2024",
       "valor": -1.21
+    },
+    {
+      "id": "4eb7",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "08/12/2024",
+      "valor": 70
     }
   ],
   "saldo": [
     {
       "tipo": "Conta corrente",
-      "valor": 491.1,
+      "valor": 561.1,
       "id": "1"
     },
     {

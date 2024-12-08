@@ -1,8 +1,12 @@
+'use client'
+
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
 import { ThemeProvider } from '@mui/material/styles'
 import theme from '../../styles/theme'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ToastContainer } from 'react-toastify'
+import { Provider } from 'react-redux'
+import store from '@/redux/store'
 
 export default function RootLayout({
   children
@@ -19,7 +23,7 @@ export default function RootLayout({
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <ToastContainer />
-            {children}
+            <Provider store={store}>{children}</Provider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
