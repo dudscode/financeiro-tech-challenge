@@ -6,8 +6,10 @@ import { IExtratoProps } from '@/components/Extrato/types'
 import { formatCurrency } from '@/components/Extrato/utils'
 import { Modal } from '@/components/Extrato/components/Modal'
 import { ButtonEdit, ButtonDelete } from '@/components/Extrato/components/Buttons'
+import { useTransaction } from '@/hooks/useTransaction'
 
 export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
+  useTransaction()
   const { extrato, loading, fetchData, openModal, onEdit, onDelete, item, setItem } = useExtrato()
   const hasExtrato = !!extrato.length
 
@@ -19,7 +21,7 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
         {loading && <CircularProgress />}
         {!loading && hasExtrato && (
           <S.List>
-            {extrato.map((item, index) => (
+            {[...extrato].reverse().map((item, index) => (
               <S.Item key={index}>
                 <S.TextContainer>
                   <S.TextHighlight>{item.mes}</S.TextHighlight>

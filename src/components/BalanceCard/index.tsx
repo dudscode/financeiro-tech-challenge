@@ -23,7 +23,6 @@ interface Saldo {
 interface BalanceCardProps {
   saldo: Saldo
   loading: boolean
-  refreshSaldo: (updatedSaldo: Saldo) => void
 }
 
 const formatCurrentDate = () => {
@@ -37,7 +36,7 @@ const formatCurrentDate = () => {
   return date.charAt(0).toUpperCase() + date.slice(1)
 }
 
-export const BalanceCard: React.FC<BalanceCardProps> = ({ saldo, loading, refreshSaldo }) => {
+export const BalanceCard: React.FC<BalanceCardProps> = ({ saldo, loading }) => {
   const { getSession } = useAuth()
   const auth = getSession()
   const [isVisible, setIsVisible] = useState(true)

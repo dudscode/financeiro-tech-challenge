@@ -1,6 +1,10 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { ITransacao, TypeProps, IModalProps } from '@/components/Extrato/types'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { setExtrato } from '@/redux/features/slices/transactions'
+import { toast } from 'react-toastify'
 
 const fetchEditData = async (item: ITransacao) => {
   try {
@@ -13,9 +17,10 @@ const fetchEditData = async (item: ITransacao) => {
       ...saldoCC.data[0],
       valor: dataEdit.data.valor + saldoCC.data[0].valor
     })
+    toast.success('Transação editava com sucesso!')
     return response.data
   } catch (error) {
-    console.error('Error fetching extrato data:', error)
+    toast.error('Erro ao editar transação. Tente novamente.')
   }
 }
 
@@ -32,23 +37,16 @@ const fetchDeleteData = async (item: ITransacao) => {
       ...saldoCC.data[0],
       valor: dataDelete.data.valor + saldoCC.data[0].valor
     })
+    toast.success('Transação apagada com sucesso!')
     return response.data
   } catch (error) {
-    console.error('Error fetching extrato data:', error)
-  }
-}
-
-const fetchExtratoData = async () => {
-  try {
-    const response = await axios.get('/api/extrato')
-    return response.data
-  } catch (error) {
-    console.error('Error fetching extrato data:', error)
+    toast.error('Erro ao apagar transação. Tente novamente.')
   }
 }
 
 export const useExtrato = () => {
-  const [extrato, setExtrato] = useState<ITransacao[]>([])
+  const dispatch = useDispatch()
+  const { extrato } = useSelector((state: any) => state.transactions)
   const [loading, setLoading] = useState(true)
   const [item, setItem] = useState<ITransacao>({} as ITransacao)
   const [openModal, setOpenModal] = useState<IModalProps>({
@@ -56,17 +54,14 @@ export const useExtrato = () => {
     type: 'edit'
   })
 
+  useEffect(() => {
+    !!extrato.length && setLoading(false)
+  }, [extrato])
+
   const fn = {
     deleted: fetchDeleteData,
     edit: fetchEditData
   }
-
-  useEffect(() => {
-    fetchExtratoData().then(response => {
-      setExtrato(response)
-      setLoading(false)
-    })
-  }, [])
 
   const onEdit = (item: ITransacao) => {
     setItem(item)
@@ -80,7 +75,7 @@ export const useExtrato = () => {
   const fetchData = async (type: TypeProps, value?: string) => {
     if (!!value) {
       const result = await fn[type](item)
-      setExtrato(result)
+      dispatch(setExtrato(result))
     }
     setOpenModal({ status: false, type: 'edit' })
   }

@@ -1,5 +1,10 @@
 import axios from 'axios'
-
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { setExtrato, addTransaction } from '@/redux/features/slices/transactions'
+import { Dispatch } from 'redux'
+import { updateSaldoTotal } from '@/redux/features/slices/saldo'
+import { toast } from 'react-toastify'
 interface Transaction {
   mes: string
   tipo: string
@@ -12,7 +17,7 @@ const formatMonth = () => {
   return data.charAt(0).toUpperCase() + data.slice(1)
 }
 
-export const sendTransaction = async (type: string, amount: number): Promise<Transaction> => {
+export const sendTransaction = async (type: string, amount: number, dispatch: Dispatch) => {
   const transaction: Transaction = {
     mes: formatMonth(),
     tipo: type === 'deposit' ? 'Depósito' : 'Transferência',
@@ -27,13 +32,31 @@ export const sendTransaction = async (type: string, amount: number): Promise<Tra
       ...saldoCC.data[0],
       valor: response.data.valor + saldoCC.data[0].valor
     })
-    return saldo.data
+
+    dispatch(addTransaction(response.data))
+    dispatch(updateSaldoTotal(saldo.data.valor))
+    toast.success('Transação efetuada com sucesso!')
+  } catch (error) {
+    toast.error('Erro ao efetuar transação. Tente novamente.')
+    return { tipo: '', valor: 0, mes: '', data: '' }
+  }
+}
+export const getExtrato = async (dispatch: Dispatch) => {
+  try {
+    const extrato = await axios.get(`/api/extrato`)
+    dispatch(setExtrato(extrato.data))
   } catch (error) {
     console.error('Error fetching saldo data:', error)
-    return { tipo: '', valor: 0, mes: '', data: '' }
+    return []
   }
 }
 
 export const useTransaction = () => {
-  return { sendTransaction }
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    getExtrato(dispatch)
+  }, [])
+
+  return { sendTransaction: (type: string, amount: number) => sendTransaction(type, amount, dispatch) }
 }

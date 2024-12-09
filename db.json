@@ -10,80 +10,17 @@
   ],
   "extrato": [
     {
-      "mes": "Novembro",
-      "tipo": "Depósito",
-      "data": "21/11/2022",
-      "valor": 100,
-      "id": "e4da"
-    },
-    {
-      "mes": "Dezembro",
-      "tipo": "Saque",
-      "data": "15/12/2022",
-      "valor": 50,
-      "id": "58fb"
-    },
-    {
-      "mes": "Novembro",
-      "tipo": "Transferência",
-      "data": "21/11/2022",
-      "valor": 500,
-      "id": "01c8"
-    },
-    {
-      "id": "af82",
-      "mes": "Outubro",
-      "tipo": "Depósito",
-      "data": "28/10/2024",
-      "valor": 500
-    },
-    {
-      "id": "c88d",
-      "mes": "Outubro",
-      "tipo": "Depósito",
-      "data": "28/10/2024",
-      "valor": 500
-    },
-    {
-      "id": "e8d7",
-      "mes": "Outubro",
-      "tipo": "Transferência",
-      "data": "28/10/2024",
-      "valor": -500
-    },
-    {
-      "id": "98d0",
-      "mes": "Outubro",
-      "tipo": "Transferência",
-      "data": "28/10/2024",
-      "valor": -20
-    },
-    {
-      "id": "d326",
-      "mes": "Outubro",
-      "tipo": "Depósito",
-      "data": "29/10/2024",
-      "valor": 12.31
-    },
-    {
-      "id": "1566",
-      "mes": "Outubro",
-      "tipo": "Transferência",
-      "data": "29/10/2024",
-      "valor": -1.21
-    },
-    {
-      "id": "4eb7",
+      "id": "7e09",
       "mes": "Dezembro",
       "tipo": "Depósito",
-      "data": "08/12/2024",
-      "valor": 70
+      "data": "09/12/2024",
+      "valor": 1000
     }
   ],
   "saldo": [
     {
       "tipo": "Conta corrente",
-      "valor": 561.1,
+      "valor": 5802.9400000000005,
       "id": "1"
     },
     {

@@ -7,22 +7,12 @@ interface ITrasaction {
   valor: number
 }
 
-interface ISaldo {
-  id: string
-  tipo: string
-  valor: number
-}
-
 interface IExtratoState {
   extrato: ITrasaction[]
-  saldo: ISaldo[]
-  saldoTotal: number
 }
 
 const initialState: IExtratoState = {
-  extrato: [],
-  saldo: [],
-  saldoTotal: 0
+  extrato: []
 }
 
 const transactionsSlice = createSlice({
@@ -34,15 +24,25 @@ const transactionsSlice = createSlice({
         ...state,
         extrato: [...state.extrato, action.payload]
       }
+    },
+    setExtrato: (state, action: { payload: ITrasaction[] }) => {
+      return {
+        ...state,
+        extrato: action.payload
+      }
     }
   }
 })
 
-const totalTransactions = createSelector(
-  state => state.transactions.transactions,
-  transactions => transactions.reduce((acc: number, item: ITrasaction) => acc + item.valor, 0)
+interface RootState {
+  transactions: IExtratoState
+}
+
+export const totalTransactions = createSelector(
+  (state: RootState) => state.transactions.extrato,
+  (transactions: ITrasaction[]) => transactions.reduce((acc: number, item: ITrasaction) => acc + item.valor, 0)
 )
 
-export const { addTransaction } = transactionsSlice.actions
+export const { addTransaction, setExtrato } = transactionsSlice.actions
 
 export default transactionsSlice.reducer
