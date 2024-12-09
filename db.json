@@ -15,12 +15,19 @@
       "tipo": "Depósito",
       "data": "09/12/2024",
       "valor": 1000
+    },
+    {
+      "id": "9faf",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "09/12/2024",
+      "valor": 2000
     }
   ],
   "saldo": [
     {
       "tipo": "Conta corrente",
-      "valor": 5802.9400000000005,
+      "valor": 3000,
       "id": "1"
     },
     {
