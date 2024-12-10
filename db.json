@@ -22,12 +22,110 @@
       "tipo": "Depósito",
       "data": "09/12/2024",
       "valor": 2000
+    },
+    {
+      "id": "1777",
+      "mes": "Dezembro",
+      "tipo": "Transferência",
+      "data": "10/12/2024",
+      "valor": -1
+    },
+    {
+      "id": "b8be",
+      "mes": "Dezembro",
+      "tipo": "Transferência",
+      "data": "10/12/2024",
+      "valor": -1
+    },
+    {
+      "id": "0ac5",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "10/12/2024",
+      "valor": 10
+    },
+    {
+      "id": "2884",
+      "mes": "Dezembro",
+      "tipo": "Transferência",
+      "data": "10/12/2024",
+      "valor": -10
+    },
+    {
+      "id": "6103",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "10/12/2024",
+      "valor": 10
+    },
+    {
+      "id": "77b7",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "10/12/2024",
+      "valor": 30
+    },
+    {
+      "id": "6271",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "10/12/2024",
+      "valor": 30
+    },
+    {
+      "id": "2104",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "10/12/2024",
+      "valor": 30
+    },
+    {
+      "id": "5848",
+      "mes": "Dezembro",
+      "tipo": "Transferência",
+      "data": "10/12/2024",
+      "valor": -30
+    },
+    {
+      "id": "cd00",
+      "mes": "Dezembro",
+      "tipo": "Transferência",
+      "data": "10/12/2024",
+      "valor": -30
+    },
+    {
+      "id": "f82d",
+      "mes": "Dezembro",
+      "tipo": "Transferência",
+      "data": "10/12/2024",
+      "valor": -30
+    },
+    {
+      "id": "e276",
+      "mes": "Dezembro",
+      "tipo": "Transferência",
+      "data": "10/12/2024",
+      "valor": -78.88
+    },
+    {
+      "id": "764c",
+      "mes": "Dezembro",
+      "tipo": "Transferência",
+      "data": "10/12/2024",
+      "valor": -10
+    },
+    {
+      "id": "fbed",
+      "mes": "Dezembro",
+      "tipo": "Transferência",
+      "data": "10/12/2024",
+      "valor": -10
     }
   ],
   "saldo": [
     {
       "tipo": "Conta corrente",
-      "valor": 3000,
+      "valor": 2912.12,
       "id": "1"
     },
     {

@@ -16,7 +16,7 @@ const initialState: ISaldoState = {
   saldoTotal: 0
 }
 
-const saldoSlice = createSlice({
+const saldosSlice = createSlice({
   name: 'transactions',
   initialState,
   reducers: {
@@ -46,6 +46,6 @@ export const totalSaldo = createSelector(
   (saldo: ISaldo[]) => saldo.reduce((acc, item) => acc + item.valor, 0)
 )
 
-export const { updateSaldo, updateSaldoTotal, getSaldo } = saldoSlice.actions
+export const { updateSaldo, updateSaldoTotal, getSaldo } = saldosSlice.actions
 
-export default saldoSlice.reducer
+export default saldosSlice.reducer

@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <Base>
-      <BalanceCard saldo={saldoCC || { tipo: '', valor: 0 }} loading={loading} />
+      <BalanceCard saldo={saldoCC} loading={loading} />
       <TransactionCard
         onTransactionSubmit={(type, amount) => {
           setLoading(true)
