@@ -267,12 +267,19 @@
       "tipo": "Depósito",
       "data": "15/12/2024",
       "valor": 100
+    },
+    {
+      "id": "3b38",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "15/12/2024",
+      "valor": 787.87
     }
   ],
   "saldo": [
     {
       "tipo": "Conta corrente",
-      "valor": 4704.5199999999995,
+      "valor": 5492.389999999999,
       "id": "1"
     },
     {

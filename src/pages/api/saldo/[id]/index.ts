@@ -1,8 +1,17 @@
 import { NextResponse } from 'next/server'
+import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001' || 'https://json-server-vercel-tawny-one.vercel.app'
+
+type Data = {
+  name: string
+}
+
+export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+  res.status(200).json({ name: 'ok' })
+}
 
 export async function GET(req: Request) {
   try {

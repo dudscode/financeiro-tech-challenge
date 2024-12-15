@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
 
 const API_URL =
@@ -9,6 +10,14 @@ interface ExtratoItem {
   data: string
   tipo: 'Transferência' | 'Depósito'
   valor: number
+}
+
+type Data = {
+  name: string
+}
+
+export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+  res.status(200).json({ name: 'ok' })
 }
 
 export async function GET() {

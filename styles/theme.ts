@@ -1,5 +1,5 @@
 'use client'
-import '../styles/font.css'
+import './font.module.css'
 import { createTheme } from '@mui/material/styles'
 
 const theme = createTheme({

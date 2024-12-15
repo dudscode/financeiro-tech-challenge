@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { useSaldo } from '@/hooks/useSaldo'
 
 export default function Home() {
-  const { saldo, refreshSaldo } = useSaldo('cc')
+  const { saldo } = useSaldo('cc')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <Base>
-      <BalanceCard saldo={saldo || { tipo: '', valor: 0 }} loading={loading} refreshSaldo={refreshSaldo} />
+      <BalanceCard saldo={saldo || { tipo: '', valor: 0 }} loading={loading} />
       <InvestmentsCard
         title='Investimentos'
         total='50.000.00'

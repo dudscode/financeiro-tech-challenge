@@ -4,6 +4,8 @@ import { addTransaction } from '@/redux/features/slices/transactions'
 import { updateSaldo } from '@/redux/features/slices/saldos'
 import { toast } from 'react-toastify'
 
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001' || 'https://json-server-vercel-tawny-one.vercel.app'
 interface ISaldo {
   id: string
   tipo: string
@@ -32,13 +34,13 @@ export const fetchSendTransaction = (type: string, amount: number, saldo: ISaldo
 
   return async (dispatch: Dispatch) => {
     Promise.all([
-      axios.post(`/api/extrato`, transaction),
-      axios.get(`/api/saldo`, { params: { tipo: 'Conta corrente' } })
+      axios.post(`${API_URL}/extrato`, transaction),
+      axios.get(`${API_URL}/saldo`, { params: { tipo: 'Conta corrente' } })
     ])
       .then(([transaction, saldos]) => {
         dispatch(addTransaction(transaction.data))
         axios
-          .put<ISaldo>(`/api/saldo/1`, {
+          .put<ISaldo>(`${API_URL}/saldo/1`, {
             ...saldos.data[0],
             valor: transaction.data.valor + saldos.data[0].valor
           })
