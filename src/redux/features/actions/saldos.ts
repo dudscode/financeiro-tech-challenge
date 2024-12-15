@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Dispatch } from 'redux'
-import { updateSaldo, getSaldo } from '@/redux/features/slices/saldos'
+import { updateSaldo } from '@/redux/features/slices/saldos'
 
 interface ISaldo {
   id: string
@@ -13,7 +13,7 @@ export const fetchGetSaldo = () => {
     axios
       .get(`/api/saldo`)
       .then(saldo => {
-        dispatch(getSaldo(saldo.data))
+        dispatch(updateSaldo(saldo.data))
       })
       .catch(error => {
         console.error('Error fetching saldo data:', error)

@@ -33,9 +33,10 @@ const fetchDeleteData = async (item: ITransacao) => {
     })
     const response = await axios.get('/api/extrato')
     const saldoCC = await axios.get(`/api/saldo`, { params: { tipo: 'Conta corrente' } })
+    console.log('dataDelete.data.valor: ', dataDelete.data.valor)
     await axios.put(`/api/saldo/1`, {
       ...saldoCC.data[0],
-      valor: dataDelete.data.valor + saldoCC.data[0].valor
+      valor: saldoCC.data[0].valor - dataDelete.data.valor
     })
     toast.success('Transação apagada com sucesso!')
     return response.data

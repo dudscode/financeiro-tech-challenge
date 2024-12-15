@@ -20,12 +20,6 @@ const saldosSlice = createSlice({
   name: 'transactions',
   initialState,
   reducers: {
-    getSaldo: (state, action: { payload: [ISaldo] }) => {
-      return {
-        ...state,
-        saldo: action.payload
-      }
-    },
     updateSaldo: (state, action: { payload: [ISaldo] }) => {
       return {
         ...state,
@@ -46,6 +40,11 @@ export const totalSaldo = createSelector(
   (saldo: ISaldo[]) => saldo.reduce((acc, item) => acc + item.valor, 0)
 )
 
-export const { updateSaldo, updateSaldoTotal, getSaldo } = saldosSlice.actions
+export const saldoCC = createSelector(
+  (state: ISaldoState) => state.saldo,
+  (saldo: ISaldo[]) => saldo.filter(item => item.tipo === 'Conta corrente')
+)
+
+export const { updateSaldo, updateSaldoTotal } = saldosSlice.actions
 
 export default saldosSlice.reducer

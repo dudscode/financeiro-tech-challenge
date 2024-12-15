@@ -10,19 +10,13 @@ import { useTransaction } from '@/hooks/useTransaction'
 
 export default function Home() {
   const { sendTransaction } = useTransaction()
-  const { saldo, saldoCC } = useSaldo()
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    !!saldo.length && setLoading(false)
-  }, [saldoCC])
+  const { saldo, saldoCC, loading } = useSaldo()
 
   return (
     <Base>
       <BalanceCard saldo={saldoCC} loading={loading} />
       <TransactionCard
         onTransactionSubmit={(type, amount) => {
-          setLoading(true)
           sendTransaction(type, amount)
         }}
       />

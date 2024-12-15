@@ -1,8 +1,14 @@
 import { Dispatch } from 'redux'
 import axios from 'axios'
 import { addTransaction } from '@/redux/features/slices/transactions'
-import { updateSaldoTotal } from '@/redux/features/slices/saldos'
+import { updateSaldo } from '@/redux/features/slices/saldos'
 import { toast } from 'react-toastify'
+
+interface ISaldo {
+  id: string
+  tipo: string
+  valor: number
+}
 
 interface Transaction {
   mes: string
@@ -16,7 +22,7 @@ const formatMonth = () => {
   return data.charAt(0).toUpperCase() + data.slice(1)
 }
 
-export const fetchSendTransaction = (type: string, amount: number) => {
+export const fetchSendTransaction = (type: string, amount: number, saldo: ISaldo[]) => {
   const transaction: Transaction = {
     mes: formatMonth(),
     tipo: type === 'deposit' ? 'Depósito' : 'Transferência',
@@ -26,19 +32,21 @@ export const fetchSendTransaction = (type: string, amount: number) => {
 
   return async (dispatch: Dispatch) => {
     Promise.all([
-      axios.post<Transaction>(`/api/extrato`, transaction),
-      axios.get<Transaction[]>(`/api/saldo`, { params: { tipo: 'Conta corrente' } })
+      axios.post(`/api/extrato`, transaction),
+      axios.get(`/api/saldo`, { params: { tipo: 'Conta corrente' } })
     ])
-      .then(([transaction, saldo]) => {
+      .then(([transaction, saldos]) => {
         dispatch(addTransaction(transaction.data))
         axios
-          .put<Transaction>(`/api/saldo/1`, {
-            ...saldo.data[0],
-            valor: transaction.data.valor + saldo.data[0].valor
+          .put<ISaldo>(`/api/saldo/1`, {
+            ...saldos.data[0],
+            valor: transaction.data.valor + saldos.data[0].valor
           })
           .then(saldoUpdate => {
-            console.log('saldoUpdate: ', saldoUpdate)
-            dispatch(updateSaldoTotal(saldoUpdate.data.valor))
+            const novoSaldo: [ISaldo] = saldo.map((item: ISaldo) =>
+              item.tipo === 'Conta poupança' ? item : saldoUpdate.data
+            ) as [ISaldo]
+            dispatch(updateSaldo(novoSaldo))
           })
           .catch(error => {
             console.error('Error updating saldo data:', error)

@@ -120,12 +120,159 @@
       "tipo": "Transferência",
       "data": "10/12/2024",
       "valor": -10
+    },
+    {
+      "id": "4f30",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "14/12/2024",
+      "valor": 100
+    },
+    {
+      "id": "8bfd",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "14/12/2024",
+      "valor": 100
+    },
+    {
+      "id": "067a",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "14/12/2024",
+      "valor": 100
+    },
+    {
+      "id": "6c53",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "14/12/2024",
+      "valor": 100
+    },
+    {
+      "id": "dee0",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "14/12/2024",
+      "valor": 100
+    },
+    {
+      "id": "7456",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "14/12/2024",
+      "valor": 100
+    },
+    {
+      "id": "3bc6",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "14/12/2024",
+      "valor": 30
+    },
+    {
+      "id": "a392",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "14/12/2024",
+      "valor": 20
+    },
+    {
+      "id": "d3eb",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "14/12/2024",
+      "valor": 20
+    },
+    {
+      "id": "a66b",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "14/12/2024",
+      "valor": 20
+    },
+    {
+      "id": "c1ec",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "14/12/2024",
+      "valor": 87.87
+    },
+    {
+      "id": "b2ee",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "15/12/2024",
+      "valor": 6.77
+    },
+    {
+      "id": "7498",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "15/12/2024",
+      "valor": 78.88
+    },
+    {
+      "id": "5554",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "15/12/2024",
+      "valor": 10
+    },
+    {
+      "id": "2479",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "15/12/2024",
+      "valor": 100
+    },
+    {
+      "id": "9340",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "15/12/2024",
+      "valor": 78.88
+    },
+    {
+      "id": "c333",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "15/12/2024",
+      "valor": 100
+    },
+    {
+      "id": "b380",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "15/12/2024",
+      "valor": 100
+    },
+    {
+      "id": "b2d9",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "15/12/2024",
+      "valor": 100
+    },
+    {
+      "id": "5243",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "15/12/2024",
+      "valor": 100
+    },
+    {
+      "id": "e475",
+      "mes": "Dezembro",
+      "tipo": "Depósito",
+      "data": "15/12/2024",
+      "valor": 100
     }
   ],
   "saldo": [
     {
       "tipo": "Conta corrente",
-      "valor": 2912.12,
+      "valor": 4704.5199999999995,
       "id": "1"
     },
     {
