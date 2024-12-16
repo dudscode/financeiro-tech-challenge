@@ -6,6 +6,7 @@ import GreyCard from '@/components/CardGrey'
 import { ISizeChart, InvestmentsCardProps } from '@/components/InvestmentsCard/types'
 import { ChartEstatistica } from '@/components/InvestmentsCard/components/ChartEstatistica'
 import { Renda } from '@/components/InvestmentsCard/components/Renda'
+import AngularRemoteApp from '../GraficAngularMFE/AngularRemoteApp'
 export const InvestmentsCard: React.FC<InvestmentsCardProps> = ({
   title,
   total,
@@ -27,7 +28,10 @@ export const InvestmentsCard: React.FC<InvestmentsCardProps> = ({
           <Renda title='Renda Fixa' value={rendaFixa} />
           <Renda title='Renda variável' value={rendaVariavel} />
         </S.ContainerRenda>
-        <ChartEstatistica isMobile={isMobile} sizeChartContainer={sizeChartContainer} chartData={chartData} />
+        <div>
+          <AngularRemoteApp />
+        </div>
+        {/* <ChartEstatistica isMobile={isMobile} sizeChartContainer={sizeChartContainer} chartData={chartData} /> */}
       </S.Container>
     </GreyCard>
   )

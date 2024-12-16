@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NEXT_PRIVATE_LOCAL_WEBPACK=true next dev",
-    "build": "NEXT_PRIVATE_LOCAL_WEBPACK=false next build",
+    "dev": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true next dev",
+    "build": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=false next build",
     "start": "next start",
     "lint": "next lint",
     "json-server": "json-server --watch db.json --port 3001",
@@ -25,6 +25,7 @@
     "@mui/x-charts": "^7.18.0",
     "@reduxjs/toolkit": "^2.4.0",
     "axios": "^1.7.7",
+    "cross-env": "^7.0.3",
     "json-server": "^1.0.0-beta.2",
     "next": "^14.2.18",
     "react": "^18",

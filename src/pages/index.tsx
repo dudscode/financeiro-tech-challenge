@@ -1,7 +1,4 @@
 'use client'
-import { lazy } from 'react'
-const BulletinApp = lazy(() => import('bulletin/App'))
-
 import { Typography, CardMedia, Grid2 as Grid } from '@mui/material'
 import * as S from './styles'
 
@@ -38,7 +35,6 @@ export default function Home() {
 
   return (
     <S.Container>
-      <BulletinApp />
       <BaseHome>
         <MyContext.Consumer>
           {({ login, create }) => {
