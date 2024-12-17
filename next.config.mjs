@@ -10,7 +10,7 @@ const nextConfig = {
         name: 'mf_next',
         filename: 'static/chunks/remoteEntry.js',
         remotes: {
-          angularRemoteApp: `angularRemoteApp@http://localhost:4201/remoteEntry.js` // substituir por url bucket
+          angularRemoteApp: `angularRemoteApp@https://d39c4uctwonyl2.cloudfront.net/build/remoteEntry.js` // substituir por url bucket
         },
         exposes: {},
         shared: {}
