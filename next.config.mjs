@@ -3,7 +3,7 @@ import { NextFederationPlugin } from '@module-federation/nextjs-mf'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack: config => {
-    config.output.publicPath = process.env.NEXT_PUBLIC_BASE_PATH
+    config.output.publicPath = "auto"
     config.plugins.push(
       new NextFederationPlugin({
         // publicPath: "auto",
