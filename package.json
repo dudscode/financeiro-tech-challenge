@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true next dev",
-    "build": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=false next build",
+    "build": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true next build",
     "start": "next start",
     "lint": "next lint",
     "json-server": "json-server --watch db.json --port 3001",
