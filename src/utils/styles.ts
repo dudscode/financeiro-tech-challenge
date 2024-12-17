@@ -8,7 +8,6 @@ export const Container = styled('div')`
     width: 100%;
   }
 `
-
 export const Title = styled('div')`
   ${({ theme }) => css`
     color: ${theme.palette.text.primary};
