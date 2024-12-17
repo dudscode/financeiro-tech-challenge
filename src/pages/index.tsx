@@ -1,6 +1,6 @@
 'use client'
 import { Typography, CardMedia, Grid2 as Grid } from '@mui/material'
-import * as S from './styles'
+import * as S from '../utils/styles'
 
 import BaseHome from '@/templates/BaseHome'
 import useIsMobile from '@/hooks/useIsMobile'
