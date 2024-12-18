@@ -21,7 +21,7 @@ const setSessionStorage = (data: User[]) => {
 }
 
 const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || 'https://json-server-vercel-tawny-one.vercel.app' || 'http://localhost:3001'
+  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001' || 'https://json-server-vercel-tawny-one.vercel.app'
 
 export const initialUserAuth = async (email: string, password: string) => {
   try {

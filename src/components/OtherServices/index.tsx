@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { Grid } from '@mui/material'
+import { Grid2 as Grid } from '@mui/material'
 import { ServiceContainer, ServiceGrid, ServiceTitle } from './styles'
 import ServiceButton from '../ServiceButton'
 import GreyCard from '../CardGrey'
@@ -24,7 +24,7 @@ const OtherServices = () => {
 
         <ServiceGrid container spacing={3} direction='row'>
           {services.map((service, index) => (
-            <Grid item xs={12} sm={4} key={index}>
+            <Grid size={{ xs: 12, md: 5 }} key={index}>
               <ServiceButton icon={service.icon} label={service.title}></ServiceButton>
             </Grid>
           ))}

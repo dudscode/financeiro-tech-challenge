@@ -100,20 +100,6 @@ export const Divider = styled(Hr)`
   `}
 `
 
-export const TitleContainer = styled('div')`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 24px;
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-  }
-`
-
 export const ButtonContainer = styled('div')`
   display: flex;
   justify-content: flex-end;

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Extrato, IExtratoProps } from './index' // Certifique-se de que o caminho está correto
+import { Extrato } from './index' // Certifique-se de que o caminho está correto
 
 // Define the metadata for the component stories
 const meta: Meta<typeof Extrato> = {

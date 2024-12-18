@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import * as S from './styles'
 import { Input } from '@/components/Input'
 import { Button } from '@/components/Button'

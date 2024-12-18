@@ -1,31 +1,48 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchGetSaldo, fetchGetSaldoCC, fetchGetSaldoCP } from '@/redux/features/actions/saldos'
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || 'https://json-server-vercel-tawny-one.vercel.app' || 'http://localhost:3001'
-
-export const useSaldo = () => {
-  const [saldo, setSaldo] = useState({ contaCorrente: { valor: 0 }, contaPoupanca: { valor: 0 } })
-
-  useEffect(() => {
-    const fetchSaldo = async () => {
-      const saldoResult = await getSaldo()
-      setSaldo(saldoResult)
-      console.log(saldoResult)
-    }
-
-    fetchSaldo()
-  }, [])
-
-  return saldo
+interface ISaldo {
+  id: string
+  tipo: string
+  valor: number
 }
 
-const getSaldo = async () => {
-  try {
-    const response = await axios.get(`${API_URL}/saldo`)
-    return { contaCorrente: response.data[0], contaPoupanca: response.data[1] }
-  } catch (error) {
-    console.error('Error fetching saldo data:', error)
-    return { contaCorrente: { valor: 0 }, contaPoupanca: { valor: 0 } }
+type Type = 'cc' | 'cp'
+
+const types = {
+  cc: fetchGetSaldoCC,
+  cp: fetchGetSaldoCP
+}
+
+export const useSaldo = (type: Type = 'cc') => {
+  const [loading, setLoading] = useState(true)
+  const { transactions, saldos } = useSelector((state: any) => state)
+  const { extrato } = transactions
+  const dispatch = useDispatch()
+  const [saldoAtualizado, updateSaldo] = useState(saldos.saldo)
+
+  useEffect(() => {
+    fetchGetSaldo()(dispatch)
+  }, [])
+
+  useEffect(() => {
+    setLoading(true)
+    !!extrato.length && types[type](saldos.saldo)(dispatch)
+  }, [extrato])
+
+  useEffect(() => {
+    if (!!saldos.saldo.length) {
+      updateSaldo(saldos.saldo)
+      setLoading(false)
+    }
+  }, [saldos.saldo])
+
+  return {
+    loading,
+    saldo: saldoAtualizado,
+    saldoCC: saldoAtualizado.find((item: ISaldo) => item.tipo === 'Conta corrente'),
+    saldoCP: saldoAtualizado.find((item: ISaldo) => item.tipo === 'Conta poupança'),
+    getSaldoCC: () => fetchGetSaldoCC(saldos.saldo)(dispatch)
   }
 }
