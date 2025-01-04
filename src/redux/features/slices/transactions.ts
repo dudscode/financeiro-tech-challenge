@@ -1,4 +1,4 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 interface ITrasaction {
   mes: string
@@ -33,15 +33,6 @@ const transactionsSlice = createSlice({
     }
   }
 })
-
-interface RootState {
-  transactions: IExtratoState
-}
-
-export const totalTransactions = createSelector(
-  (state: RootState) => state.transactions.extrato,
-  (transactions: ITrasaction[]) => transactions.reduce((acc: number, item: ITrasaction) => acc + item.valor, 0)
-)
 
 export const { addTransaction, setExtrato } = transactionsSlice.actions
 
