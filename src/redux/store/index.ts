@@ -4,7 +4,7 @@ import saldos from '@/redux/features/slices/saldos'
 import user from '@/redux/features/slices/user'
 
 const reducer = {
-  transactions: transactions,
+  transactions,
   saldos,
   user
 }

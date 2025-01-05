@@ -17,10 +17,10 @@ const types = {
 
 export const useSaldo = (type: Type = 'cc') => {
   const [loading, setLoading] = useState(true)
-  const { transactions, saldos } = useSelector((state: any) => state)
-  const { extrato } = transactions
+  const { extrato } = useSelector((state: any) => state.transactions)
+  const { saldo } = useSelector((state: any) => state.saldos)
   const dispatch = useDispatch()
-  const [saldoAtualizado, updateSaldo] = useState(saldos.saldo)
+  const [saldoAtualizado, updateSaldo] = useState(saldo)
 
   useEffect(() => {
     fetchGetSaldo()(dispatch)
@@ -28,21 +28,21 @@ export const useSaldo = (type: Type = 'cc') => {
 
   useEffect(() => {
     setLoading(true)
-    !!extrato.length && types[type](saldos.saldo)(dispatch)
+    !!extrato.length && types[type](saldo)(dispatch)
   }, [extrato])
 
   useEffect(() => {
-    if (!!saldos.saldo.length) {
-      updateSaldo(saldos.saldo)
+    if (!!saldo.length) {
+      updateSaldo(saldo)
       setLoading(false)
     }
-  }, [saldos.saldo])
+  }, [saldo])
 
   return {
     loading,
     saldo: saldoAtualizado,
     saldoCC: saldoAtualizado.find((item: ISaldo) => item.tipo === 'Conta corrente'),
     saldoCP: saldoAtualizado.find((item: ISaldo) => item.tipo === 'Conta poupança'),
-    getSaldoCC: () => fetchGetSaldoCC(saldos.saldo)(dispatch)
+    getSaldoCC: () => fetchGetSaldoCC(saldo)(dispatch)
   }
 }

@@ -1,6 +1,6 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
-interface ISaldo {
+export interface ISaldo {
   id: string
   tipo: string
   valor: number
@@ -34,16 +34,6 @@ const saldosSlice = createSlice({
     }
   }
 })
-
-export const totalSaldo = createSelector(
-  (state: ISaldoState) => state.saldo,
-  (saldo: ISaldo[]) => saldo.reduce((acc, item) => acc + item.valor, 0)
-)
-
-export const saldoCC = createSelector(
-  (state: ISaldoState) => state.saldo,
-  (saldo: ISaldo[]) => saldo.filter(item => item.tipo === 'Conta corrente')
-)
 
 export const { updateSaldo, updateSaldoTotal } = saldosSlice.actions
 

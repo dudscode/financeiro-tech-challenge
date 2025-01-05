@@ -45,7 +45,11 @@ export const Modal = ({
           <S.Item>
             <SelectTypeTransaction
               callback={(value: string) =>
-                setItem({ ...item, tipo: getTransactionType[value as keyof typeof getTransactionType] || 'deposit' })
+                setItem({
+                  ...item,
+                  valor: value === 'deposit' ? Math.abs(item.valor) : parseInt(`-${Math.abs(item.valor)}`),
+                  tipo: getTransactionType[value as keyof typeof getTransactionType] || 'deposit'
+                })
               }
               size='100%'
               initialValue={item.tipo ? getTransactionTypeValue[item.tipo] : 'deposit'}
