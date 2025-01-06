@@ -8,7 +8,7 @@ import useIsTablet from '@/hooks/useIsTablet'
 import useIsMobile from '@/hooks/useIsMobile'
 import useCurrencyFormatter from '@/hooks/useCurrencyFormatter'
 import { useAuth } from '@/hooks/useAuth'
-
+import { TransactionType } from '@/config/transactions'
 interface Auth {
   userName?: string
   access: boolean
@@ -16,7 +16,7 @@ interface Auth {
 }
 
 interface Saldo {
-  tipo: string
+  tipo: TransactionType
   valor: number
 }
 

@@ -7,6 +7,7 @@ import { formatCurrency } from '@/components/Extrato/utils'
 import { Modal } from '@/components/Extrato/components/Modal'
 import { ButtonEdit, ButtonDelete } from '@/components/Extrato/components/Buttons'
 import { useTransaction } from '@/hooks/useTransaction'
+import transactionsType from '@/config/transactions'
 
 export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
   useTransaction()
@@ -31,7 +32,9 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
                   </S.ButtonContainer>
                 </S.TextContainer>
                 <S.TextContainer>
-                  <S.Paragraph txt='16px'>{item.tipo}</S.Paragraph>
+                  <S.Paragraph txt='16px'>
+                    {transactionsType.find(({ value }) => item.tipo === value)?.label}
+                  </S.Paragraph>
                   <S.Paragraph txt='13px' type='info'>
                     {item.data}
                   </S.Paragraph>

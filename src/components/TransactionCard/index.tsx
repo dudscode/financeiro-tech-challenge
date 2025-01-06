@@ -6,12 +6,14 @@ import GreyCard from '../CardGrey'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { formatCurrency } from '@/components/TransactionCard/utils'
+import transactionsType from '@/config/transactions'
+import { TransactionType } from '@/config/transactions'
 export interface ITransactionCardProps {
-  onTransactionSubmit: (type: 'deposit' | 'transfer', amount: number) => void
+  onTransactionSubmit: (type: TransactionType, amount: number) => void
 }
 
 export const TransactionCard: React.FC<ITransactionCardProps> = ({ onTransactionSubmit }) => {
-  const [transactionType, setTransactionType] = useState<'deposit' | 'transfer' | ''>('')
+  const [transactionType, setTransactionType] = useState<TransactionType | ''>('')
   const [amount, setAmount] = useState<string>('')
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,15 +44,20 @@ export const TransactionCard: React.FC<ITransactionCardProps> = ({ onTransaction
             <FormControl fullWidth margin='normal'>
               <Select
                 value={transactionType}
-                onChange={e => setTransactionType(e.target.value as 'deposit' | 'transfer')}
+                onChange={e => setTransactionType(e.target.value as TransactionType)}
                 displayEmpty
                 fullWidth
               >
                 <MenuItem value='' disabled>
                   Selecione o tipo de transação
                 </MenuItem>
-                <MenuItem value='deposit'>Depósito</MenuItem>
-                <MenuItem value='transfer'>Transferência</MenuItem>
+                {transactionsType.map((transaction, index) => {
+                  return (
+                    <MenuItem key={index} value={transaction.value}>
+                      {transaction.label}
+                    </MenuItem>
+                  )
+                })}
               </Select>
             </FormControl>
           </Grid>

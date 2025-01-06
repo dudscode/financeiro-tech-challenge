@@ -1,15 +1,10 @@
 import axios from 'axios'
 import { Dispatch } from 'redux'
 import { updateSaldo } from '@/redux/features/slices/saldos'
+import { ISaldo } from '@/redux/features/slices/saldos'
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001' || 'https://json-server-vercel-tawny-one.vercel.app'
-
-interface ISaldo {
-  id: string
-  tipo: string
-  valor: number
-}
 
 export const fetchGetSaldo = () => {
   return async (dispatch: Dispatch) => {
