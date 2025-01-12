@@ -3,16 +3,7 @@ import { DialogModal } from '@/components/Dialog'
 import { ITransacao, TypeProps } from '@/components/Extrato/types'
 import { formatCurrencyWithoutNegative } from '@/components/Extrato/utils'
 import * as S from '@/components/Extrato/styles'
-
-const getTransactionType = {
-  deposit: 'Depósito',
-  transfer: 'Transferência'
-} as const
-
-const getTransactionTypeValue = {
-  Depósito: 'deposit',
-  Transferência: 'transfer'
-} as const
+import { TransactionType } from '@/config/transactions'
 
 export const Modal = ({
   item,
@@ -23,7 +14,7 @@ export const Modal = ({
 }: {
   item: ITransacao
   type: 'deleted' | 'edit'
-  setItem: React.Dispatch<React.SetStateAction<ITransacao>>
+  setItem: (item: ITransacao) => void
   openModal: boolean
   fetchData: (mode: TypeProps, value?: string) => void
 }) => {
@@ -44,15 +35,15 @@ export const Modal = ({
         <S.List>
           <S.Item>
             <SelectTypeTransaction
-              callback={(value: string) =>
+              callback={(value: TransactionType) =>
                 setItem({
                   ...item,
-                  valor: value === 'deposit' ? Math.abs(item.valor) : parseInt(`-${Math.abs(item.valor)}`),
-                  tipo: getTransactionType[value as keyof typeof getTransactionType] || 'deposit'
+                  valor: item.valor,
+                  tipo: value
                 })
               }
               size='100%'
-              initialValue={item.tipo ? getTransactionTypeValue[item.tipo] : 'deposit'}
+              initialValue={item.tipo}
             />
           </S.Item>
         </S.List>

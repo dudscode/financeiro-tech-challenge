@@ -5,6 +5,7 @@ import { updateSaldo } from '@/redux/features/slices/saldos'
 import { ITransacao } from '@/components/Extrato/types'
 import { toast } from 'react-toastify'
 import { ISaldo } from '@/redux/features/slices/saldos'
+import transactionsType from '@/config/transactions'
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001' || 'https://json-server-vercel-tawny-one.vercel.app'
@@ -29,7 +30,13 @@ export const fetchGetExtrato = () => {
 
 export const fetchEditData = (item: ITransacao, saldos: [ISaldo]) => {
   return async (dispatch: Dispatch) => {
-    const dataEdit = await axios.put(`${API_URL}/extrato/${item.id}`, item)
+    await axios.put(`${API_URL}/extrato/${item.id}`, {
+      ...item,
+      valor:
+        transactionsType.find(({ value }) => value === item.tipo)?.action === 'sum'
+          ? Math.abs(item.valor)
+          : -Math.abs(item.valor)
+    })
     Promise.all([
       axios.get(`${API_URL}/extrato`),
       axios.get(`${API_URL}/saldo`, { params: { tipo: 'Conta corrente' } })
@@ -54,7 +61,7 @@ export const fetchEditData = (item: ITransacao, saldos: [ISaldo]) => {
 
 export const fetchDeleteData = (item: ITransacao, saldos: [ISaldo]) => {
   return async (dispatch: Dispatch) => {
-    const dataEdit = await axios.delete(`${API_URL}/extrato/${item.id}`)
+    await axios.delete(`${API_URL}/extrato/${item.id}`)
     Promise.all([
       axios.get(`${API_URL}/extrato`),
       axios.get(`${API_URL}/saldo`, { params: { tipo: 'Conta corrente' } })

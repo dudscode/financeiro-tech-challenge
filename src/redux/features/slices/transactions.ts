@@ -1,14 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
-
-interface ITrasaction {
-  mes: string
-  tipo: string
-  data: string
-  valor: number
-}
+import { ITransacao } from '@/components/Extrato/types'
 
 interface IExtratoState {
-  extrato: ITrasaction[]
+  extrato: ITransacao[]
 }
 
 const initialState: IExtratoState = {
@@ -19,13 +13,13 @@ const transactionsSlice = createSlice({
   name: 'transactions',
   initialState,
   reducers: {
-    addTransaction: (state, action: { payload: ITrasaction }) => {
+    addTransaction: (state, action: { payload: ITransacao }) => {
       return {
         ...state,
         extrato: [...state.extrato, action.payload]
       }
     },
-    setExtrato: (state, action: { payload: ITrasaction[] }) => {
+    setExtrato: (state, action: { payload: ITransacao[] }) => {
       return {
         ...state,
         extrato: action.payload

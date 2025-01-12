@@ -3,18 +3,15 @@ import axios from 'axios'
 import { addTransaction } from '@/redux/features/slices/transactions'
 import { updateSaldo } from '@/redux/features/slices/saldos'
 import { toast } from 'react-toastify'
+import transactionsType, { TransactionType } from '@/config/transactions'
+import { ISaldo } from '@/redux/features/slices/saldos'
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001' || 'https://json-server-vercel-tawny-one.vercel.app'
-interface ISaldo {
-  id: string
-  tipo: string
-  valor: number
-}
 
 interface Transaction {
   mes: string
-  tipo: string
+  tipo: TransactionType
   data: string
   valor: number
 }
@@ -24,12 +21,12 @@ const formatMonth = () => {
   return data.charAt(0).toUpperCase() + data.slice(1)
 }
 
-export const fetchSendTransaction = (type: string, amount: number, saldo: ISaldo[]) => {
+export const fetchSendTransaction = (type: TransactionType, amount: number, saldo: ISaldo[]) => {
   const transaction: Transaction = {
     mes: formatMonth(),
-    tipo: type === 'deposit' ? 'Depósito' : 'Transferência',
+    tipo: type,
     data: new Date().toLocaleDateString(),
-    valor: type === 'transfer' ? -amount : amount
+    valor: transactionsType.find(({ value }) => value === type)?.action === 'sum' ? amount : -amount
   }
 
   return async (dispatch: Dispatch) => {
@@ -54,7 +51,7 @@ export const fetchSendTransaction = (type: string, amount: number, saldo: ISaldo
             console.error('Error updating saldo data:', error)
           })
       })
-      .catch(error => {
+      .catch(() => {
         toast.error('Erro ao efetuar transação. Tente novamente.')
       })
       .finally(() => {

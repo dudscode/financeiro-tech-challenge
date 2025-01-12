@@ -1,3 +1,4 @@
+import { TransactionType } from '@/config/transactions'
 export interface IExtratoProps {
   title: string
 }
@@ -7,7 +8,7 @@ export type TypeProps = 'deleted' | 'edit'
 export interface ITransacao {
   mes: string
   data: string
-  tipo: 'Depósito' | 'Transferência' | undefined
+  tipo: TransactionType
   valor: number
   id: string
 }

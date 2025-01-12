@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchGetSaldo, fetchGetSaldoCC, fetchGetSaldoCP } from '@/redux/features/actions/saldos'
-
-interface ISaldo {
-  id: string
-  tipo: string
-  valor: number
-}
+import { ISaldo } from '@/redux/features/slices/saldos'
 
 type Type = 'cc' | 'cp'
 

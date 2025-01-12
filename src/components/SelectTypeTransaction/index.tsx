@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { MenuItem, Select, FormControl } from '@mui/material'
+import transactionsType from '@/config/transactions'
+import { TransactionType } from '@/config/transactions'
 
 interface SelectTypeTransactionProps {
-  callback: (value: string) => void
+  callback: (value: TransactionType) => void
   size?: string
-  initialValue?: 'deposit' | 'transfer'
+  initialValue?: TransactionType
 }
 
 export const SelectTypeTransaction: React.FC<SelectTypeTransactionProps> = ({ callback, size, initialValue }) => {
-  const [transactionType, setTransactionType] = useState<'deposit' | 'transfer' | ''>(initialValue || '')
+  const [transactionType, setTransactionType] = useState<TransactionType | ''>(initialValue || '')
 
   useEffect(() => {
     if (initialValue) {
@@ -17,7 +19,7 @@ export const SelectTypeTransaction: React.FC<SelectTypeTransactionProps> = ({ ca
   }, [initialValue])
 
   const selected = (e: any) => {
-    setTransactionType(e.target.value as 'deposit' | 'transfer')
+    setTransactionType(e.target.value as TransactionType)
     callback(e.target.value)
   }
 
@@ -27,8 +29,13 @@ export const SelectTypeTransaction: React.FC<SelectTypeTransactionProps> = ({ ca
         <MenuItem value='' disabled>
           Selecione o tipo de transação
         </MenuItem>
-        <MenuItem value='deposit'>Depósito</MenuItem>
-        <MenuItem value='transfer'>Transferência</MenuItem>
+        {transactionsType.map((transaction, index) => {
+          return (
+            <MenuItem key={index} value={transaction.value}>
+              {transaction.label}
+            </MenuItem>
+          )
+        })}
       </Select>
     </FormControl>
   )

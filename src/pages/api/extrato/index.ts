@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
+import { TransactionType } from '@/config/transactions'
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001' || 'https://json-server-vercel-tawny-one.vercel.app'
