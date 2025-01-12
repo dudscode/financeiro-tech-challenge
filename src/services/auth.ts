@@ -7,34 +7,37 @@ export type User = {
   checked: boolean
 }
 
-const setSessionStorage = (data: User[]) => {
-  sessionStorage.setItem(
-    'auth',
-    JSON.stringify({
-      email: data?.[0]?.email,
-      accessToken: data?.[0]?.id,
-      accessTokenExpiresAt: new Date().getTime() + 1000 * 60 * 60 * 24,
-      access: true,
-      userName: data?.[0]?.name
-    })
-  )
+const setSessionStorage = (data: string, name: string) => {
+  sessionStorage.setItem(name, data)
 }
-
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001' || 'https://json-server-vercel-tawny-one.vercel.app'
 
 export const initialUserAuth = async (email: string, password: string) => {
   try {
-    const response = await axios.get(
-      `${API_URL}/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+    const response = await axios.post(`/api/user/auth`, {
+      email,
+      password
+    })
+    console.log('response: ', response)
+
+    setSessionStorage(
+      JSON.stringify({
+        email: response.data.result.user.email,
+        accessToken: response.data.result.user.id,
+        accessTokenExpiresAt: new Date().getTime() + 1000 * 60 * 60 * 24,
+        access: true,
+        userName: response.data.result.user.name
+      }),
+      'auth'
     )
-    if (!response?.data?.length) {
-      throw new Error('Usuário não encontrado')
-    }
-    setSessionStorage(response.data)
+    setSessionStorage(response.data.result.token, 'token')
     return { access: true, message: 'Usuário autenticado com sucesso', error: false, loading: false }
   } catch (error) {
     sessionStorage.removeItem('auth')
-    return { access: false, message: error?.toString() || 'Erro ao autenticar usuário', error: true, loading: false }
+    return {
+      access: false,
+      message: (error as any)?.response?.data?.message || 'Erro ao autenticar usuário',
+      error: true,
+      loading: false
+    }
   }
 }

@@ -47,7 +47,7 @@ export const Message = styled(FormHelperText)`
     font-size: 14px;
     margin: 0;
     position: absolute;
-    bottom: -31px;
+    bottom: -22px;
     left: 0;
   `}
 `

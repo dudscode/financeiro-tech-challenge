@@ -32,6 +32,7 @@ export function POST(_req: NextApiRequest, res: NextApiResponse<{ result?: any; 
       res.status(200).json({
         message: 'Usuário autenticado com sucesso.',
         result: {
+          user: user.data[0],
           token: auth.data[0].token
         }
       })
