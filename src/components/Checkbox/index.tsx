@@ -45,8 +45,9 @@ export const Checkbox = ({ list, error = false, errorMessage, callback }: InputP
   const status = error ? 'error' : undefined
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>, id: string) => {
-    setChecked(checked.map(item => ({ ...item, checked: item.id === id ? event.target.checked : item.checked })))
-    callback && callback(checked)
+    const check = checked.map(item => ({ ...item, checked: item.id === id ? event.target.checked : item.checked }))
+    setChecked(check)
+    callback && callback(check)
   }
 
   if (!list.length) {

@@ -18,19 +18,19 @@ export const Login = ({ isOpen, callback }: LoginProps) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const submit = async (e: { preventDefault: () => void }) => {
-    e.preventDefault()
+  const submit = async () => {
     if (!!email && !!password) {
       setLoading(true)
-      const result = await login(email, password)
-      setLoading(result.loading)
-      if (!result.access) {
-        setAccess(result)
-        return
-      }
-      setPassword('')
-      setEmail('')
-      window.location.href = '/dashboard'
+      login(email, password).then(data => {
+        setLoading(false)
+        if (!data.access) {
+          setAccess(data)
+          return
+        }
+        setPassword('')
+        setEmail('')
+        window.location.href = '/dashboard'
+      })
     }
   }
 
@@ -38,16 +38,17 @@ export const Login = ({ isOpen, callback }: LoginProps) => {
     <FullModal initialState={false} state={isOpen} callback={callback}>
       <S.Image src='images/cadastro.png' />
       <S.Text>Login</S.Text>
-      <S.FormContainer onSubmit={submit}>
+      <S.FormContainer>
         <Input
           label='Email'
           placeholder='Digite seu email'
           onChange={setEmail}
           message={access.message}
           error={!!access.error}
+          value={email}
         />
         <S.InputContainer>
-          <Input label='Senha' placeholder='Digite sua senha' type='password' onChange={setPassword} />
+          <Input label='Senha' placeholder='Digite sua senha' type='password' onChange={setPassword} value={password} />
           <S.Link
             underline='always'
             onClick={() => {
@@ -57,7 +58,7 @@ export const Login = ({ isOpen, callback }: LoginProps) => {
             Esqueci a senha!
           </S.Link>
         </S.InputContainer>
-        <Button size='large' color='success' type='submit' disabled={loading || !(email && password)}>
+        <Button size='large' color='success' type='button' disabled={loading || !(email && password)} onClick={submit}>
           {loading ? 'Loading...' : 'Acessar'}
         </Button>
       </S.FormContainer>

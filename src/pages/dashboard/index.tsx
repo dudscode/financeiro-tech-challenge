@@ -3,7 +3,6 @@
 import Base from '@/templates/Base'
 import { BalanceCard } from '@/components/BalanceCard'
 import { TransactionCard } from '@/components/TransactionCard'
-import 'react-toastify/dist/ReactToastify.css'
 import { useSaldo } from '@/hooks/useSaldo'
 import { useTransaction } from '@/hooks/useTransaction'
 // import { useEffect } from 'react'
@@ -21,7 +20,6 @@ export default function Home() {
   //     data: '12/01/2025',
   //     valor: -10
   //   }
-
   // axios
   //   .get(`/api/account`)
   //   .then(data => {
@@ -60,7 +58,7 @@ export default function Home() {
   //   })
   // axios
   //   .post(`/api/user/auth`, {
-  //     email: 'teste@gmail.com',
+  //     email: 't2este@gmail.com',
   //     password: 'testes'
   //   })
   //   .then(data => {

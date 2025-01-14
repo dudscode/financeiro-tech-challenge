@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { throwMethodNotAllowed } from '@/modulos/common/server/error'
-import Api from '@/modulos/common/server/api'
+import axios from 'axios'
+import { API_URL } from '@/modulos/common/server/api'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req
@@ -24,7 +25,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 export function POST(_req: NextApiRequest, res: NextApiResponse<{ result?: any; status?: string; message?: string }>) {
   const body = _req.body
 
-  Promise.all([Api.get(`/user?email=${body.email}&password=${body.password}`), Api.get(`/auth`)])
+  Promise.all([
+    axios.get(`${API_URL}/user?email=${body.email}&password=${body.password}`),
+    axios.get(`${API_URL}/auth`)
+  ])
     .then(([user, auth]) => {
       if (user.data.length === 0) {
         throw new Error('Usuário não encontrado.')
