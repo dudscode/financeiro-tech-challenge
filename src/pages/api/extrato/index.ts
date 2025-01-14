@@ -21,18 +21,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
   res.status(200).json({ name: 'ok' })
 }
 
-export async function GET() {
+export async function GET(req: NextApiRequest) {
   try {
-    const response = await axios.get(`${API_URL}/extrato`)
-    const extrato: ExtratoItem[] = response.data.map((item: ExtratoItem) => {
-      if (item.tipo === 'Transferência') {
-        item.valor = -Math.abs(item.valor)
-      } else if (item.tipo === 'Depósito') {
-        item.valor = Math.abs(item.valor)
-      }
-      return item
-    })
-    return NextResponse.json(extrato)
+    const page = req.query.page || 1 // Página padrão é 1
+
+    // Realiza a chamada ao JSON Server
+    const response = await axios.get(`${API_URL}/extrato?_page=${page}`)
+
+    // JSON Server já retorna o objeto com metadados e dados paginados
+    return NextResponse.json(response.data)
   } catch (error) {
     console.error('Error fetching extrato data:', error)
     return NextResponse.json({ error: (error as Error).message }, { status: 500 })

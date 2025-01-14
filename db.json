@@ -12,15 +12,134 @@
     {
       "id": "7e09",
       "mes": "Dezembro",
-      "tipo": "Depósito",
+      "tipo": "transfer",
       "data": "09/12/2024",
-      "valor": 1000
+      "valor": -1000
+    },
+    {
+      "id": "b8f8",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.02
+    },
+    {
+      "id": "d834",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.03
+    },
+    {
+      "id": "ac89",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.04
+    },
+    {
+      "id": "044b",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.05
+    },
+    {
+      "id": "eaed",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.06
+    },
+    {
+      "id": "9e6b",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.07
+    },
+    {
+      "id": "afdf",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.08
+    },
+    {
+      "id": "cefd",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.09
+    },
+    {
+      "id": "565f",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.1
+    },
+    {
+      "id": "8a5d",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.11
+    },
+    {
+      "id": "bbec",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.12
+    },
+    {
+      "id": "f8ee",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.13
+    },
+    {
+      "id": "fcff",
+      "mes": "Janeiro",
+      "tipo": "transfer",
+      "data": "1/14/2025",
+      "valor": -0.13
+    },
+    {
+      "id": "5309",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.14
+    },
+    {
+      "id": "cc26",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.15
+    },
+    {
+      "id": "fbf3",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.15
+    },
+    {
+      "id": "3e01",
+      "mes": "Janeiro",
+      "tipo": "transfer",
+      "data": "1/14/2025",
+      "valor": -0.16
     }
   ],
   "saldo": [
     {
       "tipo": "Conta corrente",
-      "valor": 1000,
+      "valor": -999.09,
       "id": "1"
     },
     {

@@ -12,15 +12,33 @@ const API_URL =
 
 const mountValue = (response: [ITransacao]) => response.reduce((current, acc) => acc.valor + current, 0)
 
-export const fetchGetExtrato = () => {
+// export const fetchGetExtrato = () => {
+//   return async (dispatch: Dispatch) => {
+//     axios
+//       .get(`${API_URL}/extrato`)
+//       .then(extrato => {
+//         dispatch(setExtrato(extrato.data))
+//       })
+//       .catch(error => {
+//         console.error('Error fetching saldo data:', error)
+//       })
+//       .finally(() => {
+//         console.log('Extrato fetched!')
+//       })
+//   }
+// }
+
+export const fetchGetExtrato = (page = 1) => {
   return async (dispatch: Dispatch) => {
     axios
-      .get(`${API_URL}/extrato`)
-      .then(extrato => {
-        dispatch(setExtrato(extrato.data))
+      .get(`${API_URL}/extrato`, { params: { _page: page } })
+      .then(response => {
+        dispatch(setExtrato(response.data.data)) // Supondo que você pega apenas os dados
+        // Você pode também armazenar metadados se necessário
       })
       .catch(error => {
-        console.error('Error fetching saldo data:', error)
+        console.error('Error fetching extrato data:', error)
+        toast.error('Erro ao buscar dados do extrato.')
       })
       .finally(() => {
         console.log('Extrato fetched!')
