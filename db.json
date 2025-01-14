@@ -128,12 +128,20 @@
       "data": "1/14/2025",
       "valor": 0.14,
       "timestamp": "2025-01-14T21:04:21.799Z"
+    },
+    {
+      "id": "421e",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.15,
+      "timestamp": "2025-01-14T21:35:59.126Z"
     }
   ],
   "saldo": [
     {
       "tipo": "Conta corrente",
-      "valor": -998.0400000000001,
+      "valor": -997.8900000000001,
       "id": "1"
     },
     {

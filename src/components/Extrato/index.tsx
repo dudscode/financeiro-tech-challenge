@@ -10,13 +10,12 @@ import { useTransaction } from '@/hooks/useTransaction'
 import transactionsType from '@/config/transactions'
 
 export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
-  const { getExtrato, page } = useTransaction() // Inclui `getExtrato` e `page` para controle de paginação
+  const { getExtrato, page } = useTransaction()
   const { extrato, loading, fetchData, openModal, onEdit, onDelete, item, setItem } = useExtrato()
   const hasExtrato = !!extrato.length
 
   const handlePageChange = (newPage: number) => {
     if (newPage > 0) {
-      // Certifique-se de que a página é válida (não negativa)
       getExtrato(newPage)
     }
   }
@@ -54,7 +53,6 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
         )}
         {!loading && !hasExtrato && <S.Paragraph txt='16px'>Não existe nenhum extrato</S.Paragraph>}
 
-        {/* Paginação */}
         <S.PaginationContainer>
           <S.PaginationButton onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
             Anterior
