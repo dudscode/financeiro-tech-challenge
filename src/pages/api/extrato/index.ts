@@ -23,12 +23,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
 export async function GET(req: NextApiRequest) {
   try {
-    const page = req.query.page || 1 // Página padrão é 1
+    const page = req.query.page || 1
 
-    // Realiza a chamada ao JSON Server
     const response = await axios.get(`${API_URL}/extrato?_page=${page}`)
 
-    // JSON Server já retorna o objeto com metadados e dados paginados
     return NextResponse.json(response.data)
   } catch (error) {
     console.error('Error fetching extrato data:', error)

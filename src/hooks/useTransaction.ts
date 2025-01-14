@@ -7,22 +7,20 @@ import { TransactionType } from '@/config/transactions'
 export const useTransaction = () => {
   const dispatch = useDispatch()
   const { saldo } = useSelector((state: any) => state.saldos)
-  const [page, setPage] = useState(1) // Estado para controlar a página atual
+  const [page, setPage] = useState(1)
 
   const sendTransaction = (type: TransactionType, amount: number) => {
     fetchSendTransaction(type, amount, saldo)(dispatch)
   }
 
-  // Função para obter o extrato de uma página específica
   const getExtrato = useCallback(
     (pageNumber: number) => {
-      setPage(pageNumber) // Atualiza o estado da página atual
+      setPage(pageNumber)
       fetchGetExtrato(pageNumber)(dispatch)
     },
     [dispatch]
   )
 
-  // Carrega a primeira página de extrato quando o componente é montado
   useEffect(() => {
     getExtrato(1)
   }, [getExtrato])
