@@ -106,3 +106,28 @@ export const ButtonContainer = styled('div')`
   align-items: center;
   gap: 8px;
 `
+export const PaginationContainer = styled('div')`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  gap: 24px;
+`
+
+export const PaginationButton = styled('button')`
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  &:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+  }
+`
+
+export const PageIndicator = styled('div')`
+  font-size: 16px;
+  font-weight: bold;
+`

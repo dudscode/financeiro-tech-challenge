@@ -12,15 +12,136 @@
     {
       "id": "7e09",
       "mes": "Dezembro",
-      "tipo": "Depósito",
+      "tipo": "transfer",
       "data": "09/12/2024",
-      "valor": 1000
+      "valor": -1000,
+      "timestamp": "2024-12-09T20:35:06.705Z"
+    },
+    {
+      "id": "3380",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.01,
+      "timestamp": "2025-01-14T20:42:43.603Z"
+    },
+    {
+      "id": "a74d",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.02,
+      "timestamp": "2025-01-14T20:42:48.907Z"
+    },
+    {
+      "id": "e339",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.03,
+      "timestamp": "2025-01-14T20:42:51.706Z"
+    },
+    {
+      "id": "b182",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.04,
+      "timestamp": "2025-01-14T20:42:54.290Z"
+    },
+    {
+      "id": "cedb",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.05,
+      "timestamp": "2025-01-14T20:42:57.256Z"
+    },
+    {
+      "id": "2f10",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.06,
+      "timestamp": "2025-01-14T20:43:00.323Z"
+    },
+    {
+      "id": "d70e",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.07,
+      "timestamp": "2025-01-14T20:43:04.657Z"
+    },
+    {
+      "id": "5e73",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.08,
+      "timestamp": "2025-01-14T20:43:08.023Z"
+    },
+    {
+      "id": "d268",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.09,
+      "timestamp": "2025-01-14T20:43:11.192Z"
+    },
+    {
+      "id": "6a4a",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.1,
+      "timestamp": "2025-01-14T20:43:16.522Z"
+    },
+    {
+      "id": "1479",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.11,
+      "timestamp": "2025-01-14T20:43:26.944Z"
+    },
+    {
+      "id": "7ab4",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.12,
+      "timestamp": "2025-01-14T20:48:42.924Z"
+    },
+    {
+      "id": "3f83",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.13,
+      "timestamp": "2025-01-14T21:04:10.001Z"
+    },
+    {
+      "id": "cf8d",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.14,
+      "timestamp": "2025-01-14T21:04:21.799Z"
+    },
+    {
+      "id": "421e",
+      "mes": "Janeiro",
+      "tipo": "deposit",
+      "data": "1/14/2025",
+      "valor": 0.15,
+      "timestamp": "2025-01-14T21:35:59.126Z"
     }
   ],
   "saldo": [
     {
       "tipo": "Conta corrente",
-      "valor": 1000,
+      "valor": -997.8900000000001,
       "id": "1"
     },
     {

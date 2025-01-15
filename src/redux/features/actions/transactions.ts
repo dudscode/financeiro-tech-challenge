@@ -14,6 +14,7 @@ interface Transaction {
   tipo: TransactionType
   data: string
   valor: number
+  timestamp: string
 }
 
 const formatMonth = () => {
@@ -26,7 +27,8 @@ export const fetchSendTransaction = (type: TransactionType, amount: number, sald
     mes: formatMonth(),
     tipo: type,
     data: new Date().toLocaleDateString(),
-    valor: transactionsType.find(({ value }) => value === type)?.action === 'sum' ? amount : -amount
+    valor: transactionsType.find(({ value }) => value === type)?.action === 'sum' ? amount : -amount,
+    timestamp: new Date().toISOString()
   }
 
   return async (dispatch: Dispatch) => {
