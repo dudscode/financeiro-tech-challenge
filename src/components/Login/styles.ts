@@ -16,7 +16,7 @@ export const Text = styled('p')`
   `}
 `
 
-export const FormContainer = styled('form')`
+export const FormContainer = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
