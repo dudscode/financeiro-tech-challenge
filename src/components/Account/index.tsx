@@ -9,18 +9,17 @@ export const Account = () => {
   const handleRedirect = () => {
     router.push('/minha-conta')
   }
-  const [userName, setUserName] = useState('Nome do usuario logado');
+  const [userName, setUserName] = useState('Nome do usuario logado')
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const auth = sessionStorage.getItem('auth');
+      const auth = sessionStorage.getItem('auth')
       if (auth) {
-        const name = JSON.parse(auth).userName;
-        setUserName(name);
+        const name = JSON.parse(auth).userName
+        setUserName(name)
       }
-    };
-
-  }, []);
+    }
+  }, [])
 
   return (
     <S.Container>

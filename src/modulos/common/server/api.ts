@@ -3,7 +3,11 @@ import axios from 'axios'
 export const API_URL =
   process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001' || 'https://json-server-vercel-tawny-one.vercel.app'
 
-const getToken = () => sessionStorage.getItem('token') || ''
+const getToken = () => {
+  if (typeof window !== 'undefined') {
+    window.sessionStorage.getItem('token') || ''
+  }
+}
 
 const getBearerToken = () => `Bearer ${getToken()}`
 

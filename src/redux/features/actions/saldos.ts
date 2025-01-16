@@ -9,9 +9,9 @@ const API_URL =
 export const fetchGetSaldo = () => {
   return async (dispatch: Dispatch) => {
     axios
-      .get(`${API_URL}/saldo`)
+      .get(`/api/balance`)
       .then(saldo => {
-        dispatch(updateSaldo(saldo.data))
+        dispatch(updateSaldo(saldo.data.result))
       })
       .catch(error => {
         console.error('Error fetching saldo data:', error)

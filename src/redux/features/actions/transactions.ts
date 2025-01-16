@@ -39,7 +39,7 @@ export const fetchSendTransaction = (type: TransactionType, amount: number, sald
       .then(([transaction, saldos]) => {
         dispatch(addTransaction(transaction.data))
         axios
-          .put<ISaldo>(`${API_URL}/saldo/1`, {
+          .put<ISaldo>(`/api/saldo/1`, {
             ...saldos.data[0],
             valor: transaction.data.valor + saldos.data[0].valor
           })
