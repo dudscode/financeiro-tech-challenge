@@ -52,7 +52,6 @@ export const fetchGetSaldoCC = (saldo: [ISaldo]) => {
         const saldoAtualizado: [ISaldo] = saldo.map(item => (item.tipo !== 'Conta corrente' ? item : saldoCC)) as [
           ISaldo
         ]
-        console.log('saldoAtualizado: ', saldoAtualizado)
         dispatch(updateSaldo(saldoAtualizado))
       })
       .catch(error => {

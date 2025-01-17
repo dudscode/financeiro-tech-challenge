@@ -35,7 +35,7 @@ export const useExtrato = () => {
 
   const fetchData = async (type: TypeProps, value?: string) => {
     if (!!value) {
-      await fn[type](item, saldo)(dispatch)
+      await fn[type](item)(dispatch)
     }
     setOpenModal({ status: false, type: 'edit' })
   }

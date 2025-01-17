@@ -33,29 +33,45 @@ export const fetchSendTransaction = (type: TransactionType, amount: number, sald
 
   return async (dispatch: Dispatch) => {
     const tipo = encodeURIComponent('Conta corrente')
-    Promise.all([axios.post(`${API_URL}/extrato`, transaction), axios.get(`/api/balance?tipo=${tipo}`)])
-      .then(([transaction, saldos]) => {
-        dispatch(addTransaction(transaction.data))
+    await axios
+      .get(`/api/balance?tipo=${tipo}`)
+      .then(saldos => {
+        const saldoCC = saldos.data.result[0]
+        const result = transaction.valor + saldoCC.valor
+        const hasSum = transactionsType.find(({ value }) => value === type)?.action === 'sum'
+        if (result < 0 && !hasSum) {
+          toast.error('Saldo insuficiente')
+          new Error('Saldo insuficiente')
+          return
+        }
         axios
-          .put(`/api/balance/1`, {
-            ...saldos.data.result[0],
-            valor: transaction.data.valor + saldos.data.result[0].valor
+          .post(`${API_URL}/extrato`, transaction)
+          .then(transaction => {
+            dispatch(addTransaction(transaction.data))
+            axios
+              .put(`/api/balance/1`, {
+                ...saldos.data.result[0],
+                valor: transaction.data.valor + saldos.data.result[0].valor
+              })
+              .then(saldoUpdate => {
+                const novoSaldo: [ISaldo] = saldo.map((item: ISaldo) =>
+                  item.tipo === 'Conta poupança' ? item : saldoUpdate.data.result
+                ) as [ISaldo]
+                dispatch(updateSaldo(novoSaldo))
+              })
+              .catch(error => {
+                console.error('Error updating saldo data:', error)
+              })
           })
-          .then(saldoUpdate => {
-            const novoSaldo: [ISaldo] = saldo.map((item: ISaldo) =>
-              item.tipo === 'Conta poupança' ? item : saldoUpdate.data.result
-            ) as [ISaldo]
-            dispatch(updateSaldo(novoSaldo))
+          .catch(() => {
+            toast.error('Erro ao efetuar transação. Tente novamente.')
           })
-          .catch(error => {
-            console.error('Error updating saldo data:', error)
+          .finally(() => {
+            toast.success('Transação efetuada com sucesso!')
           })
       })
-      .catch(() => {
-        toast.error('Erro ao efetuar transação. Tente novamente.')
-      })
-      .finally(() => {
-        toast.success('Transação efetuada com sucesso!')
+      .catch(error => {
+        console.error('Saldo insuficiente')
       })
   }
 }
