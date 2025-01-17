@@ -30,7 +30,6 @@ export function GET(_req: NextApiRequest, res: NextApiResponse<{ result?: any; s
       })
     })
     .catch(error => {
-      console.log('error: ', error)
       res.status(500).json({ status: 'error', message: error.message })
     })
 }

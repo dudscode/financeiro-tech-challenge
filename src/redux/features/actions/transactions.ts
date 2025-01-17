@@ -32,20 +32,18 @@ export const fetchSendTransaction = (type: TransactionType, amount: number, sald
   }
 
   return async (dispatch: Dispatch) => {
-    Promise.all([
-      axios.post(`${API_URL}/extrato`, transaction),
-      axios.get(`${API_URL}/saldo`, { params: { tipo: 'Conta corrente' } })
-    ])
+    const tipo = encodeURIComponent('Conta corrente')
+    Promise.all([axios.post(`${API_URL}/extrato`, transaction), axios.get(`/api/balance?tipo=${tipo}`)])
       .then(([transaction, saldos]) => {
         dispatch(addTransaction(transaction.data))
         axios
-          .put<ISaldo>(`/api/saldo/1`, {
-            ...saldos.data[0],
-            valor: transaction.data.valor + saldos.data[0].valor
+          .put(`/api/balance/1`, {
+            ...saldos.data.result[0],
+            valor: transaction.data.valor + saldos.data.result[0].valor
           })
           .then(saldoUpdate => {
             const novoSaldo: [ISaldo] = saldo.map((item: ISaldo) =>
-              item.tipo === 'Conta poupança' ? item : saldoUpdate.data
+              item.tipo === 'Conta poupança' ? item : saldoUpdate.data.result
             ) as [ISaldo]
             dispatch(updateSaldo(novoSaldo))
           })

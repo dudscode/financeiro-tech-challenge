@@ -24,8 +24,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 export function PUT(_req: NextApiRequest, res: NextApiResponse<{ result?: any; status?: string; message?: string }>) {
   const { id } = _req.query
+  const body = _req.body
 
-  Api.put(`/saldo/${id}`)
+  Api.put(`/saldo/${id}`, body)
     .then(data => {
       res.status(200).json({
         result: data.data,
