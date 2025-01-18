@@ -1,10 +1,9 @@
 import { Dispatch } from 'redux'
 import axios from 'axios'
 import { addTransaction } from '@/redux/features/slices/transactions'
-import { updateSaldo } from '@/redux/features/slices/saldos'
+import { ISaldo, updateSaldo } from '@/redux/features/slices/saldos'
 import { toast } from 'react-toastify'
 import transactionsType, { TransactionType } from '@/config/transactions'
-import { ISaldo } from '@/redux/features/slices/saldos'
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001' || 'https://json-server-vercel-tawny-one.vercel.app'
@@ -15,6 +14,8 @@ interface Transaction {
   data: string
   valor: number
   timestamp: string
+  file: string
+  filename: string
 }
 
 const formatMonth = () => {
@@ -22,13 +23,21 @@ const formatMonth = () => {
   return data.charAt(0).toUpperCase() + data.slice(1)
 }
 
-export const fetchSendTransaction = (type: TransactionType, amount: number, saldo: ISaldo[]) => {
+export const fetchSendTransaction = (
+  type: TransactionType,
+  amount: number,
+  file: string,
+  filename: string,
+  saldo: ISaldo[]
+) => {
   const transaction: Transaction = {
     mes: formatMonth(),
     tipo: type,
     data: new Date().toLocaleDateString(),
     valor: transactionsType.find(({ value }) => value === type)?.action === 'sum' ? amount : -amount,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    file,
+    filename
   }
 
   return async (dispatch: Dispatch) => {
@@ -41,8 +50,7 @@ export const fetchSendTransaction = (type: TransactionType, amount: number, sald
         const hasSum = transactionsType.find(({ value }) => value === type)?.action === 'sum'
         if (result < 0 && !hasSum) {
           toast.error('Saldo insuficiente')
-          new Error('Saldo insuficiente')
-          return
+          throw new Error('Saldo insuficiente')
         }
         axios
           .post(`${API_URL}/extrato`, transaction)

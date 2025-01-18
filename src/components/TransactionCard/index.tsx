@@ -1,19 +1,25 @@
 'use client'
 import React, { useState } from 'react'
-import { MenuItem, Select, Grid2 as Grid, FormControl } from '@mui/material'
+import { MenuItem, Select, Grid2 as Grid, FormControl, Button } from '@mui/material'
 import * as S from './styles'
 import GreyCard from '../CardGrey'
 import { toast } from 'react-toastify'
 import { formatCurrency } from '@/components/TransactionCard/utils'
-import transactionsType from '@/config/transactions'
-import { TransactionType } from '@/config/transactions'
+import transactionsType, { TransactionType } from '@/config/transactions'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 export interface ITransactionCardProps {
-  onTransactionSubmit: (type: TransactionType, amount: number) => void
+  onTransactionSubmit: (type: TransactionType, amount: number, file: string, filename: string) => void
+}
+
+interface FileChangeEvent extends React.ChangeEvent<HTMLInputElement> {
+  target: HTMLInputElement & EventTarget & { files: FileList }
 }
 
 export const TransactionCard: React.FC<ITransactionCardProps> = ({ onTransactionSubmit }) => {
   const [transactionType, setTransactionType] = useState<TransactionType | ''>('')
   const [amount, setAmount] = useState<string>('')
+  const [file, setFile] = useState<string>('')
+  const [filename, setFilename] = useState<string>('')
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.replace(/\D/g, '')
@@ -24,12 +30,36 @@ export const TransactionCard: React.FC<ITransactionCardProps> = ({ onTransaction
     }
   }
 
+  const handleFileChange = (e: FileChangeEvent) => {
+    const selectedFile = e.target.files[0]
+    if (selectedFile) {
+      if (selectedFile.size > 5 * 1024 * 1024) {
+        toast.error('O arquivo deve ter no máximo 5MB.')
+        return
+      }
+      const validTypes = ['application/pdf', 'image/jpeg', 'image/png']
+      if (!validTypes.includes(selectedFile.type)) {
+        toast.error('Apenas arquivos PDF, JPG e PNG são permitidos.')
+        return
+      }
+      const reader = new FileReader()
+      reader.onload = event => {
+        setFile(reader?.result?.toString().split(',')[1] ?? '') // Converte para Base64 e remove o prefixo
+        console.log(selectedFile)
+        setFilename(selectedFile.name)
+      }
+      reader.readAsDataURL(selectedFile)
+    }
+  }
+
   const handleSubmit = () => {
     const numericAmount = parseFloat(amount.replace(/\./g, '').replace(',', '.'))
-    if (transactionType && numericAmount > 0) {
-      onTransactionSubmit(transactionType, numericAmount)
-    } else {
+    if (!transactionType || numericAmount <= 0) {
       toast.error('Por favor, selecione o tipo de transação e insira um valor válido.')
+    } else if (!file || !filename) {
+      toast.error('Faça o upload de um arquivo válido!')
+    } else {
+      onTransactionSubmit(transactionType, numericAmount, file, filename)
     }
   }
 
@@ -66,6 +96,21 @@ export const TransactionCard: React.FC<ITransactionCardProps> = ({ onTransaction
               <S.AmountInput type='text' value={amount} onChange={handleAmountChange} placeholder='0,00' fullWidth />
             </FormControl>
           </Grid>{' '}
+          <Grid size={{ xs: 12, sm: 12, md: 12 }}></Grid>
+          <Grid size={{ xs: 6, md: 6 }} offset={{ xs: 3, sm: 0, md: 0 }}>
+            <FormControl fullWidth margin='normal'>
+              <Button
+                component='label'
+                variant='contained'
+                startIcon={<CloudUploadIcon />}
+                color={filename ? 'success' : 'secondary'}
+              >
+                Upload File
+                <S.VisuallyHiddenInput type='file' accept='.pdf, .jpg, .jpeg, .png' onChange={handleFileChange} />
+              </Button>
+            </FormControl>
+          </Grid>
+          <S.FilenameRow size={{ xs: 12, sm: 12, md: 12 }}>{filename ? `File: ${filename}` : ''}</S.FilenameRow>
           <Grid size={{ xs: 12, sm: 12, md: 12 }}></Grid>
           <S.ButtonRow size={{ xs: 6, md: 6 }} offset={{ xs: 3, sm: 0, md: 0 }}>
             <S.SubmitButton variant='contained' color='primary' onClick={handleSubmit} size='large'>

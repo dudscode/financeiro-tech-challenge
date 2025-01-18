@@ -73,8 +73,8 @@ export default function Home() {
     <Base>
       <BalanceCard saldo={saldoCC} loading={loading} />
       <TransactionCard
-        onTransactionSubmit={(type, amount) => {
-          sendTransaction(type, amount)
+        onTransactionSubmit={(type, amount, file, filename) => {
+          sendTransaction(type, amount, file, filename)
         }}
       />
     </Base>
