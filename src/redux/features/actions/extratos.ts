@@ -29,8 +29,9 @@ export const fetchGetExtrato = (page = 1) => {
   }
 }
 
-export const fetchEditData = (item: ITransacao, saldos: [ISaldo]) => {
+export const fetchEditData = (item: ITransacao) => {
   return async (dispatch: Dispatch) => {
+    const tipo = encodeURIComponent('Conta corrente')
     await axios.put(`${API_URL}/extrato/${item.id}`, {
       ...item,
       valor:
@@ -38,17 +39,14 @@ export const fetchEditData = (item: ITransacao, saldos: [ISaldo]) => {
           ? Math.abs(item.valor)
           : -Math.abs(item.valor)
     })
-    Promise.all([
-      axios.get(`${API_URL}/extrato`),
-      axios.get(`${API_URL}/saldo`, { params: { tipo: 'Conta corrente' } })
-    ])
-      .then(async ([response, saldo]) => {
-        await axios.put(`${API_URL}/saldo/1`, {
-          ...saldo.data[0],
+    Promise.all([axios.get(`${API_URL}/extrato`), axios.get(`/api/balance?tipo=${tipo}`)])
+      .then(async ([response, saldos]) => {
+        await axios.put(`/api/balance/1`, {
+          ...saldos.data.result[0],
           valor: mountValue(response.data)
         })
-        const saldosAtualizado = saldos.map((value: ISaldo) =>
-          value.tipo === 'Conta corrente' ? saldo.data[0] : value
+        const saldosAtualizado = saldos.data.result.map((value: ISaldo) =>
+          value.tipo === 'Conta corrente' ? saldos.data.result[0] : value
         )
         dispatch(updateSaldo(saldosAtualizado as [ISaldo]))
         dispatch(setExtrato(response.data))
@@ -60,20 +58,18 @@ export const fetchEditData = (item: ITransacao, saldos: [ISaldo]) => {
   }
 }
 
-export const fetchDeleteData = (item: ITransacao, saldos: [ISaldo]) => {
+export const fetchDeleteData = (item: ITransacao) => {
   return async (dispatch: Dispatch) => {
+    const tipo = encodeURIComponent('Conta corrente')
     await axios.delete(`${API_URL}/extrato/${item.id}`)
-    Promise.all([
-      axios.get(`${API_URL}/extrato`),
-      axios.get(`${API_URL}/saldo`, { params: { tipo: 'Conta corrente' } })
-    ])
-      .then(async ([response, saldo]) => {
-        await axios.put(`${API_URL}/saldo/1`, {
-          ...saldo.data[0],
+    Promise.all([axios.get(`${API_URL}/extrato`), axios.get(`/api/saldos?tipo=${tipo}`)])
+      .then(async ([response, saldos]) => {
+        await axios.put(`/api/saldos/1`, {
+          ...saldos.data.result[0],
           valor: mountValue(response.data)
         })
-        const saldosAtualizado = saldos.map((value: ISaldo) =>
-          value.tipo === 'Conta corrente' ? saldo.data[0] : value
+        const saldosAtualizado = saldos.data.result.map((value: ISaldo) =>
+          value.tipo === 'Conta corrente' ? saldos.data.result[0] : value
         )
         dispatch(updateSaldo(saldosAtualizado as [ISaldo]))
         dispatch(setExtrato(response.data))

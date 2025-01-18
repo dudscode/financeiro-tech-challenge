@@ -9,9 +9,9 @@ const API_URL =
 export const fetchGetSaldo = () => {
   return async (dispatch: Dispatch) => {
     axios
-      .get(`${API_URL}/saldo`)
+      .get(`/api/balance`)
       .then(saldo => {
-        dispatch(updateSaldo(saldo.data))
+        dispatch(updateSaldo(saldo.data.result))
       })
       .catch(error => {
         console.error('Error fetching saldo data:', error)
@@ -24,10 +24,11 @@ export const fetchGetSaldo = () => {
 
 export const fetchGetSaldoCP = (saldo: [ISaldo]) => {
   return async (dispatch: Dispatch) => {
+    const tipo = encodeURIComponent('Conta poupança')
     axios
-      .get(`${API_URL}/saldo`, { params: { tipo: 'Conta poupança' } })
+      .get(`/api/balance?tipo=${tipo}`)
       .then(result => {
-        const saldoCP = result.data[0]
+        const saldoCP = result.data.result[0]
         const saldoAtualizado: [ISaldo] = saldo.map(item => (item.tipo !== 'Conta poupança' ? item : saldoCP)) as [
           ISaldo
         ]
@@ -43,10 +44,11 @@ export const fetchGetSaldoCP = (saldo: [ISaldo]) => {
 }
 export const fetchGetSaldoCC = (saldo: [ISaldo]) => {
   return async (dispatch: Dispatch) => {
+    const tipo = encodeURIComponent('Conta corrente')
     axios
-      .get(`${API_URL}/saldo`, { params: { tipo: 'Conta corrente' } })
+      .get(`/api/balance?tipo=${tipo}`)
       .then(result => {
-        const saldoCC = result.data[0]
+        const saldoCC = result.data.result[0]
         const saldoAtualizado: [ISaldo] = saldo.map(item => (item.tipo !== 'Conta corrente' ? item : saldoCC)) as [
           ISaldo
         ]

@@ -18,8 +18,6 @@ export const initialUserAuth = async (email: string, password: string) => {
       password
     })
     .then(response => {
-      console.log('response: ', response)
-
       setSessionStorage(
         JSON.stringify({
           email: response.data.result.user.email,
