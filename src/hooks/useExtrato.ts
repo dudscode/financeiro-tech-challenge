@@ -40,8 +40,10 @@ export const useExtrato = () => {
     setOpenModal({ status: false, type: 'edit' })
   }
 
+  const sortedExtrato = [...extrato].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+
   return {
-    extrato,
+    extrato: sortedExtrato,
     loading,
     fetchData,
     openModal,
