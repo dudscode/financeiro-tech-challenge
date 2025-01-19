@@ -1,4 +1,3 @@
-'use client'
 import { MyAccount } from '@/components/MyAcoount'
 import Base from '@/templates/Base'
 

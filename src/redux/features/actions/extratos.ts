@@ -7,7 +7,8 @@ import { toast } from 'react-toastify'
 import { ISaldo } from '@/redux/features/slices/saldos'
 import transactionsType from '@/config/transactions'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://json-server-vercel-tawny-one.vercel.app'
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001' || 'https://json-server-vercel-tawny-one.vercel.app'
 
 const mountValue = (response: [ITransacao]) => response.reduce((current, acc) => acc.valor + current, 0)
 
@@ -16,7 +17,7 @@ export const fetchGetExtrato = () => {
     axios
       .get(`${API_URL}/extrato`)
       .then(response => {
-        dispatch(setExtrato(response.data.reverse()))
+        dispatch(setExtrato(response.data))
       })
       .catch(error => {
         console.error('Error fetching extrato data:', error)

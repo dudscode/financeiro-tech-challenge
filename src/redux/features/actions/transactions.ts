@@ -5,7 +5,8 @@ import { ISaldo, updateSaldo } from '@/redux/features/slices/saldos'
 import { toast } from 'react-toastify'
 import transactionsType, { TransactionType } from '@/config/transactions'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://json-server-vercel-tawny-one.vercel.app'
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001' || 'https://json-server-vercel-tawny-one.vercel.app'
 
 interface Transaction {
   mes: string

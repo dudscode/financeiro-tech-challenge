@@ -1,5 +1,3 @@
-'use client'
-
 import { useState } from 'react'
 import * as S from './styles'
 import I from '@/components/Icons'

@@ -37,7 +37,8 @@ export const Container = styled('section')`
     min-width: 310px;
     @media (min-width: ${theme.breakpoints.values.sm}${theme.breakpoints.unit}) {
       align-items: center;
-
+      max-height: calc(100vh - 140px);
+      position: relative;
     }
     @media (min-width: ${theme.breakpoints.values.lg}${theme.breakpoints.unit}) {
       max-width: 280px;
@@ -79,7 +80,7 @@ const types: Types = {
   info: theme => theme.palette.text.disabled
 }
 
-export const Paragraph = styled('p') <IParagraph>`
+export const Paragraph = styled('p')<IParagraph>`
   ${({ theme, txt = '12px', md = 0, weight = 400, type = 'default' }) => css`
     color: ${types[type](theme)};
     font-size: ${txt};
@@ -108,11 +109,21 @@ export const ButtonContainer = styled('div')`
   gap: 8px;
 `
 export const PaginationContainer = styled('div')`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 16px;
-  gap: 24px;
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    gap: 24px;
+    @media (min-width: ${theme.breakpoints.values.sm}${theme.breakpoints.unit}) {
+      position: absolute;
+      bottom: 20px;
+    }
+    @media (min-width: ${theme.breakpoints.values.lg}${theme.breakpoints.unit}) {
+      position: relative;
+      bottom: initial;
+    }
+  `}
 `
 
 export const PaginationButton = styled('button')`
@@ -185,7 +196,7 @@ export const MenuWrapper = styled('div')`
     max-width: 400px;
     width: 90%;
   }
-`;
+`
 
 export const FilterSelect = styled('select')`
   width: 100%;
@@ -201,19 +212,19 @@ export const Filters = styled('div')`
   max-width: 100%;
   margin-bottom: 20px;
   margin-top: 25px;
-`;
+`
 
 export const FilterHeader = styled('div')`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
-`;
+`
 
 export const FilterTitle = styled(Typography)`
   font-size: 16px;
   font-weight: 600;
-`;
+`
 
 export const CloseButton = styled('button')`
   background: none;
@@ -227,14 +238,14 @@ export const CloseButton = styled('button')`
   &:hover {
     color: ${({ theme }) => theme.palette.secondary.dark};
   }
-`;
+`
 
 export const FilterActions = styled('div')`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
   margin-top: 16px;
-`;
+`
 
 export const ConfirmButton = styled('button')`
   background-color: ${({ theme }) => theme.palette.primary.main};
@@ -247,4 +258,4 @@ export const ConfirmButton = styled('button')`
   &:hover {
     background-color: ${({ theme }) => theme.palette.primary.dark};
   }
-`;
+`

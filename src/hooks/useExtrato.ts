@@ -4,6 +4,13 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { fetchEditData, fetchDeleteData } from '@/redux/features/actions/extratos'
 
+interface ExtratoItem {
+  mes: string
+  tipo: string
+  data: string
+  valor: number
+}
+
 export const useExtrato = () => {
   const dispatch = useDispatch()
   const { extrato } = useSelector((state: any) => state.transactions)
@@ -14,10 +21,39 @@ export const useExtrato = () => {
     status: false,
     type: 'edit'
   })
+  const [filteredExtrato, setFilteredExtrato] = useState<ExtratoItem[]>([])
+  const [tempFiltered, setTempFiltered] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const [paginatedExtrato, setPaginatedExtrato] = useState<ExtratoItem[]>([])
+
+  const itemsPerPage = 5
 
   useEffect(() => {
     !!extrato.length && setLoading(false)
+    setFilteredExtrato(extrato)
   }, [extrato])
+
+  useEffect(() => {
+    !!extrato.length && setLoading(false)
+    setCurrentPage(1)
+    setFilteredExtrato(
+      [...extrato].filter((item: ExtratoItem) => {
+        const reg = new RegExp(tempFiltered.toLowerCase(), 'gi')
+        return !!tempFiltered ? item.mes.toLowerCase().match(reg)?.[0] : true
+      })
+    )
+  }, [tempFiltered])
+
+  useEffect(() => {
+    setLoading(false)
+  }, [saldo])
+
+  useEffect(() => {
+    !!extrato.length && setLoading(false)
+    const startIndex = (currentPage - 1) * itemsPerPage
+    const endIndex = startIndex + itemsPerPage
+    setPaginatedExtrato(filteredExtrato.slice(startIndex, endIndex))
+  }, [filteredExtrato, currentPage])
 
   const fn = {
     deleted: fetchDeleteData,
@@ -26,10 +62,12 @@ export const useExtrato = () => {
 
   const onEdit = (item: ITransacao) => {
     setItem(item)
+    setLoading(true)
     setOpenModal({ status: true, type: 'edit' })
   }
   const onDelete = (item: ITransacao) => {
     setItem(item)
+    setLoading(true)
     setOpenModal({ status: true, type: 'deleted' })
   }
 
@@ -37,19 +75,35 @@ export const useExtrato = () => {
     if (!!value) {
       await fn[type](item)(dispatch)
     }
+    setLoading(true)
     setOpenModal({ status: false, type: 'edit' })
   }
 
-  const sortedExtrato = [...extrato].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+  const hasExtrato = !!extrato && extrato.length
+  const hasPagination = !(currentPage * itemsPerPage >= filteredExtrato.length) || currentPage > 1
+  const handlePageChange = (newPage: number) => {
+    if (newPage > 0 && newPage <= Math.ceil(filteredExtrato.length / itemsPerPage)) {
+      setCurrentPage(newPage)
+    }
+  }
 
   return {
-    extrato: sortedExtrato,
+    extrato: [...paginatedExtrato].reverse() || [],
     loading,
     fetchData,
     openModal,
     onEdit,
     onDelete,
     item,
-    setItem
+    setItem,
+    tempFiltered,
+    setTempFiltered,
+    currentPage,
+    setCurrentPage,
+    hasExtrato,
+    hasPagination,
+    handlePageChange,
+    hasNextPage: currentPage * itemsPerPage > filteredExtrato.length,
+    hasPreviousPage: currentPage === 1
   }
 }

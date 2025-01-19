@@ -1,4 +1,3 @@
-'use client'
 import React from 'react'
 import { Grid2 as Grid } from '@mui/material'
 import { ServiceContainer, ServiceGrid, ServiceTitle } from './styles'

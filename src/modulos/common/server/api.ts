@@ -1,10 +1,12 @@
+'use client'
 import axios from 'axios'
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://json-server-vercel-tawny-one.vercel.app'
+export const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001' || 'https://json-server-vercel-tawny-one.vercel.app'
 
 const getToken = () => {
   if (typeof window !== 'undefined') {
-    window.sessionStorage.getItem('token') || ''
+    return window.sessionStorage.getItem('token') || ''
   }
 }
 

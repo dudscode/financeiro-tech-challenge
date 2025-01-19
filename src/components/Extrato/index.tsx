@@ -9,56 +9,36 @@ import { ButtonEdit, ButtonDelete } from '@/components/Extrato/components/Button
 import { useTransaction } from '@/hooks/useTransaction'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import CloseIcon from '@mui/icons-material/Close'
-
-interface ExtratoItem {
-  mes: string
-  tipo: string
-  data: string
-  valor: number
-}
+import transactionsType from '@/config/transactions'
 
 export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
-  const { getExtrato } = useTransaction()
-  const { extrato, loading, fetchData, openModal, onEdit, onDelete, item, setItem } = useExtrato()
-  const hasExtrato = !!extrato && extrato.length
+  useTransaction()
+  const {
+    extrato,
+    loading,
+    fetchData,
+    openModal,
+    onEdit,
+    onDelete,
+    item,
+    setItem,
+    tempFiltered,
+    setTempFiltered,
+    currentPage,
+    setCurrentPage,
+    hasExtrato,
+    hasPagination,
+    hasNextPage,
+    hasPreviousPage,
+    handlePageChange
+  } = useExtrato()
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [paginatedExtrato, setPaginatedExtrato] = useState<ExtratoItem[]>([])
-  const itemsPerPage = 10
-
-  const [searchTerm, setSearchTerm] = useState('')
-  const [filterMonth, setFilterMonth] = useState('')
-  const [tempFilterMonth, setTempFilterMonth] = useState('')
+  const [filterMonth, setFilterMonth] = useState(tempFiltered)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const filteredExtrato = extrato.filter((item: ExtratoItem) => {
-    const matchesSearch = (item.tipo || '').toLowerCase().includes((searchTerm || '').toLowerCase())
-    const matchesMonth = filterMonth ? item.mes === filterMonth : true
-    return matchesSearch && matchesMonth
-  })
-
-  useEffect(() => {
-    console.log('filteredExtrato: ', filteredExtrato)
-    if (filteredExtrato.length === 0) {
-      const startIndex = (currentPage - 1) * itemsPerPage
-      const endIndex = startIndex + itemsPerPage
-      setPaginatedExtrato(filteredExtrato.slice(startIndex, endIndex))
-    }
-  }, [filteredExtrato, currentPage])
-
-  useEffect(() => {
-    setCurrentPage(1)
-  }, [filterMonth, searchTerm])
-
-  const handlePageChange = (newPage: number) => {
-    if (newPage > 0 && newPage <= Math.ceil(filteredExtrato.length / itemsPerPage)) {
-      setCurrentPage(newPage)
-    }
-  }
-
   const handleConfirmFilter = () => {
-    setFilterMonth(tempFilterMonth)
     setIsMenuOpen(false)
+    setTempFiltered(filterMonth)
   }
 
   return (
@@ -71,8 +51,9 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
           <S.SearchInput
             type='text'
             placeholder='Pesquisar...'
-            value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
+            onChange={e => {
+              setTempFiltered(e.target.value)
+            }}
           />
 
           <S.IconWrapper onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -87,7 +68,7 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
                   <CloseIcon />
                 </S.CloseButton>
               </S.FilterHeader>
-              <S.FilterSelect value={tempFilterMonth} onChange={e => setTempFilterMonth(e.target.value)}>
+              <S.FilterSelect value={filterMonth} onChange={e => setFilterMonth(e.target.value)}>
                 <option value=''>Todos os meses</option>
                 <option value='Janeiro'>Janeiro</option>
                 <option value='Fevereiro'>Fevereiro</option>
@@ -110,10 +91,10 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
         </S.Filters>
 
         {loading && <CircularProgress />}
-        {!loading && hasExtrato && (
+        {!!(!loading && hasExtrato) && (
           <S.List>
-            {paginatedExtrato.length > 0 ? (
-              paginatedExtrato.map((item, index) => (
+            {extrato.length > 0 ? (
+              extrato.map((item, index) => (
                 <S.Item key={index}>
                   <S.TextContainer>
                     <S.TextHighlight>{item.mes}</S.TextHighlight>
@@ -123,9 +104,11 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
                     </S.ButtonContainer>
                   </S.TextContainer>
                   <S.TextContainer>
-                    <S.Paragraph txt='16px'>{item.tipo}</S.Paragraph>
+                    <S.Paragraph txt='16px'>
+                      {transactionsType.find(transaction => transaction.value === item.tipo)?.label}
+                    </S.Paragraph>
                     <S.Paragraph txt='13px' type='info'>
-                      {item.data} teste
+                      {item.data}
                     </S.Paragraph>
                   </S.TextContainer>
                   <S.Paragraph>{formatCurrency(item.valor)}</S.Paragraph>
@@ -138,19 +121,17 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
           </S.List>
         )}
         {!loading && !hasExtrato && <S.Paragraph txt='16px'>Não existe nenhum extrato</S.Paragraph>}
-
-        <S.PaginationContainer>
-          <S.PaginationButton onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-            Anterior
-          </S.PaginationButton>
-          <S.PageIndicator>{currentPage}</S.PageIndicator>
-          <S.PaginationButton
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage * itemsPerPage >= filteredExtrato.length}
-          >
-            Próxima
-          </S.PaginationButton>
-        </S.PaginationContainer>
+        {hasPagination && !loading && (
+          <S.PaginationContainer>
+            <S.PaginationButton onClick={() => handlePageChange(currentPage - 1)} disabled={hasPreviousPage}>
+              Anterior
+            </S.PaginationButton>
+            <S.PageIndicator>{currentPage}</S.PageIndicator>
+            <S.PaginationButton onClick={() => handlePageChange(currentPage + 1)} disabled={hasNextPage}>
+              Próxima
+            </S.PaginationButton>
+          </S.PaginationContainer>
+        )}
       </S.Container>
     </>
   )

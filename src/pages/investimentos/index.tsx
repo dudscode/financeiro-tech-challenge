@@ -1,4 +1,3 @@
-'use client'
 import Base from '@/templates/Base'
 import { InvestmentsCard } from '@/components/InvestmentsCard'
 import { BalanceCard } from '@/components/BalanceCard'

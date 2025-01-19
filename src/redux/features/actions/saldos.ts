@@ -3,7 +3,8 @@ import { Dispatch } from 'redux'
 import { updateSaldo } from '@/redux/features/slices/saldos'
 import { ISaldo } from '@/redux/features/slices/saldos'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://json-server-vercel-tawny-one.vercel.app'
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001' || 'https://json-server-vercel-tawny-one.vercel.app'
 
 export const fetchGetSaldo = () => {
   return async (dispatch: Dispatch) => {
@@ -23,7 +24,7 @@ export const fetchGetSaldo = () => {
 
 export const fetchGetSaldoCP = (saldo: [ISaldo]) => {
   return async (dispatch: Dispatch) => {
-    const tipo = encodeURIComponent('Conta poupança')
+    const tipo = 'Conta poupança'
     axios
       .get(`/api/balance?tipo=${tipo}`)
       .then(result => {
@@ -43,7 +44,7 @@ export const fetchGetSaldoCP = (saldo: [ISaldo]) => {
 }
 export const fetchGetSaldoCC = (saldo: [ISaldo]) => {
   return async (dispatch: Dispatch) => {
-    const tipo = encodeURIComponent('Conta corrente')
+    const tipo = 'Conta corrente'
     axios
       .get(`/api/balance?tipo=${tipo}`)
       .then(result => {

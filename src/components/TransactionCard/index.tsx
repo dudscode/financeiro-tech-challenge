@@ -1,4 +1,3 @@
-'use client'
 import React, { useState } from 'react'
 import { MenuItem, Select, Grid2 as Grid, FormControl, Button } from '@mui/material'
 import * as S from './styles'
@@ -44,7 +43,7 @@ export const TransactionCard: React.FC<ITransactionCardProps> = ({ onTransaction
       }
       const reader = new FileReader()
       reader.onload = event => {
-        setFile(reader?.result?.toString().split(',')[1] ?? '') 
+        setFile(reader?.result?.toString().split(',')[1] ?? '')
         setFilename(selectedFile.name)
       }
       reader.readAsDataURL(selectedFile)
@@ -115,7 +114,13 @@ export const TransactionCard: React.FC<ITransactionCardProps> = ({ onTransaction
           <S.FilenameRow size={{ xs: 12, sm: 12, md: 12 }}>{filename ? `File: ${filename}` : ''}</S.FilenameRow>
           <Grid size={{ xs: 12, sm: 12, md: 12 }}></Grid>
           <S.ButtonRow size={{ xs: 6, md: 6 }} offset={{ xs: 3, sm: 0, md: 0 }}>
-            <S.SubmitButton variant='contained' color='primary' onClick={handleSubmit} size='large'>
+            <S.SubmitButton
+              variant='contained'
+              color='primary'
+              onClick={handleSubmit}
+              size='large'
+              disabled={!amount || amount === '0,00'}
+            >
               Concluir transação
             </S.SubmitButton>
           </S.ButtonRow>
