@@ -16,7 +16,7 @@ export const useTransaction = () => {
   const getExtrato = useCallback(
     (pageNumber: number) => {
       setPage(pageNumber)
-      fetchGetExtrato(pageNumber)(dispatch)
+      fetchGetExtrato()(dispatch)
     },
     [dispatch]
   )

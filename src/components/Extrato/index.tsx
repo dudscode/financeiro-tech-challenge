@@ -1,43 +1,62 @@
-import React, { useState } from 'react'
-import * as S from '@/components/Extrato/styles'
-import CircularProgress from '@mui/material/CircularProgress'
-import { useExtrato } from '@/hooks/useExtrato'
-import { IExtratoProps } from '@/components/Extrato/types'
-import { formatCurrency } from '@/components/Extrato/utils'
-import { Modal } from '@/components/Extrato/components/Modal'
-import { ButtonEdit, ButtonDelete } from '@/components/Extrato/components/Buttons'
-import { useTransaction } from '@/hooks/useTransaction'
-import FilterListIcon from '@mui/icons-material/FilterList'
-import CloseIcon from '@mui/icons-material/Close'
+import React, { useEffect, useState } from 'react';
+import * as S from '@/components/Extrato/styles';
+import CircularProgress from '@mui/material/CircularProgress';
+import { useExtrato } from '@/hooks/useExtrato';
+import { IExtratoProps } from '@/components/Extrato/types';
+import { formatCurrency } from '@/components/Extrato/utils';
+import { Modal } from '@/components/Extrato/components/Modal';
+import { ButtonEdit, ButtonDelete } from '@/components/Extrato/components/Buttons';
+import { useTransaction } from '@/hooks/useTransaction';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import CloseIcon from '@mui/icons-material/Close';
 
-
+interface ExtratoItem {
+  mes: string;
+  tipo: string;
+  data: string;
+  valor: number;
+}
 
 export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
-  const { getExtrato, page } = useTransaction()
-  const { extrato, loading, fetchData, openModal, onEdit, onDelete, item, setItem } = useExtrato()
-  const hasExtrato = !!extrato && extrato.length
+  const { getExtrato } = useTransaction();
+  const { extrato, loading, fetchData, openModal, onEdit, onDelete, item, setItem } = useExtrato();
+  const hasExtrato = !!extrato && extrato.length;
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [paginatedExtrato, setPaginatedExtrato] = useState<ExtratoItem[]>([]); 
+  const itemsPerPage = 10;
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterMonth, setFilterMonth] = useState('');
+  const [tempFilterMonth, setTempFilterMonth] = useState('');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const filteredExtrato = extrato.filter((item: ExtratoItem) => {
+    const matchesSearch = (item.tipo || '').toLowerCase().includes((searchTerm || '').toLowerCase());
+    const matchesMonth = filterMonth ? item.mes === filterMonth : true;
+    return matchesSearch && matchesMonth;
+  });
+
+  useEffect(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    setPaginatedExtrato(filteredExtrato.slice(startIndex, endIndex)); 
+  }, [filteredExtrato, currentPage]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filterMonth, searchTerm]);
 
   const handlePageChange = (newPage: number) => {
-    if (newPage > 0) {
-      getExtrato(newPage)
+    if (newPage > 0 && newPage <= Math.ceil(filteredExtrato.length / itemsPerPage)) {
+      setCurrentPage(newPage);
     }
-  }
-
-  const [searchTerm, setSearchTerm] = useState('')
-  const [filterMonth, setFilterMonth] = useState('')
-  const [tempFilterMonth, setTempFilterMonth] = useState('')
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  const filteredExtrato = extrato.filter((item: { mes: string; tipo: string }) => {
-    const matchesSearch = (item.tipo || '').toLowerCase().includes((searchTerm || '').toLowerCase())
-    const matchesMonth = filterMonth ? item.mes === filterMonth : true
-    return matchesSearch && matchesMonth
-  })
+  };
 
   const handleConfirmFilter = () => {
-    setFilterMonth(tempFilterMonth)
-    setIsMenuOpen(false)
-  }
+    setFilterMonth(tempFilterMonth);
+    setIsMenuOpen(false);
+  };
 
   return (
     <>
@@ -93,20 +112,20 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
         {loading && <CircularProgress />}
         {!loading && hasExtrato && (
           <S.List>
-            {filteredExtrato.length > 0 ? (
-              [...filteredExtrato].reverse().map((item, index) => (
+            {paginatedExtrato.length > 0 ? (
+              paginatedExtrato.map((item, index) => (
                 <S.Item key={index}>
                   <S.TextContainer>
                     <S.TextHighlight>{item.mes}</S.TextHighlight>
                     <S.ButtonContainer>
-                      <ButtonEdit item={item} hasExtrato={hasExtrato} onEdit={onEdit} />
-                      <ButtonDelete item={item} hasExtrato={hasExtrato} onDelete={onDelete} />
+                      <ButtonEdit item={item as any} hasExtrato={hasExtrato as any} onEdit={onEdit} />
+                      <ButtonDelete item={item as any} hasExtrato={hasExtrato as any} onDelete={onDelete} />
                     </S.ButtonContainer>
                   </S.TextContainer>
                   <S.TextContainer>
                     <S.Paragraph txt="16px">{item.tipo}</S.Paragraph>
                     <S.Paragraph txt="13px" type="info">
-                      {item.data}
+                      {item.data} teste
                     </S.Paragraph>
                   </S.TextContainer>
                   <S.Paragraph>{formatCurrency(item.valor)}</S.Paragraph>
@@ -114,20 +133,25 @@ export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
                 </S.Item>
               ))
             ) : (
-              <S.Paragraph txt="16px">Não há registros desse mês</S.Paragraph>
+              <S.Paragraph txt="16px">Não há registros dessa página</S.Paragraph>
             )}
           </S.List>
         )}
-        {!loading && !hasExtrato && <S.Paragraph txt='16px'>Não existe nenhum extrato</S.Paragraph>}
+        {!loading && !hasExtrato && <S.Paragraph txt="16px">Não existe nenhum extrato</S.Paragraph>}
 
         <S.PaginationContainer>
-          <S.PaginationButton onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
+          <S.PaginationButton onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
             Anterior
           </S.PaginationButton>
-          <S.PageIndicator>{page}</S.PageIndicator>
-          <S.PaginationButton onClick={() => handlePageChange(page + 1)}>Próxima</S.PaginationButton>
+          <S.PageIndicator>{currentPage}</S.PageIndicator>
+          <S.PaginationButton
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage * itemsPerPage >= filteredExtrato.length}
+          >
+            Próxima
+          </S.PaginationButton>
         </S.PaginationContainer>
       </S.Container>
     </>
-  )
-}
+  );
+};

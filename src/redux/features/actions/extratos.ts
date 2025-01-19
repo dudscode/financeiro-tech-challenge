@@ -11,19 +11,16 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://json-server-vercel-t
 
 const mountValue = (response: [ITransacao]) => response.reduce((current, acc) => acc.valor + current, 0)
 
-export const fetchGetExtrato = (page = 1) => {
+export const fetchGetExtrato = () => {
   return async (dispatch: Dispatch) => {
     axios
-      .get(`${API_URL}/extrato`, { params: { _page: page } })
+      .get(`${API_URL}/extrato`)
       .then(response => {
-        dispatch(setExtrato(response.data))
+        dispatch(setExtrato(response.data.reverse()))
       })
       .catch(error => {
         console.error('Error fetching extrato data:', error)
         toast.error('Erro ao buscar dados do extrato.')
-      })
-      .finally(() => {
-        console.log('Extrato fetched!')
       })
   }
 }

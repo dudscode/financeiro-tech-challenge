@@ -44,7 +44,7 @@ export const TransactionCard: React.FC<ITransactionCardProps> = ({ onTransaction
       }
       const reader = new FileReader()
       reader.onload = event => {
-        setFile(reader?.result?.toString().split(',')[1] ?? '') // Converte para Base64 e remove o prefixo
+        setFile(reader?.result?.toString().split(',')[1] ?? '') 
         setFilename(selectedFile.name)
       }
       reader.readAsDataURL(selectedFile)
@@ -58,6 +58,11 @@ export const TransactionCard: React.FC<ITransactionCardProps> = ({ onTransaction
     } else {
       onTransactionSubmit(transactionType, numericAmount, file, filename)
     }
+
+    setTransactionType('')
+    setAmount('')
+    setFile('')
+    setFilename('')
   }
 
   return (
