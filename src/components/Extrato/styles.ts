@@ -116,12 +116,12 @@ export const PaginationContainer = styled('div')`
     margin-top: 16px;
     gap: 24px;
     @media (min-width: ${theme.breakpoints.values.sm}${theme.breakpoints.unit}) {
-      position: absolute;
-      bottom: 20px;
-    }
-    @media (min-width: ${theme.breakpoints.values.lg}${theme.breakpoints.unit}) {
       position: relative;
       bottom: initial;
+    }
+    @media (min-width: ${theme.breakpoints.values.lg}${theme.breakpoints.unit}) {
+      position: absolute;
+      bottom: 20px;
     }
   `}
 `
