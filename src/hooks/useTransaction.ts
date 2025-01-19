@@ -9,8 +9,8 @@ export const useTransaction = () => {
   const { saldo } = useSelector((state: any) => state.saldos)
   const [page, setPage] = useState(1)
 
-  const sendTransaction = (type: TransactionType, amount: number) => {
-    fetchSendTransaction(type, amount, saldo)(dispatch)
+  const sendTransaction = (type: TransactionType, amount: number, file: string, filename: string) => {
+    fetchSendTransaction(type, amount, file, filename, saldo)(dispatch)
   }
 
   const getExtrato = useCallback(

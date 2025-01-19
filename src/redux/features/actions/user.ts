@@ -4,8 +4,7 @@ import { setUser } from '@/redux/features/slices/user'
 import { toast } from 'react-toastify'
 import { IUser } from '@/components/MyAcoount/types'
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001' || 'https://json-server-vercel-tawny-one.vercel.app'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://json-server-vercel-tawny-one.vercel.app'
 
 export const fetchUserData = () => {
   return async (dispatch: Dispatch) => {
