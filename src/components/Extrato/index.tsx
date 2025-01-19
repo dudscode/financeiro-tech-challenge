@@ -12,7 +12,7 @@ import transactionsType from '@/config/transactions'
 export const Extrato = ({ title = 'Extrato' }: IExtratoProps) => {
   const { getExtrato, page } = useTransaction()
   const { extrato, loading, fetchData, openModal, onEdit, onDelete, item, setItem } = useExtrato()
-  const hasExtrato = !!extrato.length
+  const hasExtrato = !!extrato && extrato.length
 
   const handlePageChange = (newPage: number) => {
     if (newPage > 0) {
