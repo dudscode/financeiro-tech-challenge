@@ -55,8 +55,6 @@ export const TransactionCard: React.FC<ITransactionCardProps> = ({ onTransaction
     const numericAmount = parseFloat(amount.replace(/\./g, '').replace(',', '.'))
     if (!transactionType || numericAmount <= 0) {
       toast.error('Por favor, selecione o tipo de transação e insira um valor válido.')
-    } else if (!file || !filename) {
-      toast.error('Faça o upload de um arquivo válido!')
     } else {
       onTransactionSubmit(transactionType, numericAmount, file, filename)
     }

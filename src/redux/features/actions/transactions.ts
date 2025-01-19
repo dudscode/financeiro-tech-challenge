@@ -40,7 +40,7 @@ export const fetchSendTransaction = (
   }
 
   return async (dispatch: Dispatch) => {
-    const tipo = encodeURIComponent('Conta corrente')
+    const tipo = 'Conta corrente'
     await axios
       .get(`/api/balance?tipo=${tipo}`)
       .then(saldos => {

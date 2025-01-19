@@ -61,9 +61,9 @@ export const fetchDeleteData = (item: ITransacao) => {
   return async (dispatch: Dispatch) => {
     const tipo = encodeURIComponent('Conta corrente')
     await axios.delete(`${API_URL}/extrato/${item.id}`)
-    Promise.all([axios.get(`${API_URL}/extrato`), axios.get(`/api/saldos?tipo=${tipo}`)])
+    Promise.all([axios.get(`${API_URL}/extrato`), axios.get(`/api/balance?tipo=${tipo}`)])
       .then(async ([response, saldos]) => {
-        await axios.put(`/api/saldos/1`, {
+        await axios.put(`/api/balance/1`, {
           ...saldos.data.result[0],
           valor: mountValue(response.data)
         })
