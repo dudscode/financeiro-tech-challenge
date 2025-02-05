@@ -1,0 +1,3 @@
+[submodule "finaceiro-tech-angular"]
+	path = finaceiro-tech-angular
+	url = https://github.com/dudscode/finaceiro-tech-angular.git
