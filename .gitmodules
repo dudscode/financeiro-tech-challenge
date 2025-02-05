@@ -1,3 +1,6 @@
 [submodule "finaceiro-tech-angular"]
 	path = finaceiro-tech-angular
 	url = https://github.com/dudscode/finaceiro-tech-angular.git
+[submodule "financeiro-react-native"]
+	path = financeiro-tech-react-native
+	url = https://github.com/dudscode/financeiro-tech-react-native.git
